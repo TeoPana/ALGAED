@@ -1,0 +1,997 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<title>Ghid de examen ALGAED</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;700&display=swap">
+
+<style>
+:root{
+  --paper:#F6F7F9;
+  --surface:#FFFFFF;
+  --panel:#ECEFF4;
+  --ink:#151E2B;
+  --ink-2:#4A5768;
+  --ink-3:#7A8698;
+  --rule:#D2D9E3;
+  --rule-soft:#E4E8EF;
+  --blue:#22508F;
+  --blue-ink:#1B4176;
+  --blue-soft:#E7EEF8;
+  --red:#A93226;
+  --red-soft:#F8EBE9;
+  --shadow:0 1px 2px rgba(21,30,43,.06), 0 6px 20px -12px rgba(21,30,43,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F141B;
+    --surface:#161D26;
+    --panel:#1B2431;
+    --ink:#E2E8F1;
+    --ink-2:#9CA9BC;
+    --ink-3:#768294;
+    --rule:#2B3543;
+    --rule-soft:#212A36;
+    --blue:#82ABE2;
+    --blue-ink:#A6C4EC;
+    --blue-soft:#182640;
+    --red:#E2907F;
+    --red-soft:#2C1E1C;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F141B;
+  --surface:#161D26;
+  --panel:#1B2431;
+  --ink:#E2E8F1;
+  --ink-2:#9CA9BC;
+  --ink-3:#768294;
+  --rule:#2B3543;
+  --rule-soft:#212A36;
+  --blue:#82ABE2;
+  --blue-ink:#A6C4EC;
+  --blue-soft:#182640;
+  --red:#E2907F;
+  --red-soft:#2C1E1C;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+
+body{
+  background:var(--paper);
+  color:var(--ink);
+  font-family:"Source Serif 4","Iowan Old Style",Georgia,serif;
+  font-size:17px;
+  line-height:1.62;
+  margin:0;
+  padding:0 20px 96px;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap{max-width:820px;margin:0 auto}
+
+h1,h2,h3,h4,.label,th,.badge,.step-n,.slot{font-family:Archivo,"Helvetica Neue",Arial,sans-serif}
+
+/* ---------- header ---------- */
+.masthead{
+  padding:64px 0 34px;
+  border-bottom:2px solid var(--ink);
+  margin-bottom:42px;
+}
+.eyebrow{
+  font-family:Archivo,sans-serif;
+  font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--blue);margin:0 0 14px;
+}
+h1{
+  font-size:clamp(34px,6vw,52px);
+  font-weight:700;line-height:1.04;letter-spacing:-.022em;
+  margin:0 0 18px;text-wrap:balance;
+}
+.standfirst{
+  font-size:19px;color:var(--ink-2);margin:0;max-width:62ch;
+}
+.standfirst strong{color:var(--ink);font-weight:600}
+
+/* ---------- generic sections ---------- */
+section{margin:0 0 56px}
+h2{
+  font-size:13px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
+  color:var(--ink-3);
+  margin:0 0 22px;padding-bottom:10px;
+  border-bottom:1px solid var(--rule);
+}
+h3{font-size:22px;font-weight:600;letter-spacing:-.01em;margin:0 0 10px;line-height:1.25}
+p{margin:0 0 16px}
+p:last-child{margin-bottom:0}
+
+/* ---------- exam map table ---------- */
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:520px}
+th{
+  text-align:left;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-3);padding:12px 16px;border-bottom:1px solid var(--rule);
+  background:var(--panel);white-space:nowrap;
+}
+td{padding:11px 16px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.slotcell{font-family:Archivo,sans-serif;font-weight:700;color:var(--blue);white-space:nowrap;font-size:14px}
+td.freq{font-family:Archivo,sans-serif;font-size:13px;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+/* ---------- study plan ---------- */
+.plan{display:flex;flex-direction:column;gap:2px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.plan-row{display:flex;gap:20px;background:var(--surface);padding:16px 18px;align-items:baseline;flex-wrap:wrap}
+.plan-when{
+  font-family:Archivo,sans-serif;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  color:var(--blue);flex:0 0 132px;
+}
+.plan-what{flex:1 1 300px;font-size:16px;margin:0}
+
+/* ---------- problem cards ---------- */
+.card{
+  background:var(--surface);
+  border:1px solid var(--rule);
+  border-radius:3px;
+  padding:26px 28px;
+  margin:0 0 22px;
+  box-shadow:var(--shadow);
+}
+.card-head{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.slot{
+  font-size:12px;font-weight:700;letter-spacing:.1em;
+  color:var(--surface);background:var(--blue);
+  padding:4px 9px;border-radius:2px;white-space:nowrap;
+}
+.badge{
+  font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 9px;border-radius:2px;white-space:nowrap;
+  background:var(--blue-soft);color:var(--blue-ink);
+}
+.badge.hot{background:var(--red-soft);color:var(--red)}
+.card-head h3{flex:1 1 100%;margin:6px 0 0}
+.src{font-size:14px;color:var(--ink-3);margin:0 0 20px;font-style:italic}
+
+.label{
+  font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);margin:26px 0 12px;
+}
+.label:first-of-type{margin-top:18px}
+
+/* recipe steps */
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:11px}
+ol.steps li{
+  counter-increment:s;position:relative;padding-left:34px;font-size:16px;
+}
+ol.steps li::before{
+  content:counter(s);
+  position:absolute;left:0;top:2px;
+  font-family:Archivo,sans-serif;font-size:11px;font-weight:700;
+  width:21px;height:21px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:var(--blue-soft);color:var(--blue-ink);
+}
+
+/* math / formula blocks */
+.math{
+  font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  font-size:14px;line-height:1.7;
+  background:var(--panel);
+  border-left:3px solid var(--blue);
+  border-radius:0 3px 3px 0;
+  padding:14px 18px;margin:14px 0;
+  overflow-x:auto;white-space:pre;
+  font-variant-numeric:tabular-nums;
+}
+code{
+  font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  font-size:.88em;background:var(--panel);padding:1px 5px;border-radius:2px;
+}
+
+/* worked example */
+.worked{
+  border:1px solid var(--rule);border-radius:3px;
+  background:var(--paper);
+  padding:18px 20px;margin:12px 0 0;
+}
+.worked p{font-size:15.5px;margin:0 0 12px}
+.worked .math{background:var(--surface);margin:10px 0}
+.given{font-size:15.5px;margin:0 0 14px;padding-bottom:14px;border-bottom:1px dashed var(--rule)}
+
+/* traps */
+.traps{
+  border-left:3px solid var(--red);
+  background:var(--red-soft);
+  border-radius:0 3px 3px 0;
+  padding:14px 18px;margin:22px 0 0;
+}
+.traps .label{color:var(--red);margin:0 0 8px}
+.traps ul{margin:0;padding-left:19px;font-size:15.5px}
+.traps li{margin-bottom:6px}
+.traps li:last-child{margin-bottom:0}
+
+/* formula sheet */
+.sheet{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+.sheet-block{
+  background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:18px 20px;
+}
+.sheet-block h4{
+  font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--blue);margin:0 0 12px;
+}
+.sheet-block .math{margin:0;background:transparent;border-left:none;padding:0;font-size:13.5px}
+
+/* tactics */
+.tactic{display:flex;flex-direction:column;gap:12px}
+.tactic-item{display:flex;gap:14px;align-items:flex-start}
+.tactic-n{
+  font-family:Archivo,sans-serif;font-size:12px;font-weight:700;
+  color:var(--blue);flex:0 0 auto;padding-top:3px;min-width:22px;
+}
+.tactic-item p{margin:0;font-size:16px}
+
+footer{
+  margin-top:64px;padding-top:22px;border-top:1px solid var(--rule);
+  font-size:14px;color:var(--ink-3);
+}
+footer p{margin:0 0 8px}
+
+strong{font-weight:600}
+.hl{background:var(--blue-soft);padding:0 3px;border-radius:2px}
+
+@media (max-width:640px){
+  body{font-size:16px;padding:0 16px 64px}
+  .card{padding:20px 18px}
+  .masthead{padding:44px 0 28px}
+}
+
+@media print{
+  body{background:#fff;color:#000;font-size:11pt;padding:0}
+  .card,.worked,.sheet-block,.tablewrap,.plan{break-inside:avoid;box-shadow:none}
+  .card{border:1px solid #bbb}
+  .masthead{padding-top:0}
+  section{margin-bottom:28px}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Algebră liniară &amp; geometrie analitică</p>
+  <h1>Ghid de examen ALGAED</h1>
+  <p class="standfirst">Nouă tipuri de exerciții acoperă tot ce a picat între 2021 și 2025. Pentru fiecare: <strong>rețeta în pași</strong>, un <strong>exemplu rezolvat cu numerele reale de pe subiect</strong>, și capcanele. Nimic în plus.</p>
+</header>
+
+<section>
+  <h2>Harta examenului</h2>
+  <p>Subiectele au aceeași structură an de an. Examenul final are 5 probleme, parțialul are 4 — iar restanța înseamnă structura de examen final. Coloana din dreapta spune în câte din sesiunile 2021–2025 a apărut tipul respectiv.</p>
+
+  <div class="tablewrap" style="margin-bottom:22px">
+    <table>
+      <thead><tr><th>Slot</th><th>Examen final — tipul problemei</th><th>Frecvență</th></tr></thead>
+      <tbody>
+        <tr><td class="slotcell">P1</td><td>Complement ortogonal U<sup>⊥</sup> și proiecția unui vector (Gram–Schmidt)</td><td class="freq">toate</td></tr>
+        <tr><td class="slotcell">P2</td><td>Conică: tip + formă canonică <em>sau</em> formă pătratică (min/max)</td><td class="freq">toate</td></tr>
+        <tr><td class="slotcell">P3</td><td>Descompunerea SVD <em>sau</em> bază ortonormată de vectori proprii</td><td class="freq">toate</td></tr>
+        <tr><td class="slotcell">P4</td><td>Sistem de 2 ecuații diferențiale, problemă Cauchy + interpretare grafică</td><td class="freq">toate</td></tr>
+        <tr><td class="slotcell">P5</td><td>Ecuație diferențială de ordin 2, problemă Cauchy</td><td class="freq">toate</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>Slot</th><th>Parțial — tipul problemei</th><th>Frecvență</th></tr></thead>
+      <tbody>
+        <tr><td class="slotcell">P1</td><td>Geometrie în spațiu: drepte concurente, plan, simetric, arie</td><td class="freq">3 din 4</td></tr>
+        <tr><td class="slotcell">P2</td><td>Dependență liniară cu parametru + completare la bază + coordonate</td><td class="freq">toate</td></tr>
+        <tr><td class="slotcell">P3</td><td>Aplicație liniară ℝ³→ℝ³ cu parametru: Ker, Im, sumă directă</td><td class="freq">3 din 4</td></tr>
+        <tr><td class="slotcell">P4</td><td>Diagonalizarea unei matrice 3×3 (uneori cu parametru)</td><td class="freq">3 din 4</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Planul de învățat</h2>
+  <p>Ordinea nu e cea din curs, e cea a raportului punctaj / efort. Diagonalizarea e prima fiindcă P2, P3 și P4 de la examen se sprijină toate pe ea — o înveți o dată, o folosești de trei ori.</p>
+  <div class="plan">
+    <div class="plan-row">
+      <div class="plan-when">Sesiunea 1 · 2h</div>
+      <p class="plan-what"><strong>Diagonalizare + cele două ecuații diferențiale (P4, P5).</strong> Sunt 40% din examenul final și sunt complet mecanice — se rezolvă la fel de fiecare dată. Refă cu mâna, pe hârtie, cele trei exemple de mai jos.</p>
+    </div>
+    <div class="plan-row">
+      <div class="plan-when">Sesiunea 2 · 2h</div>
+      <p class="plan-what"><strong>Proiecție / Gram–Schmidt (P1) și SVD (P3).</strong> Amândouă sunt „calculează valori proprii, apoi ortogonalizează" — dacă ai făcut sesiunea 1, valorile proprii le știi deja.</p>
+    </div>
+    <div class="plan-row">
+      <div class="plan-when">Sesiunea 3 · 1½h</div>
+      <p class="plan-what"><strong>Conica (P2)</strong> — are cei mai mulți pași, dar se punctează pe parcurs: doar identificarea tipului cu δ îți aduce puncte. Apoi recitește capcanele de la toate tipurile.</p>
+    </div>
+    <div class="plan-row">
+      <div class="plan-when">Dacă e parțial</div>
+      <p class="plan-what">Fă în schimb cele 4 tipuri din a doua jumătate a ghidului. Diagonalizarea rămâne prima.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== EXAMEN FINAL ===================== -->
+
+<section>
+  <h2>Examen final — cele 5 probleme</h2>
+
+  <!-- P1 -->
+  <article class="card">
+    <div class="card-head">
+      <span class="slot">P1</span>
+      <span class="badge hot">apare la fiecare sesiune</span>
+      <h3>Complement ortogonal și proiecție</h3>
+    </div>
+    <p class="src">Model: examen ianuarie 2024, grupa CC</p>
+
+    <p class="label">Rețeta</p>
+    <ol class="steps">
+      <li>Verifică întâi dacă generatorii lui <code>U</code> sunt independenți. Dacă unul e combinație a celorlalți, aruncă-l. <code>dim U</code> = câți rămân.</li>
+      <li>Gram–Schmidt pe cei rămași: fiecare vector nou minus proiecțiile lui pe toți cei deja ortogonalizați.</li>
+      <li>Proiecția: aduni proiecțiile lui <code>v</code> pe fiecare vector din baza ortogonală.</li>
+      <li><code>pr_{U⊥} v = v − pr_U v</code>. Nu îl recalcula de la zero.</li>
+      <li>Dacă cere explicit <code>U⊥</code>: rezolvi sistemul <code>⟨x, uᵢ⟩ = 0</code> pentru fiecare generator. <code>dim U⊥ = n − dim U</code>.</li>
+    </ol>
+
+    <div class="math">w₁ = u₁
+w₂ = u₂ − (⟨u₂,w₁⟩ / ‖w₁‖²)·w₁
+w₃ = u₃ − (⟨u₃,w₁⟩ / ‖w₁‖²)·w₁ − (⟨u₃,w₂⟩ / ‖w₂‖²)·w₂
+
+pr_U v = Σᵢ (⟨v,wᵢ⟩ / ‖wᵢ‖²)·wᵢ</div>
+
+    <p class="label">Exemplu rezolvat</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> U = Sp{u₁=(0,1,2,−2), u₂=(1,2,6,−2), u₃=(1,1,4,0)} ⊆ ℝ⁴ și v = (1,0,1,0). Se cer U<sup>⊥</sup> și pr<sub>U</sub>v.</p>
+
+      <p><strong>1. Dependență.</strong> Observi că u₁ + u₃ = (1,2,6,−2) = u₂. Deci u₂ se aruncă: <span class="hl">dim U = 2</span>, bază {u₁, u₃}.</p>
+
+      <p><strong>2. Gram–Schmidt.</strong></p>
+      <div class="math">w₁ = u₁ = (0,1,2,−2),   ‖w₁‖² = 0+1+4+4 = 9
+⟨u₃,w₁⟩ = 0+1+8+0 = 9
+w₂ = (1,1,4,0) − (9/9)(0,1,2,−2) = (1,0,2,2),   ‖w₂‖² = 9</div>
+
+      <p><strong>3. Proiecția.</strong> ⟨v,w₁⟩ = 0+0+2+0 = 2 și ⟨v,w₂⟩ = 1+0+2+0 = 3.</p>
+      <div class="math">pr_U v = (2/9)(0,1,2,−2) + (3/9)(1,0,2,2) = (1/9)·(3, 2, 10, 2)</div>
+
+      <p><strong>4. Complementul.</strong></p>
+      <div class="math">pr_(U⊥) v = (1,0,1,0) − (1/9)(3,2,10,2) = (1/9)·(6, −2, −1, −2)</div>
+
+      <p><strong>5. U<sup>⊥</sup> explicit.</strong> Din ⟨x,u₁⟩ = 0 și ⟨x,u₃⟩ = 0, cu x = (x,y,z,t):</p>
+      <div class="math">y + 2z − 2t = 0
+x + y + 4z   = 0     ⟹   x = −2z − 2t,  y = −2z + 2t
+
+dim U⊥ = 2,  bază { (−2,−2,1,0), (−2,2,0,1) }</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li>Dacă faci Gram–Schmidt fără să verifici dependența, îți iese <code>w₃ = 0</code> și te blochezi. Verifică întâi.</li>
+        <li>Nu normaliza dacă enunțul cere doar „bază ortogonală" — radicalii complică degeaba calculul proiecției.</li>
+        <li>La proiecție se împarte la <code>‖wᵢ‖²</code>, nu la <code>‖wᵢ‖</code>.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- P2 -->
+  <article class="card">
+    <div class="card-head">
+      <span class="slot">P2</span>
+      <span class="badge">apare la fiecare sesiune</span>
+      <h3>Conică: tip și formă canonică</h3>
+    </div>
+    <p class="src">Model: examen ianuarie 2024, grupa CC</p>
+
+    <p class="label">Rețeta</p>
+    <ol class="steps">
+      <li>Identifică coeficienții din forma standard. <strong>Atenție:</strong> coeficientul lui <code>xy</code> se împarte la 2 ca să obții <code>a₁₂</code>; la fel pentru <code>b₁</code>, <code>b₂</code>.</li>
+      <li>Calculează δ — asta îți dă tipul, și e deja punctaj.</li>
+      <li>Calculează Δ — dacă e ≠ 0, conica e nedegenerată.</li>
+      <li>Diagonalizează A: valori proprii λ₁, λ₂ și vectori proprii normalizați. Formează Q cu <code>det Q = +1</code> (dacă iese −1, inversează cele două coloane).</li>
+      <li>Substituie <code>(x,y)ᵀ = Q(x′,y′)ᵀ</code>. Partea pătratică devine automat <code>λ₁x′² + λ₂y′²</code>; partea liniară se recalculează.</li>
+      <li>Formează pătrate perfecte (translația) și scrii forma canonică.</li>
+    </ol>
+
+    <div class="math">a₁₁x² + 2a₁₂xy + a₂₂y² + 2b₁x + 2b₂y + c = 0
+
+     | a₁₁ a₁₂ |              | a₁₁ a₁₂ b₁ |
+ δ = |         |          Δ = | a₁₂ a₂₂ b₂ |
+     | a₁₂ a₂₂ |              | b₁  b₂  c  |
+
+ δ > 0 → elipsă      δ = 0 → parabolă      δ < 0 → hiperbolă
+ Δ ≠ 0 → nedegenerată            Δ = 0 → degenerată</div>
+
+    <p class="label">Exemplu rezolvat</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> x² + 2xy + y² + 2x − 2y = 0. Se cer tipul și forma canonică.</p>
+
+      <p><strong>1. Coeficienții.</strong> a₁₁ = 1, a₁₂ = <strong>1</strong> (jumătate din 2), a₂₂ = 1, b₁ = <strong>1</strong>, b₂ = <strong>−1</strong>, c = 0.</p>
+
+      <p><strong>2–3. Tipul.</strong></p>
+      <div class="math">δ = 1·1 − 1·1 = 0            ⟹  parabolă
+Δ = det[1 1 1; 1 1 −1; 1 −1 0] = −4 ≠ 0   ⟹  nedegenerată</div>
+
+      <p><strong>4. Rotația.</strong> A = [1 1; 1 1], deci λ² − 2λ = 0 ⟹ λ₁ = 2, λ₂ = 0.</p>
+      <div class="math">λ=2 : −x + y = 0  ⟹  q₁ = (1,1)/√2
+λ=0 :  x + y = 0  ⟹  q₂ = (−1,1)/√2
+
+      1   | 1  −1 |
+ Q = ———  |       |,     det Q = ½(1+1) = 1  ✓
+      √2  | 1   1 |</div>
+
+      <p><strong>5. Substituția.</strong> x = (x′−y′)/√2 și y = (x′+y′)/√2.</p>
+      <div class="math">partea pătratică  →  λ₁x′² + λ₂y′² = 2x′²
+partea liniară    →  2x − 2y = (2/√2)[(x′−y′) − (x′+y′)] = −2√2·y′</div>
+
+      <p><strong>6. Forma canonică.</strong></p>
+      <div class="math">2x′² − 2√2·y′ = 0     ⟹     y′ = x′²/√2      (parabolă)</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li>Cel mai frecvent greșit: <code>a₁₂</code> este <em>jumătate</em> din coeficientul lui <code>xy</code>. La fel <code>b₁</code>, <code>b₂</code>.</li>
+        <li><code>det Q</code> trebuie să fie <strong>+1</strong>. Dacă e −1, ai o simetrie, nu o rotație — schimbă coloanele între ele.</li>
+        <li>Verificări rapide fără calcul: apare doar <code>x²</code> (nu și <code>y²</code>) → parabolă; <code>x²</code> și <code>y²</code> cu semne diferite → hiperbolă; cu același semn și coeficienți egali → cerc.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- P3 -->
+  <article class="card">
+    <div class="card-head">
+      <span class="slot">P3</span>
+      <span class="badge">apare la fiecare sesiune</span>
+      <h3>Descompunerea SVD</h3>
+    </div>
+    <p class="src">Model: examen ianuarie 2024, ambele grupe (CC și CD)</p>
+
+    <p class="label">Rețeta</p>
+    <ol class="steps">
+      <li>Dacă ți se dă o aplicație <code>f</code>, nu o matrice, prima treabă e să scrii matricea <code>A</code> în baza canonică — pe <em>coloane</em> pui imaginile vectorilor din bază.</li>
+      <li>Calculează <code>M = AᵀA</code> (iese simetrică, n×n).</li>
+      <li>Valorile proprii ale lui M sunt mereu ≥ 0. Ordonează-le <strong>descrescător</strong>; vectorii proprii ortonormați, în aceeași ordine, sunt coloanele lui <code>V</code>.</li>
+      <li><code>σᵢ = √λᵢ</code>. Σ are aceeași formă (m×n) ca A, cu σ pe diagonală și 0 în rest.</li>
+      <li><code>uᵢ = (1/σᵢ)·A·vᵢ</code>, pentru fiecare σᵢ ≠ 0.</li>
+      <li>Dacă ai obținut mai puțini <code>uᵢ</code> decât m, completează cu vectori ortonormați oarecare.</li>
+    </ol>
+
+    <div class="math">A = U · Σ · Vᵀ</div>
+
+    <p class="label">Exemplu rezolvat</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> f : ℝ₂[X] → ℝ₂[X], f(P) = P′ (derivata), în baza canonică {1, X, X²}. Se cere SVD.</p>
+
+      <p><strong>1. Matricea.</strong> f(1) = 0, f(X) = 1, f(X²) = 2X. Coordonatele acestora, puse pe coloane:</p>
+      <div class="math">     | 0  1  0 |
+ A = | 0  0  2 |
+     | 0  0  0 |</div>
+
+      <p><strong>2–3. AᵀA și spectrul.</strong></p>
+      <div class="math">        | 0  0  0 |
+ AᵀA =  | 0  1  0 |     λ₁ = 4, λ₂ = 1, λ₃ = 0
+        | 0  0  4 |
+
+ v₁ = (0,0,1),  v₂ = (0,1,0),  v₃ = (1,0,0)
+
+     | 0  0  1 |
+ V = | 0  1  0 |        (ordinea: λ descrescător)
+     | 1  0  0 |</div>
+
+      <p><strong>4. Valorile singulare.</strong> σ₁ = √4 = 2, σ₂ = √1 = 1, σ₃ = 0 ⟹ Σ = diag(2, 1, 0).</p>
+
+      <p><strong>5–6. Matricea U.</strong></p>
+      <div class="math">u₁ = ½·A·(0,0,1)ᵀ = ½·(0,2,0) = (0,1,0)
+u₂ = 1·A·(0,1,0)ᵀ = (1,0,0)
+u₃ = (0,0,1)                     (completat ortonormal)
+
+     | 0  1  0 |
+ U = | 1  0  0 |
+     | 0  0  1 |</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li>σ = <strong>√λ</strong>, nu λ.</li>
+        <li>Coloanele lui V se ordonează după λ <strong>descrescător</strong> — altfel Σ nu mai corespunde.</li>
+        <li>Σ are dimensiunea lui A (m×n), nu a lui AᵀA. Dacă A nu e pătratică, Σ are linii sau coloane de zerouri.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- P4 -->
+  <article class="card">
+    <div class="card-head">
+      <span class="slot">P4</span>
+      <span class="badge hot">apare la fiecare sesiune · cea mai sigură</span>
+      <h3>Sistem de 2 ecuații diferențiale (Cauchy)</h3>
+    </div>
+    <p class="src">Model: examen ianuarie 2024, grupa CC</p>
+
+    <p class="label">Rețeta</p>
+    <ol class="steps">
+      <li>Scrie sistemul ca <code>X′ = A·X</code>, cu A matricea coeficienților.</li>
+      <li>Valorile proprii ale lui A. De aici, unul din trei cazuri (mai jos).</li>
+      <li>Dacă sistemul are termen liber (neomogen): caută întâi o soluție particulară constantă, rezolvând <code>A·X + b = 0</code>, și adaug-o la soluția omogenă.</li>
+      <li>Pune <code>t = 0</code> în <strong>soluția generală</strong> și obții un sistem în C₁, C₂.</li>
+      <li>Partea geometrică: taie Ox ⟺ y(t) = 0; taie Oy ⟺ x(t) = 0; bisectoarea I ⟺ y = x; bisectoarea a II-a ⟺ y = −x. Tangenta într-un punct t₀ este vectorul <code>(x′(t₀), y′(t₀))</code>.</li>
+    </ol>
+
+    <div class="math">λ₁ ≠ λ₂ reale     X(t) = C₁e^(λ₁t)·v₁ + C₂e^(λ₂t)·v₂
+
+λ dublă, un       găsești v₂ din (A − λI)v₂ = v₁ , apoi
+singur vector     X(t) = C₁e^(λt)·v₁ + C₂e^(λt)·(t·v₁ + v₂)
+
+λ = α ± iβ        X(t) = e^(αt)·[ combinații de cos βt și sin βt ]</div>
+
+    <p class="label">Exemplu rezolvat</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> x′ = 3x − y, y′ = −x + 3y, cu x(0) = 0, y(0) = 2. Se cere soluția și dacă intersectează axele.</p>
+
+      <p><strong>1–2. Spectrul.</strong></p>
+      <div class="math">     | 3  −1 |
+ A = |       |     det(A − λI) = (3−λ)² − 1 = 0  ⟹  λ = 2, 4
+     | −1  3 |
+
+ λ=2 :  x − y = 0   ⟹  v₁ = (1, 1)
+ λ=4 : −x − y = 0   ⟹  v₂ = (−1, 1)</div>
+
+      <p><strong>3. Soluția generală.</strong> Valori proprii distincte, deci primul caz:</p>
+      <div class="math">X(t) = C₁·e^(2t)·(1,1) + C₂·e^(4t)·(−1,1)</div>
+
+      <p><strong>4. Condițiile inițiale.</strong> La t = 0: C₁ − C₂ = 0 și C₁ + C₂ = 2, deci C₁ = C₂ = 1.</p>
+      <div class="math">x(t) = e^(2t) − e^(4t)
+y(t) = e^(2t) + e^(4t)</div>
+
+      <p><strong>5. Geometria.</strong></p>
+      <div class="math">Ox :  y(t) = e^(2t) + e^(4t) > 0  pentru orice t   ⟹  NU intersectează Ox
+
+Oy :  x(t) = 0  ⟺  e^(2t) = e^(4t)  ⟺  t = 0
+      ⟹  intersectează Oy în punctul (0, 2)
+
+tangenta în t=0 :  (x′(0), y′(0)) = (2−4, 2+4) = (−2, 6)
+      nu e paralelă cu (0,1)  ⟹  curba NU e tangentă la Oy</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li>Condițiile inițiale se pun în soluția generală deja scrisă, nu în ecuația de pornire.</li>
+        <li>Înainte să spui „intersectează", verifică semnul: <code>e^(2t) − e^(4t)</code> este negativ pentru orice t &gt; 0.</li>
+        <li>La cazul cu λ dublă, <code>v₂</code> se găsește din <code>(A − λI)v₂ = v₁</code> — cu v₁ în dreapta, nu cu 0.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- P5 -->
+  <article class="card">
+    <div class="card-head">
+      <span class="slot">P5</span>
+      <span class="badge hot">apare la fiecare sesiune · ultima problemă</span>
+      <h3>Ecuație diferențială de ordin 2 (Cauchy)</h3>
+    </div>
+    <p class="src">Model: examen 23.01.2023 și examen ianuarie 2024</p>
+
+    <p class="label">Rețeta</p>
+    <ol class="steps">
+      <li>Ecuația caracteristică: <code>x″ + ax′ + bx = f(t)</code> devine <code>λ² + aλ + b = 0</code>.</li>
+      <li>Soluția omogenă x₀, după tipul rădăcinilor (tabelul de mai jos).</li>
+      <li>Soluția particulară x<sub>p</sub>, după forma lui f(t) (al doilea tabel).</li>
+      <li><code>x = x₀ + x_p</code>, apoi pui x(0) și x′(0).</li>
+    </ol>
+
+    <div class="math">SOLUȚIA OMOGENĂ
+λ₁ ≠ λ₂ reale     x₀ = C₁e^(λ₁t) + C₂e^(λ₂t)
+λ dublă           x₀ = (C₁ + C₂t)·e^(λt)
+λ = α ± iβ        x₀ = e^(αt)·(C₁cos βt + C₂sin βt)
+
+SOLUȚIA PARTICULARĂ   (m = multiplicitatea lui λ ca rădăcină; 0 dacă nu e rădăcină)
+f = constantă k   x_p = a·tᵐ
+f = e^(μt)        x_p = a·tᵐ·e^(μt)
+f = polinom gr. n x_p = polinom de grad n, înmulțit cu tᵐ
+f = cos ωt/sin ωt x_p = tᵐ·(a·cos ωt + b·sin ωt)</div>
+
+    <p class="label">Exemplu rezolvat A — termen liber constant</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> x″ + 4x′ + 4x = 4, cu x(0) = 0, x′(0) = 0.</p>
+      <div class="math">λ² + 4λ + 4 = 0  ⟹  (λ+2)² = 0  ⟹  λ = −2 dublă
+x₀ = (C₁ + C₂t)·e^(−2t)
+
+f = 4 constantă, iar 0 nu e rădăcină  ⟹  x_p = a
+substitui:  4a = 4  ⟹  a = 1
+
+x(t) = (C₁ + C₂t)·e^(−2t) + 1
+
+x(0)  = C₁ + 1 = 0            ⟹  C₁ = −1
+x′(t) = (C₂ − 2C₁ − 2C₂t)e^(−2t)
+x′(0) = C₂ − 2C₁ = C₂ + 2 = 0 ⟹  C₂ = −2
+
+x(t) = 1 − (1 + 2t)·e^(−2t)</div>
+    </div>
+
+    <p class="label">Exemplu rezolvat B — ecuații cuplate</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> x″ + 4x = 5f(t), cu x(0) = 0, x′(0) = 1, unde f este soluția lui f′ + 4f = 5eᵗ, f(0) = 1.</p>
+      <p><strong>Întâi f</strong> (ecuație de ordin I):</p>
+      <div class="math">f₀ = C·e^(−4t);   f_p = a·eᵗ  ⟹  a + 4a = 5  ⟹  a = 1
+f(0) = C + 1 = 1  ⟹  C = 0        ⟹  f(t) = eᵗ</div>
+      <p><strong>Apoi x</strong>, cu 5f(t) = 5eᵗ ca termen liber:</p>
+      <div class="math">λ² + 4 = 0  ⟹  λ = ±2i  ⟹  x₀ = C₁cos 2t + C₂sin 2t
+x_p = a·eᵗ  ⟹  a + 4a = 5  ⟹  a = 1
+
+x(t)  = C₁cos 2t + C₂sin 2t + eᵗ
+x(0)  = C₁ + 1 = 0        ⟹  C₁ = −1
+x′(0) = 2C₂ + 1 = 1       ⟹  C₂ = 0
+
+x(t) = eᵗ − cos 2t</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li><strong>Rezonanța.</strong> Dacă μ (respectiv ±iω) este rădăcină a ecuației caracteristice, înmulțește x<sub>p</sub> cu <code>tᵐ</code>. Fără asta, substituția îți dă 0 = ceva și te blochezi.</li>
+        <li>La ecuațiile cuplate, rezolvi complet ecuația de ordin I întâi, apoi o bagi ca termen liber în a doua.</li>
+        <li>x′(0) se calculează derivând soluția <em>completă</em>, inclusiv x<sub>p</sub>.</li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== PARȚIAL ===================== -->
+
+<section>
+  <h2>Parțial — cele 4 probleme</h2>
+  <p style="font-size:15.5px;color:var(--ink-2);margin:-8px 0 22px">Rezumatul nucleului. Tratarea completă a parțialului — cu instrumentele de bază și variantele rare, 11 tipuri în total — este în <em>Ghid de parțial ALGAED</em>.</p>
+
+  <!-- Partial P1 -->
+  <article class="card">
+    <div class="card-head">
+      <span class="slot">P1</span>
+      <span class="badge">3 din 4 sesiuni</span>
+      <h3>Geometrie analitică în spațiu</h3>
+    </div>
+    <p class="src">Model: parțial CC 2022 (reapare aproape identic în decembrie 2024)</p>
+
+    <p class="label">Rețeta</p>
+    <ol class="steps">
+      <li>Din fiecare dreaptă scoate un punct și vectorul director: din <code>(x−x₀)/a = (y−y₀)/b = (z−z₀)/c</code> ai <code>M₀(x₀,y₀,z₀)</code> și <code>v = (a,b,c)</code>.</li>
+      <li>Concurente ⟺ coplanare și neparalele ⟺ produsul mixt <code>(v₁, v₂, M₁M₂) = 0</code>. De aici scoți parametrul.</li>
+      <li>Planul determinat de ele trece prin M₁ și are normala <code>N = v₁ × v₂</code>.</li>
+      <li>Simetricul lui A față de plan: scrii dreapta prin A cu direcția N, afli intersecția P cu planul, iar simetricul este <code>B = 2P − A</code>.</li>
+      <li>Aria triunghiului: <code>½·‖AB × AC‖</code>.</li>
+    </ol>
+
+    <p class="label">Exemplu rezolvat</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> d₁ : (x−2)/4 = (y+1)/α = z/2 și d₂ : (x+1)/3 = y/2 = (z−2)/4. Se cere α pentru care sunt concurente, plus ecuația planului.</p>
+      <div class="math">M₁(2,−1,0),  v₁ = (4, α, 2)
+M₂(−1,0,2),  v₂ = (3, 2, 4)      M₁M₂ = (−3, 1, 2)
+
+               | 4  α  2 |
+(v₁,v₂,M₁M₂) = | 3  2  4 | = 4(4−4) − α(6+12) + 2(3+6) = 18 − 18α
+               |−3  1  2 |
+
+= 0  ⟹  α = 1</div>
+      <p>Cu α = 1, normala planului:</p>
+      <div class="math">N = v₁ × v₂ = (1·4 − 2·2,  −(4·4 − 2·3),  4·2 − 1·3) = (0, −10, 5)
+
+π :  0(x−2) − 10(y+1) + 5(z−0) = 0   ⟹   2y − z + 2 = 0
+
+verificare: M₂(−1,0,2) → 0 − 2 + 2 = 0  ✓</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li>Componenta din mijloc a produsului vectorial are <strong>semn minus</strong> în față.</li>
+        <li>Produsul mixt = 0 înseamnă coplanare, care poate însemna și <em>paralele</em>. Verifică rapid că v₁ și v₂ nu sunt proporționale.</li>
+        <li>La final, verifică planul cu al doilea punct: prinde greșelile de semn.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- Partial P2 -->
+  <article class="card">
+    <div class="card-head">
+      <span class="slot">P2</span>
+      <span class="badge hot">apare la fiecare parțial</span>
+      <h3>Dependență liniară cu parametru, completare la bază, coordonate</h3>
+    </div>
+    <p class="src">Model: parțial CC 2022. Aceeași problemă, cu polinoame în loc de matrice, a picat în 2023 și în decembrie 2024 — se rezolvă identic.</p>
+
+    <p class="label">Rețeta</p>
+    <ol class="steps">
+      <li>Scrie fiecare matrice sau polinom ca <em>vector de coordonate</em> în baza canonică. Pentru M₂(ℝ): <code>(a₁₁, a₁₂, a₂₁, a₂₂)</code>. Pentru ℝ₃[X]: <code>(a₀, a₁, a₂, a₃)</code>. De aici totul e algebră liniară obișnuită.</li>
+      <li>Pune vectorii pe liniile unei matrice: dependenți ⟺ <code>det = 0</code>. Rezolvi în parametru.</li>
+      <li>Cu parametrul găsit, caută relația concretă de dependență și aruncă un vector. Ce rămâne e o bază pentru <code>Sp{...}</code>.</li>
+      <li>Completare la o bază a spațiului: adaugi vectori din baza canonică (E₁₁, E₁₂, … sau 1, X, X², X³) până la dimensiunea spațiului, și verifici <code>det ≠ 0</code>.</li>
+      <li>Coordonatele lui B: rezolvi sistemul <code>α₁b₁ + … + αₙbₙ = B</code>. Începe cu componentele care apar în cele mai puține ecuații.</li>
+    </ol>
+
+    <p class="label">Exemplu rezolvat</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> A₁ = (4 3; 2 1), A₂ = (β −3; 2 −1), A₃ = (1 0; 1 0), A₄ = (0 1; 0 1) în M₂(ℝ), și B = (5 4; 3 2).</p>
+
+      <p><strong>1–2. Parametrul.</strong> Ca vectori de coordonate:</p>
+      <div class="math">A₁=(4,3,2,1)   A₂=(β,−3,2,−1)   A₃=(1,0,1,0)   A₄=(0,1,0,1)
+
+| 4  3  2  1 |
+| β −3  2 −1 |
+| 1  0  1  0 | = −2β        = 0  ⟹  β = 0
+| 0  1  0  1 |</div>
+
+      <p><strong>3. Relația de dependență.</strong> Cu β = 0:</p>
+      <div class="math">A₁ + A₂ = (4,0,4,0) = 4·A₃      ⟹   A₁ + A₂ − 4A₃ = 0
+
+dim Sp{A₁,A₂,A₃,A₄} = 3,   bază { A₁, A₃, A₄ }</div>
+
+      <p><strong>4. Completarea.</strong> M₂(ℝ) are dimensiunea 4, deci adaug un vector — de exemplu E₁₁ = (1,0,0,0):</p>
+      <div class="math">| 4  3  2  1 |
+| 1  0  1  0 |
+| 0  1  0  1 | = −2 ≠ 0   ⟹  { A₁, A₃, A₄, E₁₁ } e bază în M₂(ℝ)
+| 1  0  0  0 |</div>
+
+      <p><strong>5. Coordonatele lui B.</strong> Din α·A₁ + γ·A₃ + δ·A₄ + ε·E₁₁ = (5,4,3,2), luate pe componente:</p>
+      <div class="math">a₂₂ :   α + δ = 2
+a₁₂ :  3α + δ = 4      ⟹  α = 1,  δ = 1
+a₂₁ :  2α + γ = 3      ⟹  γ = 1
+a₁₁ :  4α + γ + ε = 5  ⟹  ε = 0
+
+[B] = (1, 1, 1, 0)ᵀ      adică  B = A₁ + A₃ + A₄</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li>Nu încerca să lucrezi direct cu matricele. Trecerea la vectori de coordonate transformă problema în ceva mecanic.</li>
+        <li>Baza pentru <code>Sp{...}</code> nu e formată din toți cei patru — e formată din cei rămași după ce arunci vectorul dependent.</li>
+        <li>Când completezi baza, verifică întotdeauna determinantul. Un vector canonic ales prost poate fi deja în subspațiu.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- Partial P3 -->
+  <article class="card">
+    <div class="card-head">
+      <span class="slot">P3</span>
+      <span class="badge">3 din 4 sesiuni</span>
+      <h3>Aplicație liniară cu parametru: Ker, Im, sumă directă</h3>
+    </div>
+    <p class="src">Model: parțial CC 2022 (reapare cu semne schimbate în 2023)</p>
+
+    <p class="label">Rețeta</p>
+    <ol class="steps">
+      <li><code>M(f)</code> are pe <strong>coloane</strong> imaginile vectorilor bazei canonice.</li>
+      <li><code>det M(f) = 0</code> îți dă valorile speciale ale parametrului. Factorizează determinantul, nu-l lăsa desfăcut.</li>
+      <li>Pentru parametru generic (det ≠ 0): rang 3, <code>Ker = {0}</code>, <code>Im = ℝ³</code>, f bijectivă.</li>
+      <li>Pentru fiecare valoare specială: calculezi rangul, apoi Ker (soluțiile sistemului omogen) și Im (coloanele independente). Verifică mereu <code>dim Ker + dim Im = 3</code>.</li>
+      <li>Sumă directă ⟺ <code>Ker ∩ Im = {0}</code>: iei generatorul lui Ker și vezi dacă satisface ecuația care descrie Im.</li>
+    </ol>
+
+    <p class="label">Exemplu rezolvat</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> f(x,y,z) = (γx + y + z, x + γy + z, x + y + γz). Se cer Ker și Im, discuție după γ, și dacă suma Ker ⊕ Im e directă.</p>
+      <div class="math">     | γ  1  1 |
+M(f)=| 1  γ  1 |    det = γ³ − 3γ + 2 = (γ − 1)²·(γ + 2)
+     | 1  1  γ |</div>
+
+      <p><strong>Cazul γ ∉ {1, −2}:</strong> rang 3, Ker = {0}, Im = ℝ³, f bijectivă.</p>
+
+      <p><strong>Cazul γ = 1:</strong> matricea are toate elementele 1, deci <strong>rang 1</strong>.</p>
+      <div class="math">Ker :  x + y + z = 0   ⟹  dim 2,  bază {(1,−1,0), (1,0,−1)}
+Im  :  Sp{(1,1,1)}    ⟹  dim 1              (2 + 1 = 3 ✓)</div>
+
+      <p><strong>Cazul γ = −2:</strong> minorul |−2 1; 1 −2| = 3 ≠ 0, deci <strong>rang 2</strong>.</p>
+      <div class="math">Ker :  Sp{(1,1,1)}          ⟹  dim 1     (−2+1+1 = 0 ✓)
+Im  :  planul x + y + z = 0 ⟹  dim 2     (coloanele au suma 0)</div>
+
+      <p><strong>Suma directă.</strong> În ambele cazuri speciale, unul dintre subspații este dreapta <code>Sp{(1,1,1)}</code> și celălalt este planul <code>x+y+z = 0</code>. Cum 1+1+1 = 3 ≠ 0, vectorul (1,1,1) nu e în plan:</p>
+      <div class="math">Ker ∩ Im = {0}   pentru orice γ   ⟹   ℝ³ = Ker(f) ⊕ Im(f)  întotdeauna</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li>Cele două cazuri speciale se confundă ușor între ele: la <strong>γ = 1</strong> rangul e <strong>1</strong> (matricea e plină de 1-uri), la <strong>γ = −2</strong> rangul e <strong>2</strong>. Verifică rangul, nu-l ghici după multiplicitatea rădăcinii.</li>
+        <li><code>dim Ker + dim Im = 3</code> este verificarea ta gratuită. Dacă nu dă 3, ai greșit rangul.</li>
+        <li>Ker se citește din sistemul omogen, Im din coloane — nu invers.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- Partial P4 -->
+  <article class="card">
+    <div class="card-head">
+      <span class="slot">P4</span>
+      <span class="badge">3 din 4 sesiuni</span>
+      <h3>Diagonalizarea unei matrice 3×3</h3>
+    </div>
+    <p class="src">Model: parțial CC 2022, plus varianta cu parametru din decembrie 2024</p>
+
+    <p class="label">Rețeta</p>
+    <ol class="steps">
+      <li><code>det(A − λI) = 0</code> → polinomul caracteristic → valorile proprii cu multiplicitățile algebrice <code>a(λ)</code>.</li>
+      <li>Pentru fiecare λ: rezolvi <code>(A − λI)v = 0</code>. Multiplicitatea geometrică este <code>g(λ) = 3 − rang(A − λI)</code>.</li>
+      <li>A e diagonalizabilă ⟺ <code>g(λ) = a(λ)</code> pentru <strong>toate</strong> valorile proprii. Dacă toate λ sunt distincte, e automat diagonalizabilă.</li>
+      <li>P are vectorii proprii pe coloane, în aceeași ordine în care pui valorile proprii în D. <code>A = PDP⁻¹</code>.</li>
+    </ol>
+
+    <p class="label">Exemplu rezolvat — fără parametru</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> A = (2 1 −2; 2 3 −4; 1 1 −1). Se cere diagonalizarea.</p>
+      <div class="math">polinomul caracteristic:  λ³ − 4λ² + 5λ − 2 = (λ − 1)²·(λ − 2)
+                          λ₁ = 1 cu a = 2,   λ₂ = 2 cu a = 1
+
+λ = 1 :  A − I = | 1  1 −2 |
+                 | 2  2 −4 |   rang 1  ⟹  g = 3 − 1 = 2  ✓ = a
+                 | 1  1 −2 |
+         Ker :  x + y − 2z = 0  ⟹  v₁ = (1,−1,0),  v₂ = (2,0,1)
+
+λ = 2 :  A − 2I = | 0  1 −2 |   linia 1: y = 2z
+                  | 2  1 −4 |   linia 3: x + y − 3z = 0 ⟹ x = z
+                  | 1  1 −3 |   ⟹  v₃ = (1, 2, 1),  g = 1 ✓ = a
+
+     | 1  2  1 |
+ P = |−1  0  2 |        D = diag(1, 1, 2)
+     | 0  1  1 |</div>
+    </div>
+
+    <p class="label">Exemplu rezolvat — cu parametru</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> A = (3 β 0; 0 4 1; 0 2 5). Se cere β pentru care A e diagonalizabilă.</p>
+      <div class="math">Prima coloană dă direct λ = 3. Restul, din blocul 2×2:
+(4−λ)(5−λ) − 2 = λ² − 9λ + 18 = (λ − 3)(λ − 6)
+
+⟹  λ = 3 cu a = 2,   λ = 6 cu a = 1
+
+Diagonalizabilă ⟺ g(3) = 2 ⟺ rang(A − 3I) = 1 :
+
+           | 0  β  0 |
+ A − 3I =  | 0  1  1 |   liniile 2 și 3 sunt deja proporționale
+           | 0  2  2 |
+
+rangul e 1 doar dacă (0, β, 0) e proporțional cu (0, 1, 1)  ⟹  β = 0</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li>Verifică fiecare vector propriu înlocuindu-l în sistem. Un semn greșit acolo strică tot restul problemei.</li>
+        <li><code>g(λ) = n − rang(A − λI)</code>. Calculează rangul, nu număra „câte soluții par să fie".</li>
+        <li>Ordinea coloanelor lui P trebuie să corespundă ordinii valorilor proprii din D. Dacă le încurci, <code>A = PDP⁻¹</code> nu mai iese.</li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<!-- ===================== FORMULE ===================== -->
+
+<section>
+  <h2>Formulele pe care le scrii pe ciornă în primele 2 minute</h2>
+  <div class="sheet">
+
+    <div class="sheet-block">
+      <h4>Vectori</h4>
+      <div class="math">⟨a,b⟩ = a₁b₁ + a₂b₂ + a₃b₃
+‖a‖ = √⟨a,a⟩
+cos α = ⟨a,b⟩ / (‖a‖·‖b‖)
+
+pr_b a = (⟨a,b⟩/‖b‖²)·b
+
+           | i   j   k  |
+a × b =    | a₁  a₂  a₃ |
+           | b₁  b₂  b₃ |
+
+(u,v,w) = det[u; v; w]
+coplanari ⟺ (u,v,w) = 0</div>
+    </div>
+
+    <div class="sheet-block">
+      <h4>Drepte și plane</h4>
+      <div class="math">plan: Ax + By + Cz + D = 0
+      N = (A, B, C)
+
+prin M₀ cu normala N:
+  A(x−x₀) + B(y−y₀) + C(z−z₀) = 0
+
+dreaptă prin M₀, direcție (a,b,c):
+  (x−x₀)/a = (y−y₀)/b = (z−z₀)/c
+
+d(A, π) = |Ax_A + By_A + Cz_A + D|
+          ─────────────────────────
+              √(A² + B² + C²)</div>
+    </div>
+
+    <div class="sheet-block">
+      <h4>Dimensiuni și rang</h4>
+      <div class="math">dim Ker(f) + dim Im(f) = dim(domeniu)
+dim Im(A) = rang(A)
+g(λ) = n − rang(A − λI)
+
+dim(U+V) = dim U + dim V − dim(U∩V)
+sumă directă ⟺ U ∩ V = {0}
+
+dim ℝₙ[X] = n + 1
+dim Mₘₙ(ℝ) = m·n</div>
+    </div>
+
+    <div class="sheet-block">
+      <h4>Ortogonalitate</h4>
+      <div class="math">w_k = u_k − Σ_(i&lt;k) (⟨u_k,w_i⟩/‖w_i‖²)·w_i
+
+pr_U v = Σ (⟨v,w_i⟩/‖w_i‖²)·w_i
+pr_(U⊥) v = v − pr_U v
+
+x ∈ U⊥  ⟺  ⟨x, u_i⟩ = 0  ∀ i
+
+pseudosoluție:  AᵀA·x* = Aᵀ·b</div>
+    </div>
+
+    <div class="sheet-block">
+      <h4>Conice</h4>
+      <div class="math">a₁₁x² + 2a₁₂xy + a₂₂y²
+        + 2b₁x + 2b₂y + c = 0
+
+δ > 0 elipsă
+δ = 0 parabolă
+δ < 0 hiperbolă
+
+Δ ≠ 0 nedegenerată
+
+det Q = +1 (rotație)</div>
+    </div>
+
+    <div class="sheet-block">
+      <h4>Ecuații diferențiale</h4>
+      <div class="math">x′ = λx, x(t₀)=x₀
+  ⟹  x(t) = x₀·e^(λ(t−t₀))
+
+sistem:  X′ = A·X
+  λ distincte:  Σ Cᵢ·e^(λᵢt)·vᵢ
+  λ dublă:      + C₂e^(λt)(t·v₁ + v₂)
+  λ = α ± iβ:   e^(αt)(cos βt, sin βt)
+
+ordin 2:  λ² + aλ + b = 0
+  rezonanță ⟹ înmulțește x_p cu tᵐ</div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Tactica pe lucrare</h2>
+  <div class="tactic">
+    <div class="tactic-item"><span class="tactic-n">01</span><p>Scrie pe ciornă, din memorie, formulele din secțiunea de mai sus. Două minute, și le ai în față tot restul lucrării.</p></div>
+    <div class="tactic-item"><span class="tactic-n">02</span><p>Începe cu <strong>P4 și P5</strong>, cele două ecuații diferențiale. Sunt cele mai mecanice și sunt 40% din lucrare.</p></div>
+    <div class="tactic-item"><span class="tactic-n">03</span><p>Apoi <strong>P1</strong> (proiecția). Chiar dacă nu termini, scrierea bazei ortogonale prin Gram–Schmidt se punctează separat.</p></div>
+    <div class="tactic-item"><span class="tactic-n">04</span><p><strong>P3</strong> (SVD): scrie măcar <code>AᵀA</code> și valorile proprii. Sunt pași punctați independent de rezultatul final.</p></div>
+    <div class="tactic-item"><span class="tactic-n">05</span><p><strong>P2</strong> (conica) la final — are cei mai mulți pași. Calculează δ și Δ și scrie tipul chiar dacă nu apuci forma canonică.</p></div>
+    <div class="tactic-item"><span class="tactic-n">06</span><p>Scrie fiecare pas, chiar dacă rezultatul final nu-ți iese. La problemele astea, metoda se punctează separat de răspuns.</p></div>
+  </div>
+</section>
+
+<footer>
+  <p>Construit din subiectele de examen și parțial 2021–2025 și din materialele de curs, seminar și culegerea profesorului, din <code>D:\brain\Projects\ALGAED</code>.</p>
+  <p>Exemplele rezolvate au fost reverificate prin calcul, nu doar transcrise din soluțiile scanate — în două locuri, soluția scanată avea greșeli (rangurile la aplicația liniară cu parametru și vectorii proprii de la diagonalizare). Versiunea de aici e cea verificată.</p>
+  <p>Dacă vreun pas nu e clar, sau vrei mai multe exerciții de antrenament pe un anumit tip, întreabă-mă.</p>
+</footer>
+
+</div>
+</body>
+</html>

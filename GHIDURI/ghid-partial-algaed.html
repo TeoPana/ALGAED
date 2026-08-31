@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<title>Ghid de parțial ALGAED</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;700&display=swap">
+
+<style>
+:root{
+  --paper:#F6F7F9; --surface:#FFFFFF; --panel:#ECEFF4;
+  --ink:#151E2B; --ink-2:#4A5768; --ink-3:#7A8698;
+  --rule:#D2D9E3; --rule-soft:#E4E8EF;
+  --blue:#22508F; --blue-ink:#1B4176; --blue-soft:#E7EEF8;
+  --red:#A93226; --red-soft:#F8EBE9;
+  --green:#2F6B4F; --green-soft:#E6F1EB;
+  --shadow:0 1px 2px rgba(21,30,43,.06), 0 6px 20px -12px rgba(21,30,43,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F141B; --surface:#161D26; --panel:#1B2431;
+    --ink:#E2E8F1; --ink-2:#9CA9BC; --ink-3:#768294;
+    --rule:#2B3543; --rule-soft:#212A36;
+    --blue:#82ABE2; --blue-ink:#A6C4EC; --blue-soft:#182640;
+    --red:#E2907F; --red-soft:#2C1E1C;
+    --green:#7FC0A0; --green-soft:#17281F;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F141B; --surface:#161D26; --panel:#1B2431;
+  --ink:#E2E8F1; --ink-2:#9CA9BC; --ink-3:#768294;
+  --rule:#2B3543; --rule-soft:#212A36;
+  --blue:#82ABE2; --blue-ink:#A6C4EC; --blue-soft:#182640;
+  --red:#E2907F; --red-soft:#2C1E1C;
+  --green:#7FC0A0; --green-soft:#17281F;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Source Serif 4","Iowan Old Style",Georgia,serif;
+  font-size:17px; line-height:1.62; margin:0; padding:0 20px 96px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:820px;margin:0 auto}
+h1,h2,h3,h4,.label,th,.badge,.slot,.tactic-n,.tier-n{font-family:Archivo,"Helvetica Neue",Arial,sans-serif}
+
+.masthead{padding:64px 0 34px;border-bottom:2px solid var(--ink);margin-bottom:42px}
+.eyebrow{font-family:Archivo,sans-serif;font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:0 0 14px}
+h1{font-size:clamp(34px,6vw,52px);font-weight:700;line-height:1.04;letter-spacing:-.022em;margin:0 0 18px;text-wrap:balance}
+.standfirst{font-size:19px;color:var(--ink-2);margin:0;max-width:62ch}
+.standfirst strong{color:var(--ink);font-weight:600}
+
+section{margin:0 0 56px}
+h2{font-size:13px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-3);margin:0 0 10px;padding-bottom:10px;border-bottom:1px solid var(--rule)}
+.h2note{font-size:15.5px;color:var(--ink-2);margin:0 0 22px}
+h3{font-size:22px;font-weight:600;letter-spacing:-.01em;margin:0 0 10px;line-height:1.25}
+p{margin:0 0 16px}
+p:last-child{margin-bottom:0}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:520px}
+th{text-align:left;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-3);padding:12px 16px;border-bottom:1px solid var(--rule);background:var(--panel);white-space:nowrap}
+td{padding:11px 16px;border-bottom:1px solid var(--rule-soft);vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.slotcell{font-family:Archivo,sans-serif;font-weight:700;color:var(--blue);white-space:nowrap;font-size:14px}
+td.freq{font-family:Archivo,sans-serif;font-size:13px;color:var(--ink-2);white-space:nowrap;font-variant-numeric:tabular-nums}
+
+.plan{display:flex;flex-direction:column;gap:2px;background:var(--rule);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.plan-row{display:flex;gap:20px;background:var(--surface);padding:16px 18px;align-items:baseline;flex-wrap:wrap}
+.plan-when{font-family:Archivo,sans-serif;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);flex:0 0 132px}
+.plan-what{flex:1 1 300px;font-size:16px;margin:0}
+
+.card{background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:26px 28px;margin:0 0 22px;box-shadow:var(--shadow)}
+.card.compact{padding:22px 24px}
+.card-head{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-bottom:6px}
+.slot{font-size:12px;font-weight:700;letter-spacing:.1em;color:var(--surface);background:var(--blue);padding:4px 9px;border-radius:2px;white-space:nowrap}
+.slot.tool{background:var(--ink-3)}
+.slot.bonus{background:var(--green)}
+.badge{font-size:11px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:4px 9px;border-radius:2px;white-space:nowrap;background:var(--blue-soft);color:var(--blue-ink)}
+.badge.hot{background:var(--red-soft);color:var(--red)}
+.badge.calm{background:var(--green-soft);color:var(--green)}
+.card-head h3{flex:1 1 100%;margin:6px 0 0}
+.src{font-size:14px;color:var(--ink-3);margin:0 0 20px;font-style:italic}
+
+.label{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--ink-3);margin:26px 0 12px}
+.label:first-of-type{margin-top:18px}
+
+ol.steps{margin:0;padding:0;list-style:none;counter-reset:s;display:flex;flex-direction:column;gap:11px}
+ol.steps li{counter-increment:s;position:relative;padding-left:34px;font-size:16px}
+ol.steps li::before{content:counter(s);position:absolute;left:0;top:2px;font-family:Archivo,sans-serif;font-size:11px;font-weight:700;width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--blue-soft);color:var(--blue-ink)}
+
+.math{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;font-size:14px;line-height:1.7;background:var(--panel);border-left:3px solid var(--blue);border-radius:0 3px 3px 0;padding:14px 18px;margin:14px 0;overflow-x:auto;white-space:pre;font-variant-numeric:tabular-nums}
+code{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;font-size:.88em;background:var(--panel);padding:1px 5px;border-radius:2px}
+
+.worked{border:1px solid var(--rule);border-radius:3px;background:var(--paper);padding:18px 20px;margin:12px 0 0}
+.worked p{font-size:15.5px;margin:0 0 12px}
+.worked .math{background:var(--surface);margin:10px 0}
+.given{font-size:15.5px;margin:0 0 14px;padding-bottom:14px;border-bottom:1px dashed var(--rule)}
+
+.traps{border-left:3px solid var(--red);background:var(--red-soft);border-radius:0 3px 3px 0;padding:14px 18px;margin:22px 0 0}
+.traps .label{color:var(--red);margin:0 0 8px}
+.traps ul{margin:0;padding-left:19px;font-size:15.5px}
+.traps li{margin-bottom:6px}
+.traps li:last-child{margin-bottom:0}
+
+.keyidea{border-left:3px solid var(--green);background:var(--green-soft);border-radius:0 3px 3px 0;padding:14px 18px;margin:18px 0}
+.keyidea .label{color:var(--green);margin:0 0 8px}
+.keyidea p{font-size:15.5px;margin:0}
+
+.sheet{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:18px}
+.sheet-block{background:var(--surface);border:1px solid var(--rule);border-radius:3px;padding:18px 20px}
+.sheet-block h4{font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--blue);margin:0 0 12px}
+.sheet-block .math{margin:0;background:transparent;border-left:none;padding:0;font-size:13.5px}
+
+.tactic{display:flex;flex-direction:column;gap:12px}
+.tactic-item{display:flex;gap:14px;align-items:flex-start}
+.tactic-n{font-family:Archivo,sans-serif;font-size:12px;font-weight:700;color:var(--blue);flex:0 0 auto;padding-top:3px;min-width:22px}
+.tactic-item p{margin:0;font-size:16px}
+
+footer{margin-top:64px;padding-top:22px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink-3)}
+footer p{margin:0 0 8px}
+a{color:var(--blue);text-decoration:underline;text-underline-offset:2px}
+a:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:2px}
+strong{font-weight:600}
+.hl{background:var(--blue-soft);padding:0 3px;border-radius:2px}
+
+@media (max-width:640px){
+  body{font-size:16px;padding:0 16px 64px}
+  .card{padding:20px 18px}
+  .masthead{padding:44px 0 28px}
+}
+@media print{
+  body{background:#fff;color:#000;font-size:11pt;padding:0}
+  .card,.worked,.sheet-block,.tablewrap,.plan{break-inside:avoid;box-shadow:none}
+  .card{border:1px solid #bbb}
+  .masthead{padding-top:0}
+  section{margin-bottom:28px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">ALGAED · seminarele 1–9</p>
+  <h1>Ghid de parțial ALGAED</h1>
+  <p class="standfirst">Patru tipuri formează scheletul fiecărui parțial din 2021 încoace. Alte trei sunt instrumente pe care le folosești <em>în interiorul</em> celorlalte. Ultimele patru au picat mai rar — le înveți pentru punctele în plus. <strong>Toate exemplele de aici sunt verificate prin calcul</strong>, nu doar copiate din soluțiile scanate.</p>
+</header>
+
+<section>
+  <h2>Ce intră la parțial</h2>
+  <p class="h2note">Materia se oprește la diagonalizare. Ortogonalitatea, conicele, SVD-ul și ecuațiile diferențiale sunt după parțial — nu le atinge acum.</p>
+
+  <div class="tablewrap" style="margin-bottom:22px">
+    <table>
+      <thead><tr><th>Slot</th><th>Nucleul — a picat aproape de fiecare dată</th><th>Sesiuni</th></tr></thead>
+      <tbody>
+        <tr><td class="slotcell">N1</td><td>Geometrie în spațiu: drepte concurente, plan, simetric, arie, bisectoare</td><td class="freq">2022, 2024, 2025</td></tr>
+        <tr><td class="slotcell">N2</td><td>Dependență liniară cu parametru + completare la bază + coordonate</td><td class="freq">2021, 2022, 2023, 2024</td></tr>
+        <tr><td class="slotcell">N3</td><td>Aplicație liniară cu parametru: Ker, Im, sumă directă</td><td class="freq">2022, 2023, 2025</td></tr>
+        <tr><td class="slotcell">N4</td><td>Diagonalizarea unei matrice 3×3, uneori cu parametru</td><td class="freq">2022, 2023, 2024</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tablewrap" style="margin-bottom:22px">
+    <table>
+      <thead><tr><th>—</th><th>Instrumente: apar înăuntrul celorlalte probleme</th><th>Unde</th></tr></thead>
+      <tbody>
+        <tr><td class="slotcell">I1</td><td>Metoda Gauss, rangul, sisteme cu parametru</td><td class="freq">peste tot</td></tr>
+        <tr><td class="slotcell">I2</td><td>Subspații: definite prin condiții, sumă, intersecție, complement</td><td class="freq">2021, 2025</td></tr>
+        <tr><td class="slotcell">I3</td><td>Schimbarea de bază, matricea de trecere</td><td class="freq">seminar 4, N2</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tablewrap">
+    <table>
+      <thead><tr><th>—</th><th>Variante mai rare — pentru puncte în plus</th><th>Sesiuni</th></tr></thead>
+      <tbody>
+        <tr><td class="slotcell">B1</td><td>Aplicația f(X) = AX − XA pe M₂(ℝ)</td><td class="freq">2021 ×2</td></tr>
+        <tr><td class="slotcell">B2</td><td>Cayley–Hamilton: A⁻¹, Aⁿ, „găsește A cu A⁴ = B"</td><td class="freq">seminarele 7, 8</td></tr>
+        <tr><td class="slotcell">B3</td><td>Lanț Markov rezolvat prin diagonalizare</td><td class="freq">2021 ×2</td></tr>
+        <tr><td class="slotcell">B4</td><td>Gram–Schmidt + inegalitate cu Cauchy–Schwarz</td><td class="freq">2021 ×2</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section>
+  <h2>Planul de învățat</h2>
+  <p class="h2note">Ordinea e aleasă ca fiecare pas să folosească ce ai învățat la pasul dinainte.</p>
+  <div class="plan">
+    <div class="plan-row">
+      <div class="plan-when">Sesiunea 1 · 2h</div>
+      <p class="plan-what"><strong>I1 (Gauss și rangul) apoi N2 (dependență liniară).</strong> Rangul e mecanismul din spatele a trei din cele patru probleme din nucleu — dacă îl ai, restul devin rutină. N2 e cel mai sigur punctaj de pe subiect.</p>
+    </div>
+    <div class="plan-row">
+      <div class="plan-when">Sesiunea 2 · 2h</div>
+      <p class="plan-what"><strong>N4 (diagonalizare) apoi N3 (aplicație liniară).</strong> Amândouă se reduc la „calculează rangul, rezolvă sistemul omogen". N4 îți deschide și B2, B3.</p>
+    </div>
+    <div class="plan-row">
+      <div class="plan-when">Sesiunea 3 · 1½h</div>
+      <p class="plan-what"><strong>N1 (geometria) și I2 (subspații).</strong> Geometria e independentă de restul — se învață pe rețete, nu pe teorie. Fă cele trei exemple rezolvate cu mâna.</p>
+    </div>
+    <div class="plan-row">
+      <div class="plan-when">Sesiunea 4 · 1h</div>
+      <p class="plan-what"><strong>B1–B4, pentru punctele în plus.</strong> Fiecare e o aplicație directă a ceva ce știi deja. Dacă ai timp puțin, fă B2 (Cayley–Hamilton) — e cel mai ieftin.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NUCLEU ============ -->
+
+<section>
+  <h2>Nucleul — cele patru probleme sigure</h2>
+
+  <!-- N1 -->
+  <article class="card">
+    <div class="card-head">
+      <span class="slot">N1</span>
+      <span class="badge hot">3 din 4 sesiuni</span>
+      <h3>Geometrie analitică în spațiu</h3>
+    </div>
+    <p class="src">Sursa: parțial 2022, parțial decembrie 2024, refacere ianuarie 2025</p>
+
+    <p class="label">Cele cinci rețete</p>
+    <ol class="steps">
+      <li><strong>Citirea unei drepte.</strong> Din <code>(x−x₀)/a = (y−y₀)/b = (z−z₀)/c</code> scoți punctul <code>M₀(x₀,y₀,z₀)</code> și direcția <code>v = (a,b,c)</code>. Atât.</li>
+      <li><strong>Drepte concurente.</strong> Concurente ⟺ coplanare și neparalele ⟺ produsul mixt <code>(v₁, v₂, M₁M₂) = 0</code>. De aici iese parametrul. Punctul de intersecție îl afli parametrizând ambele drepte și rezolvând sistemul.</li>
+      <li><strong>Planul.</strong> Prin M₀ cu normala N: <code>N₁(x−x₀) + N₂(y−y₀) + N₃(z−z₀) = 0</code>. Normala e <code>v₁ × v₂</code> pentru două drepte, sau <code>AB × AC</code> pentru trei puncte.</li>
+      <li><strong>Simetricul lui A față de plan.</strong> Scrii dreapta prin A cu direcția N, o intersectezi cu planul obținând piciorul P, iar simetricul este <code>B = 2P − A</code>.</li>
+      <li><strong>Bisectoarea unghiului ∠BAC.</strong> Direcția ei este <strong>suma versorilor</strong>: <code>AB/‖AB‖ + AC/‖AC‖</code>. Aria triunghiului este <code>½·‖AB × AC‖</code>.</li>
+    </ol>
+
+    <p class="label">Exemplu rezolvat A — concurență, plan, simetric, arie</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă</strong> (parțial decembrie 2024): d₁ : (x−2)/1 = y/(−2) = (z−5)/2 și d₂ : (x−3)/2 = (y−1)/(−1) = (z−1)/(−2). Se cer: punctul de intersecție, planul π, simetricul lui A(2,−3,2) față de π, și aria triunghiului format.</p>
+
+      <p><strong>Intersecția.</strong> Parametrizezi și egalezi:</p>
+      <div class="math">d₁ : (2+t, −2t, 5+2t)        d₂ : (3+2s, 1−s, 1−2s)
+
+ 2+t = 3+2s        din a doua:  s = 1 + 2t
+ −2t = 1−s     ⟹  2+t = 3+2(1+2t) = 5+4t  ⟹  t = −1, s = −1
+ 5+2t = 1−2s
+
+ I(1, 2, 3)      verificare pe d₂ : (3−2, 1+1, 1+2) = (1,2,3) ✓</div>
+
+      <p><strong>Planul.</strong> N = v₁ × v₂, cu v₁ = (1,−2,2) și v₂ = (2,−1,−2):</p>
+      <div class="math">N = ( (−2)(−2) − 2(−1),  −[1(−2) − 2·2],  1(−1) − (−2)2 )
+  = (6, 6, 3)   ~   (2, 2, 1)
+
+π : 2(x−1) + 2(y−2) + (z−3) = 0   ⟹   2x + 2y + z − 9 = 0
+
+verificare cu M₁(2,0,5) : 4 + 0 + 5 − 9 = 0 ✓</div>
+
+      <p><strong>Simetricul lui A(2,−3,2).</strong> Dreapta prin A cu direcția N = (2,2,1):</p>
+      <div class="math">(2+2t, −3+2t, 2+t)  în π :
+2(2+2t) + 2(−3+2t) + (2+t) − 9 = 9t − 9 = 0   ⟹   t = 1
+
+piciorul P(4, −1, 3)
+simetricul  B = 2P − A = (8−2, −2+3, 6−2) = (6, 1, 4)
+
+verificare: mijlocul lui AB = (4, −1, 3) = P ✓</div>
+
+      <p><strong>Aria triunghiului</strong> ΔIAB, cu I(1,2,3), A(2,−3,2), B(6,1,4):</p>
+      <div class="math">IA = (1,−5,−1),  IB = (5,−1,1)
+
+IA × IB = ( −5·1 − (−1)(−1),  −[1·1 − (−1)5],  1(−1) − (−5)5 )
+        = (−6, −6, 24)
+
+‖IA × IB‖ = √(36+36+576) = √648 = 18√2
+
+aria = ½ · 18√2 = 9√2</div>
+    </div>
+
+    <p class="label">Exemplu rezolvat B — plan prin trei puncte și bisectoare</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă</strong> (refacere ianuarie 2025): A(1,3,5), B(3,4,7), C(−1,0,−1). Se cer planul (ABC), punctul P cu ‖AP‖ = 1 pe bisectoarea unghiului ∠BAC, și dreapta prin C paralelă cu AP.</p>
+      <div class="math">AB = (2, 1, 2)      AC = (−2, −3, −6)
+
+N = AB × AC = ( 1(−6) − 2(−3),  −[2(−6) − 2(−2)],  2(−3) − 1(−2) )
+            = (0, 8, −4)   ~   (0, 2, −1)
+
+π : 2(y−3) − (z−5) = 0   ⟹   2y − z − 1 = 0
+verificări:  B → 8−7−1 = 0 ✓    C → 0+1−1 = 0 ✓</div>
+      <p><strong>Bisectoarea:</strong> ‖AB‖ = 3 și ‖AC‖ = 7, deci direcția este suma versorilor:</p>
+      <div class="math">AB/3 + AC/7 = (2/3, 1/3, 2/3) + (−2/7, −3/7, −6/7)
+            = (8/21, −2/21, −4/21)   ~   (4, −1, −2),   ‖·‖ = √21
+
+AP = (1/√21)·(4, −1, −2)      (deja are norma 1)
+
+P = A + AP = ( 1 + 4/√21,  3 − 1/√21,  5 − 2/√21 )
+
+dreapta prin C paralelă cu AP :   (x+1)/4 = y/(−1) = (z+1)/(−2)</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li>Componenta din mijloc a produsului vectorial are <strong>minus în față</strong>.</li>
+        <li>Produsul mixt = 0 înseamnă doar <em>coplanare</em>, care include și cazul paralel. Verifică rapid că v₁ și v₂ nu sunt proporționale.</li>
+        <li>Bisectoarea are direcția <strong>suma versorilor</strong>, nu suma vectorilor. AB + AC e greșit dacă ‖AB‖ ≠ ‖AC‖.</li>
+        <li>Verifică fiecare plan cu un al doilea punct cunoscut: prinde greșelile de semn.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- N2 -->
+  <article class="card">
+    <div class="card-head">
+      <span class="slot">N2</span>
+      <span class="badge hot">apare la fiecare parțial</span>
+      <h3>Dependență liniară cu parametru, completare la bază, coordonate</h3>
+    </div>
+    <p class="src">Sursa: parțialele 2021, 2022 (matrice), 2023 și decembrie 2024 (polinoame)</p>
+
+    <div class="keyidea">
+      <p class="label">Matrice și polinoame: aceeași problemă</p>
+      <p>Varianta cu matrice și varianta cu polinoame sunt <strong>literalmente aceeași problemă</strong> — în 2022 și în 2024 au picat cu exact aceleași numere, doar îmbrăcate diferit. Traduci totul în vectori de coordonate din primul pas și nu te mai interesează dacă obiectele erau matrice sau polinoame.</p>
+    </div>
+
+    <p class="label">Rețeta</p>
+    <ol class="steps">
+      <li>Scrie fiecare obiect ca <em>vector de coordonate</em> în baza canonică. Pentru M₂(ℝ): <code>(a₁₁, a₁₂, a₂₁, a₂₂)</code>. Pentru ℝ₃[X]: <code>(a₀, a₁, a₂, a₃)</code>.</li>
+      <li>Pune vectorii pe liniile unei matrice. Dependenți ⟺ <code>det = 0</code>. Rezolvi în parametru.</li>
+      <li>Cu parametrul găsit, caută <em>relația concretă</em> de dependență și aruncă un vector. Ce rămâne e bază pentru <code>Sp{…}</code>; numărul lor e dimensiunea.</li>
+      <li>Completarea la o bază a spațiului: adaugi vectori canonici până atingi dimensiunea spațiului, și <strong>verifici det ≠ 0</strong>.</li>
+      <li>Coordonatele lui B: rezolvi <code>α₁b₁ + … + αₙbₙ = B</code> pe componente. Începe cu componenta care apare în cele mai puține ecuații — de obicei iese totul în trei linii.</li>
+    </ol>
+
+    <p class="label">Exemplu rezolvat — varianta cu polinoame</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă</strong> (parțial decembrie 2024): P₁ = 4+3X+2X²+X³, P₂ = α−3X+2X²−X³, P₃ = 1+X², P₄ = X+X³ în ℝ₃[X], și B = 5+4X+3X²+2X³.</p>
+
+      <p><strong>1–2. Parametrul.</strong> Coordonatele în baza {1, X, X², X³}:</p>
+      <div class="math">P₁=(4,3,2,1)   P₂=(α,−3,2,−1)   P₃=(1,0,1,0)   P₄=(0,1,0,1)
+
+| 4  3  2  1 |
+| α −3  2 −1 |
+| 1  0  1  0 | = −2α        = 0   ⟹   α = 0
+| 0  1  0  1 |</div>
+
+      <p><strong>3. Relația de dependență.</strong> Cu α = 0:</p>
+      <div class="math">P₁ + P₂ = (4,0,4,0) = 4·P₃      ⟹   P₁ + P₂ − 4P₃ = 0
+
+dim Sp{P₁,P₂,P₃,P₄} = 3,   bază { P₁, P₃, P₄ }</div>
+
+      <p><strong>4. Completarea.</strong> ℝ₃[X] are dimensiunea 4, deci mai trebuie un vector — iau polinomul constant 1 = (1,0,0,0):</p>
+      <div class="math">| 4  3  2  1 |
+| 1  0  1  0 |
+| 0  1  0  1 | = −2 ≠ 0   ⟹   { P₁, P₃, P₄, 1 } e bază în ℝ₃[X]
+| 1  0  0  0 |</div>
+
+      <p><strong>5. Coordonatele lui B</strong> = (5,4,3,2). Din αP₁ + γP₃ + δP₄ + ε·1 = B, pe componente:</p>
+      <div class="math">X³ :   α + δ = 2
+X  :  3α + δ = 4      ⟹  α = 1,  δ = 1
+X² :  2α + γ = 3      ⟹  γ = 1
+1  :  4α + γ + ε = 5  ⟹  ε = 0
+
+[B] = (1, 1, 1, 0)ᵀ       adică   B = P₁ + P₃ + P₄</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li>Nu încerca să lucrezi direct cu polinoame sau matrice. Trecerea la coordonate transformă problema în ceva pur mecanic.</li>
+        <li>Baza pentru <code>Sp{…}</code> nu conține toți cei patru vectori — doar pe cei rămași după ce arunci vectorul dependent.</li>
+        <li>Când completezi baza, verifică <strong>întotdeauna</strong> determinantul. Un vector canonic ales prost poate fi deja în subspațiu, și atunci nu ai completat nimic.</li>
+        <li>Dacă determinantul din pasul 2 nu conține parametrul, ai greșit ordinea coordonatelor undeva.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- N3 -->
+  <article class="card">
+    <div class="card-head">
+      <span class="slot">N3</span>
+      <span class="badge">3 din 4 sesiuni</span>
+      <h3>Aplicație liniară cu parametru: Ker, Im, sumă directă</h3>
+    </div>
+    <p class="src">Sursa: parțial 2022, parțial 2023, refacere ianuarie 2025</p>
+
+    <p class="label">Rețeta</p>
+    <ol class="steps">
+      <li><code>M(f)</code> are pe <strong>coloane</strong> imaginile vectorilor bazei canonice.</li>
+      <li><code>det M(f) = 0</code> dă valorile speciale ale parametrului. <strong>Factorizează</strong> determinantul, nu-l lăsa desfăcut — ai nevoie de rădăcini, nu de polinom.</li>
+      <li>Parametru generic (det ≠ 0): rang 3, <code>Ker = {0}</code>, <code>Im = ℝ³</code>, f bijectivă.</li>
+      <li>Pentru fiecare valoare specială: calculezi <strong>rangul</strong>, apoi Ker (soluțiile sistemului omogen) și Im (coloanele independente). Verifici <code>dim Ker + dim Im = 3</code>.</li>
+      <li>Sumă directă ⟺ <code>Ker ∩ Im = {0}</code>: iei generatorul lui Ker și vezi dacă satisface ecuația care descrie Im.</li>
+    </ol>
+
+    <p class="label">Exemplu rezolvat A — cazul clasic</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă</strong> (parțial 2022): f(x,y,z) = (γx + y + z, x + γy + z, x + y + γz).</p>
+      <div class="math">      | γ  1  1 |
+M(f) =| 1  γ  1 |     det = γ³ − 3γ + 2 = (γ − 1)²·(γ + 2)
+      | 1  1  γ |</div>
+      <p><strong>γ ∉ {1, −2}:</strong> rang 3, Ker = {0}, Im = ℝ³, f bijectivă.</p>
+      <p><strong>γ = 1:</strong> matricea are toate elementele 1, deci <span class="hl">rang 1</span>.</p>
+      <div class="math">Ker :  x + y + z = 0    ⟹  dim 2,  bază {(1,−1,0), (1,0,−1)}
+Im  :  Sp{(1,1,1)}     ⟹  dim 1                   (2 + 1 = 3 ✓)</div>
+      <p><strong>γ = −2:</strong> minorul |−2 1; 1 −2| = 3 ≠ 0, deci <span class="hl">rang 2</span>.</p>
+      <div class="math">Ker :  Sp{(1,1,1)}           ⟹  dim 1     (−2+1+1 = 0 ✓)
+Im  :  planul x + y + z = 0  ⟹  dim 2     (coloanele au suma 0)</div>
+      <p><strong>Suma directă.</strong> În ambele cazuri speciale, unul dintre subspații e dreapta <code>Sp{(1,1,1)}</code> și celălalt e planul <code>x+y+z = 0</code>. Cum 1+1+1 = 3 ≠ 0, dreapta nu e conținută în plan:</p>
+      <div class="math">Ker ∩ Im = {0}  pentru orice γ   ⟹   ℝ³ = Ker(f) ⊕ Im(f)  întotdeauna</div>
+    </div>
+
+    <p class="label">Exemplu rezolvat B — varianta din 2025, cu Ker ⊆ Im</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă</strong> (refacere ianuarie 2025): f(x,y,z) = (y − z·sin α, −x + z·cos α, −x·sin α + y·cos α). Se cer Ker, Im, și verificarea că Ker ⊆ Im.</p>
+      <div class="math">      |   0      1     −sin α |
+M(f) =|  −1      0      cos α |      Mᵀ = −M : matrice ANTISIMETRICĂ
+      | −sin α  cos α    0    |</div>
+      <div class="keyidea">
+        <p class="label">Scurtătura</p>
+        <p>Orice matrice antisimetrică 3×3 are determinantul 0, iar rangul ei este 0 sau 2 — niciodată 1 sau 3. Cum aici apare un 1 în matrice, rangul este <strong>2</strong>. Deci dim Ker = 1 și dim Im = 2, fără niciun calcul.</p>
+      </div>
+      <div class="math">Ker :  y = z·sin α,  x = z·cos α   (a treia ecuație se verifică singură)
+       ⟹  Ker = Sp{ (cos α, sin α, 1) },  dim 1
+
+Im  :  primele două coloane sunt independente (minorul |0 1; −1 0| = 1)
+       ⟹  Im = Sp{ (0,−1,−sin α), (1, 0, cos α) },  dim 2
+
+Ker ⊆ Im ?   (cos α, sin α, 1) = −sin α·(0,−1,−sin α) + cos α·(1,0,cos α)
+             componenta 3 :  sin²α + cos²α = 1  ✓        ⟹  DA</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li>Cele două cazuri speciale se confundă ușor: la <strong>γ = 1</strong> rangul e <strong>1</strong>, la <strong>γ = −2</strong> rangul e <strong>2</strong>. Calculează rangul — nu-l deduce din multiplicitatea rădăcinii.</li>
+        <li><code>dim Ker + dim Im = 3</code> e verificarea ta gratuită. Dacă nu dă 3, ai greșit rangul.</li>
+        <li>Ker se citește din <em>sistemul omogen</em>, Im din <em>coloane</em>. Nu invers.</li>
+        <li><code>Ker ⊕ Im</code> directă și <code>Ker ⊆ Im</code> sunt cerințe opuse — citește exact ce se cere.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- N4 -->
+  <article class="card">
+    <div class="card-head">
+      <span class="slot">N4</span>
+      <span class="badge">3 din 4 sesiuni</span>
+      <h3>Diagonalizarea unei matrice 3×3</h3>
+    </div>
+    <p class="src">Sursa: parțial 2022, parțial 2023, parțial decembrie 2024 (cu parametru)</p>
+
+    <p class="label">Rețeta</p>
+    <ol class="steps">
+      <li><code>det(A − λI) = 0</code> → polinomul caracteristic → valorile proprii cu multiplicitățile algebrice <code>a(λ)</code>.</li>
+      <li>Pentru fiecare λ: rezolvi <code>(A − λI)v = 0</code>. Multiplicitatea geometrică este <code>g(λ) = 3 − rang(A − λI)</code>.</li>
+      <li>A diagonalizabilă ⟺ <code>g(λ) = a(λ)</code> pentru <strong>toate</strong> valorile proprii. Dacă toate λ sunt distincte, e automat diagonalizabilă și sari peste verificare.</li>
+      <li>P are vectorii proprii pe coloane, în <em>aceeași ordine</em> în care pui valorile proprii în D. <code>A = PDP⁻¹</code>.</li>
+    </ol>
+
+    <div class="keyidea">
+      <p class="label">Verifică rangul doar la rădăcina multiplă</p>
+      <p>Singura valoare proprie care poate strica diagonalizarea e cea cu <code>a(λ) ≥ 2</code>. Pentru cele simple, <code>g = a = 1</code> automat. Deci verifică rangul <em>doar</em> pentru rădăcina multiplă — restul e pierdere de timp.</p>
+    </div>
+
+    <p class="label">Exemplu rezolvat A — fără parametru</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă</strong> (parțial 2022): A = (2 1 −2; 2 3 −4; 1 1 −1).</p>
+      <div class="math">λ³ − 4λ² + 5λ − 2 = (λ − 1)²·(λ − 2)
+   λ₁ = 1 cu a = 2,    λ₂ = 2 cu a = 1
+
+λ = 1 :  A − I = | 1  1 −2 |
+                 | 2  2 −4 |   rang 1  ⟹  g = 3 − 1 = 2 ✓ = a
+                 | 1  1 −2 |
+         x + y − 2z = 0   ⟹  v₁ = (1,−1,0),  v₂ = (2,0,1)
+
+λ = 2 :  A − 2I = |  0  1 −2 |   linia 1 : y = 2z
+                  |  2  1 −4 |   linia 3 : x + y − 3z = 0 ⟹ x = z
+                  |  1  1 −3 |   ⟹  v₃ = (1, 2, 1)
+
+     |  1  2  1 |
+ P = | −1  0  2 |        D = diag(1, 1, 2)
+     |  0  1  1 |</div>
+    </div>
+
+    <p class="label">Exemplu rezolvat B — cu parametru</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă</strong> (parțial decembrie 2024): A = (3 β 0; 0 4 1; 0 2 5). Se cere β pentru care A e diagonalizabilă.</p>
+      <div class="math">Prima coloană e (3,0,0)ᵀ, deci λ = 3 se citește direct.
+Restul din blocul 2×2 :  (4−λ)(5−λ) − 2 = λ² − 9λ + 18 = (λ−3)(λ−6)
+
+⟹  λ = 3 cu a = 2,   λ = 6 cu a = 1
+
+Diagonalizabilă ⟺ g(3) = 2 ⟺ rang(A − 3I) = 1 :
+
+           | 0  β  0 |
+ A − 3I =  | 0  1  1 |    liniile 2 și 3 sunt deja proporționale
+           | 0  2  2 |
+
+rangul scade la 1 doar dacă (0, β, 0) e proporțional cu (0, 1, 1)
+
+               ⟹   β = 0</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li>Verifică fiecare vector propriu înlocuindu-l înapoi în sistem. Un semn greșit acolo strică tot restul problemei — și e greșeala pe care am găsit-o chiar în soluția scanată a acestui subiect.</li>
+        <li><code>g(λ) = n − rang(A − λI)</code>. Calculează rangul, nu număra „câte soluții par să fie".</li>
+        <li>Ordinea coloanelor lui P trebuie să corespundă ordinii lui D. Dacă le încurci, <code>A = PDP⁻¹</code> nu mai iese și pierzi verificarea.</li>
+        <li>Când matricea are o coloană cu un singur element nenul, valoarea proprie se citește direct de acolo. Nu desface determinantul 3×3 degeaba.</li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<!-- ============ INSTRUMENTE ============ -->
+
+<section>
+  <h2>Instrumentele de bază</h2>
+  <p class="h2note">Nu apar mereu ca probleme separate, dar apar în interiorul celorlalte. Dacă le ai automatizate, nucleul devine mult mai rapid.</p>
+
+  <!-- I1 -->
+  <article class="card compact">
+    <div class="card-head">
+      <span class="slot tool">I1</span>
+      <span class="badge">peste tot</span>
+      <h3>Gauss, rangul, sisteme cu parametru</h3>
+    </div>
+    <p class="src">Sursa: seminarul 3</p>
+    <ol class="steps">
+      <li>Aduci matricea la formă eșalonată prin operații pe linii: schimbare de linii, înmulțire cu scalar nenul, adunarea unui multiplu al altei linii.</li>
+      <li><strong>Rangul</strong> = numărul de linii nenule rămase = numărul de pivoți.</li>
+      <li>Sistem omogen <code>Ax = 0</code>: numărul de necunoscute libere este <code>n − rang</code>. Fiecare necunoscută liberă pusă pe 1 (restul 0) dă un vector din bază.</li>
+      <li>Sistem cu parametru: rangul scade exact acolo unde un pivot devine 0. Aceste valori ale parametrului sunt cazurile speciale de discutat separat.</li>
+    </ol>
+    <div class="math">rang(A) = nr. de pivoți
+dim Ker(A) = n − rang(A)          (n = nr. de coloane)
+dim Im(A)  = rang(A)              Im = spațiul generat de COLOANE
+teorema rangului :  dim Ker(f) + dim Im(f) = dim(domeniu)</div>
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li>Când împarți o linie la o expresie cu parametru, ai presupus tacit că e nenulă. Acel caz trebuie tratat separat — e exact locul unde profesorul pune punctajul.</li>
+        <li>Im se citește din coloane, chiar dacă tu ai lucrat pe linii.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- I2 -->
+  <article class="card compact">
+    <div class="card-head">
+      <span class="slot tool">I2</span>
+      <span class="badge">2021, 2025</span>
+      <h3>Subspații: din condiții, sumă, intersecție, complement</h3>
+    </div>
+    <p class="src">Sursa: parțial decembrie 2021, refacere ianuarie 2025, seminarul 5</p>
+    <ol class="steps">
+      <li><strong>Subspațiu dat prin condiții:</strong> scrii elementul generic cu parametri, impui condițiile, rezolvi. Parametrii rămași liberi dau baza; câți sunt, atâta e dimensiunea.</li>
+      <li><strong>Sumă:</strong> reunești generatorii ambelor subspații și extragi din ei o familie independentă. <code>dim(U+V) = rang(toți generatorii)</code>.</li>
+      <li><strong>Intersecție:</strong> impui simultan condițiile ambelor subspații și rezolvi sistemul. Verificare cu Grassmann: <code>dim(U+V) = dim U + dim V − dim(U∩V)</code>.</li>
+      <li><strong>Complement</strong> al lui U în V: cauți W cu <code>U ∩ W = {0}</code> și <code>dim U + dim W = dim V</code>. Verificarea practică: pui bazele lui U și W una lângă alta și arăți că determinantul e nenul.</li>
+    </ol>
+
+    <p class="label">Exemplu rezolvat A — subspațiu din condiții</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă</strong> (parțial decembrie 2021): W = { P ∈ ℝ₂[X] | P(0) + 3P′(0) − 5P″(0) = 0 și −7P′(0) + 6P″(0) = 0 }.</p>
+      <div class="math">P = a + bX + cX²   ⟹   P(0) = a,  P′(0) = b,  P″(0) = 2c
+
+a + 3b − 10c = 0
+     −7b + 12c = 0     ⟹   b = 12c/7,  a = 10c − 3b = 34c/7
+
+c = 7  ⟹   W = Sp{ 34 + 12X + 7X² },   dim W = 1</div>
+      <p><strong>Atenție:</strong> P″(0) = <strong>2c</strong>, nu c. Aici se greșește.</p>
+    </div>
+
+    <p class="label">Exemplu rezolvat B — două subspații de matrice</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă</strong> (refacere ianuarie 2025): A = (1 1; 1 0). W₁ = {X ∈ M₂(ℝ) | Xᵀ = X}, W₂ = {X | AX = XA}. Se cer bazele, dim(W₁+W₂) și o bază a lui W₁ ∩ W₂.</p>
+      <div class="math">W₁ (simetrice) :  X = (a b; b d)
+      bază { (1 0; 0 0), (0 1; 1 0), (0 0; 0 1) },   dim = 3
+
+W₂ (comută cu A) :  X = (a b; c d)
+      AX = (a+c, b+d; a, b)      XA = (a+b, a; c+d, c)
+      egalând :  c = b   și   a = b + d
+
+      bază { I, A },   dim = 2</div>
+      <div class="keyidea">
+        <p class="label">W₂ e inclus în W₁</p>
+        <p>Orice element din W₂ este <code>αI + βA</code>. Cum I și A sunt amândouă simetrice, <strong>W₂ ⊆ W₁</strong>. Deci <code>W₁ ∩ W₂ = W₂</code> (dim 2, bază {I, A}) și <code>W₁ + W₂ = W₁</code> (dim 3). Grassmann verifică: 3 + 2 − 2 = 3 ✓</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- I3 -->
+  <article class="card compact">
+    <div class="card-head">
+      <span class="slot tool">I3</span>
+      <span class="badge">seminarul 4</span>
+      <h3>Schimbarea de bază</h3>
+    </div>
+    <ol class="steps">
+      <li>Matricea de trecere <code>P</code> de la B la B′ are pe <strong>coloane</strong> coordonatele vectorilor din B′, exprimate în baza B.</li>
+      <li>Formula: <code>[v]_B = P·[v]_B′</code>. Pentru drumul invers, <code>P⁻¹</code>.</li>
+      <li>Pentru matricea unei aplicații: <code>M(f)_B = P·M(f)_B′·P⁻¹</code>.</li>
+    </ol>
+    <div class="worked">
+      <p class="given"><strong>Exemplu:</strong> B = {1, cos x, sin x, cos 2x}, B′ = {1, cos x, sin x, cos²x}.</p>
+      <div class="math">Singurul element nou este cos²x, iar cos²x = ½ + ½·cos 2x :
+
+         | 1  0  0  ½ |
+     P = | 0  1  0  0 |      (coloanele = elementele lui B′ scrise în B)
+         | 0  0  1  0 |
+         | 0  0  0  ½ |</div>
+    </div>
+    <div class="traps">
+      <p class="label">Capcană</p>
+      <ul>
+        <li>Coordonatele se pun pe <strong>coloane</strong>, nu pe linii. Dacă le pui pe linii, obții transpusa și toate formulele de mai sus se inversează.</li>
+      </ul>
+    </div>
+  </article>
+</section>
+
+<!-- ============ BONUS ============ -->
+
+<section>
+  <h2>Pentru punctele în plus</h2>
+  <p class="h2note">Primele trei sunt aceleași unelte din nucleu, aplicate pe alt tip de obiect. Gram–Schmidt e singurul care aduce ceva nou.</p>
+
+  <!-- B1 -->
+  <article class="card compact">
+    <div class="card-head">
+      <span class="slot bonus">B1</span>
+      <span class="badge calm">2021, de două ori</span>
+      <h3>Aplicația f(X) = AX − XA pe M₂(ℝ)</h3>
+    </div>
+    <p class="src">Sursa: parțial decembrie 2021, ambele variante</p>
+    <p>E tot o problemă de tip N3, doar că spațiul e M₂(ℝ) în loc de ℝ³ — deci lucrezi cu 4 coordonate, nu 3. Scrii <code>X = (a b; c d)</code>, calculezi <code>AX − XA</code> simbolic, și citești Ker și Im din expresia rezultată.</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> A = (−6 −1; −8 −4) și f(X) = AX − XA. Se cer Ker, Im, și dacă <code>Ker ⊕ Im = M₂(ℝ)</code>.</p>
+      <div class="math">cu X = (a b; c d) :
+
+f(X) = ( 8b − c        a − 2b − d )
+       ( −8a + 2c + 8d    c − 8b   )
+
+Ker :  8b − c = 0  și  a − 2b − d = 0
+       (a treia ecuație e a doua înmulțită cu −8, nu aduce nimic nou)
+       ⟹  c = 8b,  a = 2b + d,   libere b și d   ⟹  dim Ker = 2
+
+       b=1,d=0 → (2 1; 8 0)        b=0,d=1 → I = (1 0; 0 1)
+
+Im  :  notând s = 8b − c și t = a − 2b − d,  f(X) = (s, t; −8t − 2s, −s)
+       ⟹  dim Im = 2,  bază { (1 0; −2 −1),  (0 1; −8 0) }
+
+       verificare : dim Ker + dim Im = 2 + 2 = 4 ✓
+
+sumă directă :  determinantul celor 4 vectori de coordonate
+
+| 2  1  8  0 |
+| 1  0  0  1 |
+| 0  1 −8  0 | = −36 ≠ 0     ⟹   Ker ⊕ Im = M₂(ℝ)  ✓
+| 1  0 −2 −1 |</div>
+    </div>
+    <div class="keyidea">
+      <p class="label">Verificarea gratuită</p>
+      <p><code>tr(AX − XA) = 0</code> întotdeauna. Deci fiecare element din Im are urma zero — dacă un vector pe care l-ai pus în baza lui Im nu are urma zero, ai greșit undeva. În exemplul de mai sus: 1 + (−1) = 0 ✓ și 0 + 0 = 0 ✓.</p>
+    </div>
+  </article>
+
+  <!-- B2 -->
+  <article class="card compact">
+    <div class="card-head">
+      <span class="slot bonus">B2</span>
+      <span class="badge calm">seminarele 7 și 8</span>
+      <h3>Cayley–Hamilton: A⁻¹, puteri, și „găsește A cu A⁴ = B"</h3>
+    </div>
+    <p><strong>Teorema:</strong> orice matrice își anulează propriul polinom caracteristic. Dacă <code>p(λ) = det(A − λI)</code>, atunci <code>p(A) = 0</code>. De aici scoți două lucruri utile.</p>
+
+    <p class="label">Exemplu rezolvat A — inversa și o putere mare</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> A = (0 2 1; −1 1 0; 0 0 2). Se cer A⁻¹ și A⁴, fără să inversezi și fără să înmulțești de patru ori.</p>
+      <div class="math">p(λ) = −λ³ + 3λ² − 4λ + 4        ⟹   −A³ + 3A² − 4A + 4I = 0
+
+INVERSA : scoți A factor comun
+   4I = A³ − 3A² + 4A = A·(A² − 3A + 4I)
+   ⟹  A⁻¹ = ¼·(A² − 3A + 4I)
+
+        | −2  2  2 |                    |  2  −4  −1 |
+   A² = | −1 −1 −1 |     ⟹   A⁻¹ = ¼ · |  2   0  −1 |
+        |  0  0  4 |                    |  0   0   2 |
+
+PUTERI : A³ = 3A² − 4A + 4I, deci înmulțind cu A
+   A⁴ = 3A³ − 4A² + 4A = 3(3A² − 4A + 4I) − 4A² + 4A = 5A² − 8A + 12I
+
+        |  2  −6   2 |
+   A⁴ = |  3  −1  −5 |
+        |  0   0  16 |</div>
+    </div>
+
+    <p class="label">Exemplu rezolvat B — rădăcina unei matrice</p>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> B = (11 10; 5 6). Se cere A cu A⁴ = B.</p>
+      <div class="math">λ² − 17λ + 16 = (λ−1)(λ−16)   ⟹   λ = 16 și λ = 1
+
+λ=16 :  11x + 10y = 16x  ⟹  x = 2y  ⟹  v₁ = (2, 1)
+λ=1  :  11x + 10y = x    ⟹  y = −x  ⟹  v₂ = (−1, 1)
+
+B = P·diag(16,1)·P⁻¹,   P = (2 −1; 1 1),   P⁻¹ = ⅓·(1 1; −1 2)
+
+Iei rădăcina de ordin 4 a fiecărei valori proprii :  ⁴√16 = 2,  ⁴√1 = 1
+
+              1  | 5  2 |
+A = P·diag(2,1)·P⁻¹ = ─  |      |
+              3  | 1  4 |
+
+verificare :  A² = (3 2; 1 2),   A⁴ = (A²)² = (11 10; 5 6) = B ✓</div>
+    </div>
+    <div class="traps">
+      <p class="label">Capcane</p>
+      <ul>
+        <li>Semnul lui <code>p(λ)</code> depinde de convenție. Nu conta pe el — scrie polinomul, apoi înlocuiește λ cu A și I pentru termenul liber.</li>
+        <li>Rădăcina de ordin 4 se ia din <em>valorile proprii</em>, nu din elementele matricei.</li>
+        <li>Funcționează doar dacă matricea e diagonalizabilă. Verifică asta întâi.</li>
+      </ul>
+    </div>
+  </article>
+
+  <!-- B3 -->
+  <article class="card compact">
+    <div class="card-head">
+      <span class="slot bonus">B3</span>
+      <span class="badge calm">2021, de două ori</span>
+      <h3>Lanț Markov rezolvat prin diagonalizare</h3>
+    </div>
+    <p class="src">Sursa: parțial decembrie 2021 (preferințe Netflix); apare și în culegerea profesorului (cote de piață, PageRank)</p>
+    <p>Enunțul e o poveste — livrări de pizza, genuri de filme, pagini web — dar structura e mereu aceeași: o matrice de tranziție A cu <code>u(n+1) = A·u(n)</code>, o stare inițială, și întrebarea „ce se întâmplă după N pași".</p>
+    <ol class="steps">
+      <li>Construiește A din enunț. <strong>Verificare:</strong> fiecare coloană trebuie să aibă suma 1.</li>
+      <li>Pentru N mic (2 sau 3 pași): înmulțești direct, nu diagonaliza degeaba.</li>
+      <li>Pentru N mare: <code>u(N) = Aᴺ·u(0) = P·Dᴺ·P⁻¹·u(0)</code>.</li>
+      <li><strong>Scurtătura:</strong> λ = 1 este întotdeauna valoare proprie a unei astfel de matrice, iar celelalte au <code>|λ| &lt; 1</code>, deci <code>λᴺ → 0</code>. Pentru N mare, <code>u(N)</code> tinde la vectorul propriu pentru λ = 1, normalizat să aibă suma 1 — indiferent de starea inițială.</li>
+    </ol>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> A = (0.75 0.25 0.20; 0.05 0.25 0.55; 0.20 0.50 0.25), u(0) = (1, 0, 0). Se cer u(2) și comportamentul după 30 de pași.</p>
+      <div class="math">coloanele au suma 1 :  0.75+0.05+0.20 = 1 ✓  (și celelalte două) ✓
+
+u(1) = A·u(0) = prima coloană = (0.75, 0.05, 0.20)
+u(2) = A·u(1) = (0.615, 0.16, 0.225)        suma = 1 ✓
+
+pentru n = 30, rezolvi (A − I)v = 0 :
+
+v = (115, 59, 70)      ⟹     u(30) ≈ (115, 59, 70)/244
+                             ≈ (0.471, 0.242, 0.287)
+
+verificare :  A·v = v  ✓</div>
+    </div>
+  </article>
+
+  <!-- B4 -->
+  <article class="card compact">
+    <div class="card-head">
+      <span class="slot bonus">B4</span>
+      <span class="badge calm">2021, de două ori</span>
+      <h3>Gram–Schmidt și inegalitatea cu Cauchy–Schwarz</h3>
+    </div>
+    <p class="src">Sursa: parțial decembrie 2021, ambele variante. A picat doar în 2021 — dacă timpul e scurt, ăsta se sare primul.</p>
+    <ol class="steps">
+      <li>Gram–Schmidt: fiecare vector nou minus proiecțiile lui pe toți cei deja ortogonalizați. Dacă îți iese <strong>vectorul nul</strong>, înseamnă că vectorul de start era dependent de ceilalți — nu e greșeală, e informație.</li>
+      <li>Completare la o bază ortogonală a lui ℝ³: al treilea vector este pur și simplu <code>ℓ₁ × ℓ₂</code>.</li>
+      <li>Normalizezi: <code>qᵢ = ℓᵢ/‖ℓᵢ‖</code>. Coordonatele lui w în baza ortonormată sunt direct <code>⟨w, qᵢ⟩</code> — nu mai rezolvi niciun sistem.</li>
+    </ol>
+    <div class="worked">
+      <p class="given"><strong>Se dă:</strong> U = Sp{u₁=(2,−2,1), u₂=(−3,6,0), u₃=(−5,14,2)} și w = (12,0,12).</p>
+      <div class="math">unghiul :  cos∠(u₁,u₂) = (−6−12+0)/(3·3√5) = −2/√5
+
+ℓ₁ = u₁ = (2,−2,1),   ‖ℓ₁‖² = 9
+⟨u₂,ℓ₁⟩ = −18   ⟹  ℓ₂ = (−3,6,0) + 2(2,−2,1) = (1, 2, 2),  ‖ℓ₂‖² = 9
+
+pentru u₃ :  ⟨u₃,ℓ₁⟩ = −36,  ⟨u₃,ℓ₂⟩ = 27
+ℓ₃ = (−5,14,2) + 4(2,−2,1) − 3(1,2,2) = (0,0,0)
+
+   ⟹  u₃ = 2u₁ + 3u₂ era dependent;  dim U = 2
+
+completare la ℝ³ :  ℓ₃ = ℓ₁ × ℓ₂ = (−6,−3,6) ~ (2, 1, −2)
+
+toți trei au norma 3  ⟹  qᵢ = ℓᵢ/3  e bază ortonormată în ℝ³
+
+coordonatele lui w :  ⟨w,q₁⟩ = 12,  ⟨w,q₂⟩ = 12,  ⟨w,q₃⟩ = 0
+verificare Parseval :  12² + 12² + 0² = 288 = ‖w‖² ✓
+(a treia coordonată e 0, deci w ∈ U : pr_U w = w)</div>
+    </div>
+
+    <p class="label">Partea cu inegalitatea</p>
+    <p>Ultima cerință cere să demonstrezi <code>Σᵢ ‖w − qᵢ‖² ≥ 3‖w‖² − 2√3·‖w‖ + 3</code>. Pare grea, dar e trei rânduri:</p>
+    <div class="math">‖w − qᵢ‖² = ‖w‖² − 2⟨w,qᵢ⟩ + ‖qᵢ‖² = ‖w‖² − 2⟨w,qᵢ⟩ + 1
+
+Σᵢ₌₁³ ‖w − qᵢ‖² = 3‖w‖² − 2·Σᵢ⟨w,qᵢ⟩ + 3
+
+rămâne de arătat că  Σᵢ⟨w,qᵢ⟩ ≤ √3·‖w‖ .  Cauchy–Schwarz aplicat
+vectorului coordonatelor (⟨w,q₁⟩, ⟨w,q₂⟩, ⟨w,q₃⟩) și lui (1,1,1) :
+
+Σᵢ⟨w,qᵢ⟩ ≤ √(Σᵢ⟨w,qᵢ⟩²) · √3 = ‖w‖·√3      (Parseval: Σ⟨w,qᵢ⟩² = ‖w‖²)
+
+înlocuind, se obține exact inegalitatea cerută.  ∎</div>
+  </article>
+</section>
+
+<!-- ============ FORMULE ============ -->
+
+<section>
+  <h2>Formulele de scris pe ciornă în primele două minute</h2>
+  <div class="sheet">
+
+    <div class="sheet-block">
+      <h4>Vectori</h4>
+      <div class="math">⟨a,b⟩ = a₁b₁ + a₂b₂ + a₃b₃
+‖a‖ = √⟨a,a⟩
+cos α = ⟨a,b⟩ / (‖a‖·‖b‖)
+
+           | i   j   k  |
+a × b =    | a₁  a₂  a₃ |
+           | b₁  b₂  b₃ |
+   ATENȚIE la minusul de la j
+
+(u,v,w) = det[u; v; w]
+coplanari ⟺ (u,v,w) = 0
+aria ΔABC = ½·‖AB × AC‖</div>
+    </div>
+
+    <div class="sheet-block">
+      <h4>Drepte și plane</h4>
+      <div class="math">dreaptă : (x−x₀)/a = (y−y₀)/b = (z−z₀)/c
+          punct M₀, direcție v = (a,b,c)
+
+plan prin M₀ cu normala N = (A,B,C) :
+   A(x−x₀) + B(y−y₀) + C(z−z₀) = 0
+
+din 2 drepte :  N = v₁ × v₂
+din 3 puncte :  N = AB × AC
+
+simetricul lui A față de π :  B = 2P − A
+   (P = piciorul perpendicularei)
+
+bisectoarea ∠BAC :  AB/‖AB‖ + AC/‖AC‖</div>
+    </div>
+
+    <div class="sheet-block">
+      <h4>Dimensiuni și rang</h4>
+      <div class="math">dim Ker(f) + dim Im(f) = dim(domeniu)
+dim Im(A) = rang(A)      (Im = coloanele)
+dim Ker(A) = n − rang(A)
+
+g(λ) = n − rang(A − λI)
+diagonalizabilă ⟺ g(λ) = a(λ)  ∀λ
+
+Grassmann :
+dim(U+V) = dim U + dim V − dim(U∩V)
+sumă directă ⟺ U ∩ V = {0}
+
+dim ℝₙ[X] = n + 1
+dim Mₘₙ(ℝ) = m·n</div>
+    </div>
+
+    <div class="sheet-block">
+      <h4>Reflexe care economisesc timp</h4>
+      <div class="math">· matrice antisimetrică 3×3 :
+    det = 0, rang ∈ {0, 2}
+
+· λ simplă  ⟹  g = a = 1 automat
+    verifică rangul DOAR la λ multiplă
+
+· matrice de tranziție (coloane cu suma 1) :
+    λ = 1 e mereu valoare proprie
+    A^N·u → vectorul propriu pentru λ=1
+
+· tr(AX − XA) = 0  întotdeauna
+
+· P″(0) = 2c  pentru  P = a + bX + cX²</div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2>Tactica pe lucrare</h2>
+  <div class="tactic">
+    <div class="tactic-item"><span class="tactic-n">01</span><p>Scrie pe ciornă, din memorie, produsul vectorial și cele patru relații de dimensiuni. Două minute, și le ai în față tot restul lucrării.</p></div>
+    <div class="tactic-item"><span class="tactic-n">02</span><p>Începe cu <strong>N2</strong> (dependența liniară). E cel mai mecanic și, după tabelul de frecvențe, singurul care a picat la toate cele patru sesiuni.</p></div>
+    <div class="tactic-item"><span class="tactic-n">03</span><p>Apoi <strong>N4</strong> (diagonalizarea). Chiar dacă nu termini, polinomul caracteristic și valorile proprii se punctează separat.</p></div>
+    <div class="tactic-item"><span class="tactic-n">04</span><p><strong>N3</strong>: scrie matricea, calculează determinantul <em>factorizat</em> și enumeră cazurile parametrului — asta singură valorează, chiar dacă nu apuci fiecare caz în parte.</p></div>
+    <div class="tactic-item"><span class="tactic-n">05</span><p><strong>N1</strong> (geometria) la final dacă nu-ți place, prima dacă îți place. E cea mai independentă de restul și cea mai ușor de verificat singur.</p></div>
+    <div class="tactic-item"><span class="tactic-n">06</span><p>Verifică ce poți verifica: planul cu al doilea punct, vectorul propriu în sistem, <code>dim Ker + dim Im</code>. Sunt verificări scurte, și prind greșelile care altfel se propagă în tot restul problemei.</p></div>
+    <div class="tactic-item"><span class="tactic-n">07</span><p>Scrie fiecare pas, chiar dacă rezultatul final nu iese. La problemele astea metoda se punctează separat de răspuns.</p></div>
+  </div>
+</section>
+
+<footer>
+  <p>Construit din subiectele de parțial 2021–2025, seminarele 1–9 și culegerea profesorului, din <code>D:\brain\Projects\ALGAED</code>. Perechea lui pentru sesiunea de examen este <em>Ghid de examen ALGAED</em>.</p>
+  <p>Fiecare exemplu de aici a fost recalculat și verificat, nu transcris din soluțiile scanate — acelea conțin greșeli (rangurile de la N3 și vectorii proprii de la N4 erau greșiți în soluția scanată din 2022, iar baza lui Im de la B1 la fel).</p>
+  <p>Dacă vrei mai multe exerciții de antrenament pe un tip anume, sau nu e clar un pas, întreabă-mă.</p>
+</footer>
+
+</div>
+</body>
+</html>

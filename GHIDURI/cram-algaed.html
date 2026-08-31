@@ -1,0 +1,1177 @@
+<!doctype html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<meta charset="utf-8">
+<title>Cram ALGAED</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;700&display=swap">
+
+<style>
+:root{
+  --paper:#F6F7F9; --surface:#FFFFFF; --panel:#ECEFF4;
+  --ink:#151E2B; --ink-2:#4A5768; --ink-3:#7A8698;
+  --rule:#D2D9E3; --rule-soft:#E4E8EF;
+  --blue:#22508F; --blue-ink:#1B4176; --blue-soft:#E7EEF8;
+  --red:#A93226; --red-soft:#F8EBE9;
+  --green:#2F6B4F; --green-soft:#E6F1EB;
+  --amber:#8A6212; --amber-soft:#FAF1DE;
+  --shadow:0 1px 2px rgba(21,30,43,.06), 0 6px 20px -12px rgba(21,30,43,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#0F141B; --surface:#161D26; --panel:#1B2431;
+    --ink:#E2E8F1; --ink-2:#9CA9BC; --ink-3:#768294;
+    --rule:#2B3543; --rule-soft:#212A36;
+    --blue:#82ABE2; --blue-ink:#A6C4EC; --blue-soft:#182640;
+    --red:#E2907F; --red-soft:#2C1E1C;
+    --green:#7FC0A0; --green-soft:#17281F;
+    --amber:#D8B26A; --amber-soft:#2A2216;
+    --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#0F141B; --surface:#161D26; --panel:#1B2431;
+  --ink:#E2E8F1; --ink-2:#9CA9BC; --ink-3:#768294;
+  --rule:#2B3543; --rule-soft:#212A36;
+  --blue:#82ABE2; --blue-ink:#A6C4EC; --blue-soft:#182640;
+  --red:#E2907F; --red-soft:#2C1E1C;
+  --green:#7FC0A0; --green-soft:#17281F;
+  --amber:#D8B26A; --amber-soft:#2A2216;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 6px 20px -12px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Source Serif 4","Iowan Old Style",Georgia,serif;
+  font-size:17px; line-height:1.6; margin:0; padding:0 20px 120px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto}
+h1,h2,h3,h4,.label,.btn,.chip,.step-n,.pill,.navbtn,.timeline-when{font-family:Archivo,"Helvetica Neue",Arial,sans-serif}
+p{margin:0 0 14px}
+p:last-child{margin-bottom:0}
+strong{font-weight:600}
+
+/* ---- masthead ---- */
+.masthead{padding:44px 0 24px;border-bottom:2px solid var(--ink);margin-bottom:26px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin:0 0 12px;font-family:Archivo,sans-serif}
+h1{font-size:clamp(30px,5.5vw,44px);font-weight:700;line-height:1.05;letter-spacing:-.022em;margin:0 0 14px;text-wrap:balance}
+.standfirst{font-size:18px;color:var(--ink-2);margin:0}
+
+/* ---- nav ---- */
+.nav{
+  position:sticky;top:0;z-index:20;background:var(--paper);
+  padding:12px 0 10px;margin:0 0 26px;border-bottom:1px solid var(--rule);
+  display:flex;gap:7px;flex-wrap:wrap;
+}
+.navbtn{
+  font-size:12.5px;font-weight:600;letter-spacing:.02em;
+  padding:7px 11px;border-radius:3px;border:1px solid var(--rule);
+  background:var(--surface);color:var(--ink-2);cursor:pointer;
+  display:flex;align-items:center;gap:6px;
+}
+.navbtn:hover{border-color:var(--blue);color:var(--ink)}
+.navbtn[aria-current="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.navbtn .tick{opacity:0;font-size:11px}
+.navbtn.done .tick{opacity:1;color:var(--green)}
+.navbtn[aria-current="true"].done .tick{color:#fff}
+.navbtn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* ---- panels ---- */
+.mod{display:none}
+.mod.on{display:block}
+
+.card{
+  background:var(--surface);border:1px solid var(--rule);border-radius:4px;
+  padding:22px 24px;margin:0 0 18px;box-shadow:var(--shadow);
+}
+h2{font-size:26px;font-weight:700;letter-spacing:-.015em;margin:0 0 6px;line-height:1.2}
+.sub{font-size:14.5px;color:var(--ink-3);margin:0 0 20px;font-style:italic}
+h3{font-size:19px;font-weight:600;margin:0 0 10px}
+
+.label{
+  font-size:11px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-3);margin:0 0 10px;
+}
+
+.spot{
+  border-left:3px solid var(--amber);background:var(--amber-soft);
+  border-radius:0 3px 3px 0;padding:13px 16px;margin:0 0 18px;
+}
+.spot .label{color:var(--amber);margin-bottom:6px}
+.spot p{font-size:15.5px;margin:0}
+
+.moves{display:flex;flex-direction:column;gap:9px;margin:0 0 6px;padding:0;list-style:none;counter-reset:m}
+.moves li{counter-increment:m;position:relative;padding-left:32px;font-size:16px}
+.moves li::before{
+  content:counter(m);position:absolute;left:0;top:1px;
+  font-family:Archivo,sans-serif;font-size:11px;font-weight:700;
+  width:21px;height:21px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:var(--blue);color:#fff;
+}
+
+.math{
+  font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  font-size:13.5px;line-height:1.65;background:var(--panel);
+  border-left:3px solid var(--blue);border-radius:0 3px 3px 0;
+  padding:12px 15px;margin:12px 0;overflow-x:auto;white-space:pre;
+  font-variant-numeric:tabular-nums;
+}
+code{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;font-size:.87em;background:var(--panel);padding:1px 5px;border-radius:2px}
+
+/* ---- progressive steps ---- */
+.steps{border:1px solid var(--rule);border-radius:4px;background:var(--paper);padding:16px 18px;margin:12px 0 0}
+.given{font-size:15.5px;margin:0 0 14px;padding-bottom:13px;border-bottom:1px dashed var(--rule)}
+.step{display:none;padding:2px 0 0;animation:fade .18s ease}
+.step.on{display:block}
+@keyframes fade{from{opacity:0}to{opacity:1}}
+.step .stitle{font-family:Archivo,sans-serif;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--blue);margin:14px 0 6px}
+.step p{font-size:15.5px}
+.step .math{background:var(--surface)}
+
+.btn{
+  font-size:13.5px;font-weight:600;letter-spacing:.02em;
+  padding:9px 15px;border-radius:3px;border:1px solid var(--blue);
+  background:var(--blue);color:#fff;cursor:pointer;margin:14px 6px 0 0;
+}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--blue)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+
+/* ---- exercise ---- */
+.ex{border:2px solid var(--green);border-radius:4px;background:var(--green-soft);padding:18px 20px;margin:20px 0 0}
+.ex .label{color:var(--green)}
+.ex .math{background:var(--surface);border-left-color:var(--green)}
+.qrow{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:0 0 11px}
+.qrow label{font-size:15.5px;flex:1 1 250px}
+.qrow input{
+  font-family:"JetBrains Mono",ui-monospace,monospace;font-size:14.5px;
+  padding:8px 11px;border:1px solid var(--rule);border-radius:3px;
+  background:var(--surface);color:var(--ink);width:190px;
+}
+.qrow input:focus{outline:2px solid var(--green);outline-offset:1px;border-color:var(--green)}
+.qrow input.ok{border-color:var(--green);background:var(--green-soft)}
+.qrow input.no{border-color:var(--red);background:var(--red-soft)}
+.mark{font-family:Archivo,sans-serif;font-weight:700;font-size:15px;width:18px;display:inline-block}
+.mark.ok{color:var(--green)}
+.mark.no{color:var(--red)}
+.fb{margin-top:12px;font-size:15px;display:none}
+.fb.on{display:block}
+.fb .math{margin-top:8px}
+
+.traps{border-left:3px solid var(--red);background:var(--red-soft);border-radius:0 3px 3px 0;padding:13px 16px;margin:18px 0 0}
+.traps .label{color:var(--red);margin-bottom:7px}
+.traps ul{margin:0;padding-left:18px;font-size:15px}
+.traps li{margin-bottom:5px}
+.traps li:last-child{margin-bottom:0}
+
+/* ---- referinte la rezolvari ---- */
+.refs{border:1px solid var(--blue);border-radius:4px;background:var(--blue-soft);padding:15px 17px;margin:0 0 18px}
+.refs .label{color:var(--blue-ink);margin-bottom:4px}
+.refs .hint{font-size:14.5px;color:var(--ink-2);margin:0 0 12px}
+.ref{padding:10px 0;border-top:1px solid var(--rule)}
+.ref:first-of-type{border-top:none;padding-top:2px}
+.rf{
+  font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+  font-size:12.5px;color:var(--blue-ink);margin:0 0 4px;
+  word-break:break-all;user-select:all;
+}
+.rd{font-size:15px;margin:0;color:var(--ink)}
+.pill{
+  display:inline-block;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;
+  padding:2px 7px;border-radius:2px;margin-left:7px;vertical-align:1px;
+  background:var(--green-soft);color:var(--green);
+}
+.pill.bare{background:var(--panel);color:var(--ink-3)}
+
+.aside{border:1px dashed var(--rule);border-radius:4px;padding:14px 16px;margin:18px 0 0;background:var(--paper)}
+.aside .label{margin-bottom:8px}
+.aside p{font-size:15px}
+
+/* ---- plan timeline ---- */
+.timeline{display:flex;flex-direction:column;gap:2px;background:var(--rule);border:1px solid var(--rule);border-radius:4px;overflow:hidden}
+.tl{display:flex;gap:16px;background:var(--surface);padding:12px 16px;align-items:baseline;flex-wrap:wrap}
+.tl.sleep{background:var(--blue-soft)}
+.timeline-when{font-size:12px;font-weight:700;letter-spacing:.05em;color:var(--blue);flex:0 0 92px;font-variant-numeric:tabular-nums}
+.tl p{flex:1 1 240px;font-size:15.5px;margin:0}
+
+/* ---- recognition drill ---- */
+.drill{margin:0 0 14px;padding:16px 18px;border:1px solid var(--rule);border-radius:4px;background:var(--surface)}
+.drill .q{font-size:16px;margin:0 0 12px}
+.opts{display:flex;gap:7px;flex-wrap:wrap}
+.opt{
+  font-family:Archivo,sans-serif;font-size:13px;font-weight:600;
+  padding:8px 12px;border-radius:3px;border:1px solid var(--rule);
+  background:var(--paper);color:var(--ink-2);cursor:pointer;
+}
+.opt:hover{border-color:var(--blue)}
+.opt.ok{background:var(--green-soft);border-color:var(--green);color:var(--green)}
+.opt.no{background:var(--red-soft);border-color:var(--red);color:var(--red)}
+.opt:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.why{font-size:14.5px;color:var(--ink-2);margin:11px 0 0;display:none}
+.why.on{display:block}
+
+.scorebar{font-family:Archivo,sans-serif;font-size:13px;font-weight:600;color:var(--ink-2);margin:0 0 16px}
+
+footer{margin-top:48px;padding-top:20px;border-top:1px solid var(--rule);font-size:14px;color:var(--ink-3)}
+footer p{margin:0 0 7px}
+
+@media (max-width:640px){
+  body{font-size:16px;padding:0 14px 90px}
+  .card{padding:18px 16px}
+  .qrow input{width:100%}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important}}
+</style>
+
+<div class="wrap">
+
+<header class="masthead">
+  <p class="eyebrow">Examen în 11 ore · sesiune de cramming</p>
+  <h1>Cram ALGAED</h1>
+  <p class="standfirst">Cinci tipuri de probleme. Pentru fiecare: cum o recunoști, trei mișcări, o rezolvare pas cu pas pe care o desfaci singur, apoi una pe care o faci tu. <strong>Nu citi — apasă butoanele și scrie răspunsuri.</strong></p>
+</header>
+
+<nav class="nav" id="nav" aria-label="Module">
+  <button class="navbtn" data-go="plan" aria-current="true">Planul <span class="tick">✓</span></button>
+  <button class="navbtn" data-go="p4">P4 · Sistem EDO <span class="tick">✓</span></button>
+  <button class="navbtn" data-go="p5">P5 · EDO ord. 2 <span class="tick">✓</span></button>
+  <button class="navbtn" data-go="p1">P1 · Proiecție <span class="tick">✓</span></button>
+  <button class="navbtn" data-go="p3">P3 · SVD <span class="tick">✓</span></button>
+  <button class="navbtn" data-go="p2">P2 · Conică <span class="tick">✓</span></button>
+  <button class="navbtn" data-go="rec">Recunoaștere <span class="tick">✓</span></button>
+</nav>
+
+<!-- ============ PLAN ============ -->
+<section class="mod on" id="mod-plan">
+  <div class="card">
+    <h2>Cele 11 ore</h2>
+    <p class="sub">Ordinea e după punctaj pe minut investit. Somnul e în plan fiindcă la 4 ore de somn ții minte mai mult decât la zero.</p>
+    <div class="timeline">
+      <div class="tl"><div class="timeline-when">0:00–0:20</div><p><strong>Formulele minime</strong> de mai jos. Scrie-le de mână de trei ori. Nu le citi.</p></div>
+      <div class="tl"><div class="timeline-when">0:20–1:50</div><p><strong>P4 — sistem de 2 EDO.</strong> Cea mai mecanică problemă de pe subiect.</p></div>
+      <div class="tl"><div class="timeline-when">1:50–3:00</div><p><strong>P5 — EDO de ordin 2.</strong> Aceleași valori proprii, alt ambalaj.</p></div>
+      <div class="tl"><div class="timeline-when">3:00–3:15</div><p>Pauză. Mănâncă ceva.</p></div>
+      <div class="tl"><div class="timeline-when">3:15–4:45</div><p><strong>P1 — proiecție și Gram–Schmidt.</strong></p></div>
+      <div class="tl"><div class="timeline-when">4:45–5:45</div><p><strong>P3 — SVD.</strong> Se sprijină pe P1.</p></div>
+      <div class="tl"><div class="timeline-when">5:45–6:45</div><p><strong>P2 — conica.</strong> Chiar dacă rămâi la δ și Δ, iei puncte.</p></div>
+      <div class="tl"><div class="timeline-when">6:45–7:15</div><p><strong>Drill de recunoaștere</strong> (ultimul tab). Zece enunțuri, spui din ce tip e fiecare.</p></div>
+      <div class="tl sleep"><div class="timeline-when">7:15–10:30</div><p><strong>DORMI.</strong> Trei ore. Serios — memoria se consolidează în somn, iar la examen ai nevoie de calcul corect, nu de material citit.</p></div>
+      <div class="tl"><div class="timeline-when">10:30–11:00</div><p>Recitește <em>doar</em> formulele minime și capcanele roșii. Nimic nou.</p></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Formulele fără de care nu poți intra</h3>
+    <p class="label">Scrie-le de mână acum, apoi pe ciornă la examen</p>
+    <div class="math">P4/P5   det(A − λI) = 0   →   valorile proprii λ
+        λ distincte  :  X = C₁e^(λ₁t)v₁ + C₂e^(λ₂t)v₂
+        λ dublă      :  + C₂e^(λt)(t·v₁ + v₂),  (A−λI)v₂ = v₁
+        λ = α ± iβ   :  e^(αt)·(cos βt, sin βt)
+
+P5      rezonanță: dacă μ e rădăcină, x_p se înmulțește cu tᵐ
+
+P1      w₂ = u₂ − (⟨u₂,w₁⟩/‖w₁‖²)·w₁
+        pr_U v = Σ (⟨v,wᵢ⟩/‖wᵢ‖²)·wᵢ
+        pr_(U⊥) v = v − pr_U v
+
+P3      AᵀA → valori proprii λ → σ = √λ  (NU λ)
+        uᵢ = (1/σᵢ)·A·vᵢ
+
+P2      δ = a₁₁a₂₂ − a₁₂²    >0 elipsă · =0 parabolă · <0 hiperbolă
+        atenție: a₁₂ = jumătate din coeficientul lui xy</div>
+    <button class="btn" data-go="p4">Începe cu P4 →</button>
+  </div>
+
+  <div class="card">
+    <h3>Unde sunt rezolvările de mână</h3>
+    <p class="sub">Fiecare modul are lista lui, dar asta e harta întreagă. Folderul <code>REZOLVATE</code> e cel mai bun lucru din tot dosarul și e ușor de ratat.</p>
+    <div class="refs">
+      <p class="label">EXERCITII\CANEPA\REZOLVATE\ — enunț plus soluție, pe teme</p>
+      <p class="hint">Numerotarea urmează seminarele. Ultimele patru sunt exact materia de examen.</p>
+      <div class="ref"><p class="rf">Exercitii 6-7.pdf</p><p class="rd">Produs scalar, ortogonalitate, proiecție → <strong>P1</strong></p></div>
+      <div class="ref"><p class="rf">Exercitii 8.pdf</p><p class="rd">SVD, forme pătratice, conice și cuadrice → <strong>P3 și P2</strong></p></div>
+      <div class="ref"><p class="rf">Exercitii 9.pdf</p><p class="rd">Ecuații diferențiale de ordinul I → <strong>P5</strong>, varianta cuplată</p></div>
+      <div class="ref"><p class="rf">Exercitii 10.pdf</p><p class="rd">Sisteme de ecuații diferențiale → <strong>P4</strong></p></div>
+      <div class="ref"><p class="rf">Exercitii-11.pdf</p><p class="rd">Ecuații de ordin superior → <strong>P5</strong></p></div>
+      <div class="ref"><p class="rf">Exercitii 4-5.pdf</p><p class="rd">Vectori și valori proprii. Nu e o problemă de examen în sine, dar e mecanismul din spatele lui P2, P3 și P4 — dacă te împotmolești la valori proprii, aici te uiți.</p></div>
+    </div>
+    <div class="aside" style="margin-top:16px">
+      <p class="label">Celelalte două surse cu soluții</p>
+      <p><code>MATERIALE PROFESOR\Exercitii ALGAED 2024...pdf</code> — 71 de pagini, nouă capitole, fiecare cu o secțiune „Probleme rezolvate". Paginile care te interesează: <strong>33</strong> (produs scalar, P1), <strong>47</strong> (SVD și conice, P3 și P2), <strong>60</strong> și <strong>63</strong> (ecuații și sisteme, P4), <strong>69</strong> (ordin superior, P5).</p>
+      <p style="margin-top:10px"><code>SUBIECTE\Subiecte Examen 2023-2024...pdf</code> — varianta CC vine cu baremul oficial pentru un subiect întreg. E singurul loc unde vezi <em>cât</em> trebuie scris ca să iei punctajul complet.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ P4 ============ -->
+<section class="mod" id="mod-p4">
+  <div class="card">
+    <h2>P4 · Sistem de 2 ecuații diferențiale</h2>
+    <p class="sub">A picat la fiecare sesiune. Cea mai mecanică problemă de pe subiect.</p>
+
+    <div class="spot">
+      <p class="label">Cum o recunoști</p>
+      <p>Vezi două ecuații cu <code>x′</code> și <code>y′</code> pe stânga, și <code>x(0)</code>, <code>y(0)</code> date. De obicei urmează o întrebare de geometrie: „intersectează axele?", „e tangentă la…?"</p>
+    </div>
+
+    <div class="refs">
+      <p class="label">Rezolvări gata făcute — deschide-le în paralel</p>
+      <p class="hint">Toate căile pornesc din <code>D:\brain\Projects\ALGAED\</code></p>
+      <div class="ref">
+        <p class="rf">EXERCITII\CANEPA\REZOLVATE\Exercitii 10.pdf<span class="pill">cu soluții</span></p>
+        <p class="rd">„Sisteme de ecuații diferențiale liniare de ordinul I". Exercițiul 1 are <strong>16 probleme Cauchy (a–p)</strong>, toate cu soluția scrisă dedesubt. Începe cu (a): <code>x′=−5x+2y, y′=x−6y, x(0)=3, y(0)=0</code> → <code>x=2e^(−4t)+e^(−7t)</code>, <code>y=e^(−4t)−e^(−7t)</code>. Fă (a), (b), (c) și compară-ți foaia cu a lor.</p>
+      </div>
+      <div class="ref">
+        <p class="rf">MATERIALE PROFESOR\Exercitii ALGAED 2024_e2105577f144b14069749407a650f794.pdf<span class="pill">cu soluții</span></p>
+        <p class="rd">Capitolul 8, secțiunea <strong>„Probleme rezolvate" de la pagina 63</strong>. Rezolvări desfășurate, în stilul în care le vrea profesorul pe lucrare.</p>
+      </div>
+      <div class="ref">
+        <p class="rf">EXERCITII\BADRALEXI\Fisa exercitii - ecuatii si sisteme de ecuatii diferentiale.pdf<span class="pill bare">doar enunțuri</span></p>
+        <p class="rd">19 pagini de exerciții. Folosește-o după ce ai înțeles, ca să te antrenezi pe volum.</p>
+      </div>
+    </div>
+
+    <p class="label">Trei mișcări</p>
+    <ol class="moves">
+      <li>Scoți matricea <code>A</code> a coeficienților și îi afli valorile proprii și vectorii proprii.</li>
+      <li>Scrii soluția generală cu <code>C₁</code>, <code>C₂</code>, după cazul în care ești.</li>
+      <li>Pui <code>t = 0</code> în soluție, obții C₁ și C₂ din condițiile inițiale.</li>
+    </ol>
+
+    <p class="label" style="margin-top:22px">Vezi-o făcută — examen ianuarie 2024</p>
+    <div class="steps" data-steps>
+      <p class="given"><strong>x′ = 3x − y,&nbsp; y′ = −x + 3y,&nbsp; x(0) = 0,&nbsp; y(0) = 2.</strong><br>Se cere soluția, și dacă intersectează axele.</p>
+
+      <div class="step"><div class="stitle">Mișcarea 1 — matricea și spectrul</div>
+        <div class="math">    | 3  −1 |
+A = |       |     det(A − λI) = (3−λ)² − 1 = 0
+    | −1  3 |
+
+(3−λ)² = 1  ⟹  3−λ = ±1  ⟹  λ = 2  și  λ = 4</div>
+        <p>Pentru fiecare λ, rezolvi <code>(A − λI)v = 0</code>:</p>
+        <div class="math">λ = 2 :  (3−2)x − y = 0  ⟹   x − y = 0  ⟹  v₁ = (1, 1)
+λ = 4 :  (3−4)x − y = 0  ⟹  −x − y = 0  ⟹  v₂ = (−1, 1)</div>
+      </div>
+
+      <div class="step"><div class="stitle">Mișcarea 2 — soluția generală</div>
+        <p>Valorile proprii sunt distincte și reale, deci primul caz, cel simplu:</p>
+        <div class="math">X(t) = C₁·e^(2t)·(1, 1)  +  C₂·e^(4t)·(−1, 1)
+
+adică      x(t) = C₁e^(2t) − C₂e^(4t)
+           y(t) = C₁e^(2t) + C₂e^(4t)</div>
+      </div>
+
+      <div class="step"><div class="stitle">Mișcarea 3 — condițiile inițiale</div>
+        <div class="math">t = 0 ,  e⁰ = 1 :
+
+x(0) = C₁ − C₂ = 0
+y(0) = C₁ + C₂ = 2      ⟹   C₁ = 1,  C₂ = 1
+
+x(t) = e^(2t) − e^(4t)
+y(t) = e^(2t) + e^(4t)</div>
+      </div>
+
+      <div class="step"><div class="stitle">Partea de geometrie</div>
+        <div class="math">Ox  ⟺  y(t) = 0 :  e^(2t) + e^(4t) e mereu > 0
+                   ⟹  NU intersectează Ox
+
+Oy  ⟺  x(t) = 0 :  e^(2t) = e^(4t)  ⟺  2t = 4t  ⟺  t = 0
+                   ⟹  intersectează Oy în (0, 2)
+
+tangenta acolo = (x′(0), y′(0)) = (2−4, 2+4) = (−2, 6)
+Oy are direcția (0,1); (−2,6) nu e multiplu al ei
+                   ⟹  curba NU e tangentă la Oy</div>
+      </div>
+
+      <button class="btn" data-next>Arată pasul următor →</button>
+    </div>
+
+    <div class="ex" data-ex>
+      <p class="label">Acum tu — aceleași mișcări, alte numere</p>
+      <div class="math">x′ = 2x + y ,   y′ = x + 2y ,   x(0) = 3 ,   y(0) = 1</div>
+      <div class="qrow"><label>Valorile proprii (cea mică întâi, separate prin virgulă)</label><input data-a="1,3|1, 3" placeholder="ex: 2,5"><span class="mark"></span></div>
+      <div class="qrow"><label>Vectorul propriu pentru λ mic</label><input data-a="(1,-1)|1,-1|(-1,1)|-1,1" placeholder="ex: (1,2)"><span class="mark"></span></div>
+      <div class="qrow"><label>C₁ (coeficientul lui e^(λ mic · t))</label><input data-a="1" placeholder="număr"><span class="mark"></span></div>
+      <div class="qrow"><label>C₂</label><input data-a="2" placeholder="număr"><span class="mark"></span></div>
+      <button class="btn" data-check>Verifică</button>
+      <button class="btn ghost" data-sol>Arată rezolvarea</button>
+      <div class="fb">
+        <div class="math">A = | 2  1 |    det(A−λI) = (2−λ)² − 1 = 0  ⟹  λ = 1,  λ = 3
+    | 1  2 |
+
+λ=1 :   x + y = 0   ⟹  v₁ = (1, −1)
+λ=3 :  −x + y = 0   ⟹  v₂ = (1,  1)
+
+X(t) = C₁e^(t)·(1,−1) + C₂e^(3t)·(1,1)
+
+x(0) =  C₁ + C₂ = 3
+y(0) = −C₁ + C₂ = 1     ⟹  C₂ = 2,  C₁ = 1
+
+x(t) =  e^t + 2e^(3t)
+y(t) = −e^t + 2e^(3t)
+
+Oy ⟺ x(t)=0 : ambii termeni sunt > 0 ⟹ NU intersectează Oy</div>
+      </div>
+    </div>
+
+    <div class="aside">
+      <p class="label">Celelalte două cazuri, pe scurt</p>
+      <div class="math">λ DUBLĂ, un singur vector propriu
+   găsești v₂ din  (A − λI)v₂ = v₁   ← v₁ în dreapta, nu 0
+   X(t) = C₁e^(λt)v₁ + C₂e^(λt)·(t·v₁ + v₂)
+
+   ex: x′=3x−y, y′=x+y  →  λ=2 dublu, v₁=(1,1), v₂=(1,0)
+
+λ COMPLEXE  λ = α ± iβ   →  soluția conține e^(αt)·cos βt și e^(αt)·sin βt
+
+   ex: x′=−y, y′=x, x(0)=1, y(0)=0  →  λ=±i
+       x(t) = cos t,  y(t) = sin t   (un cerc)</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Ce te poate costa</p>
+      <ul>
+        <li>Condițiile inițiale se pun în <em>soluția generală deja scrisă</em>, nu în ecuațiile de pornire.</li>
+        <li>Dacă sistemul are termen liber, cauți întâi o soluție constantă din <code>A·X + b = 0</code> și o adaugi.</li>
+        <li>Înainte să spui „intersectează", verifică semnul. Suma a două exponențiale pozitive nu se anulează niciodată.</li>
+      </ul>
+    </div>
+
+    <button class="btn" data-go="p5">Gata P4, mergi la P5 →</button>
+  </div>
+</section>
+
+<!-- ============ P5 ============ -->
+<section class="mod" id="mod-p5">
+  <div class="card">
+    <h2>P5 · Ecuație diferențială de ordin 2</h2>
+    <p class="sub">Ultima problemă de pe subiect, la fiecare sesiune. Dacă știi P4, ai deja jumătate din ea.</p>
+
+    <div class="spot">
+      <p class="label">Cum o recunoști</p>
+      <p>O singură ecuație, cu <code>x″</code> în ea, plus <code>x(0)</code> și <code>x′(0)</code>. Uneori e cuplată: îți dă întâi o ecuație de ordin I pentru <code>f</code>, iar <code>f</code> apare în dreapta la a doua.</p>
+    </div>
+
+    <div class="refs">
+      <p class="label">Rezolvări gata făcute — cel mai bun material din tot dosarul</p>
+      <p class="hint">Toate căile pornesc din <code>D:\brain\Projects\ALGAED\</code></p>
+      <div class="ref">
+        <p class="rf">EXERCITII\CANEPA\REZOLVATE\Exercitii-11.pdf<span class="pill">cu soluții</span></p>
+        <p class="rd">„Ecuații diferențiale liniare de ordin superior". Exercițiul 1, <strong>șapte ecuații (a–g) cu rezolvarea explicată în cuvinte</strong>, nu doar rezultatul: de ce alegi forma aceea pentru <code>x_p</code>, când apare rezonanța, cum se aplică principiul superpoziției. Uită-te neapărat la <strong>(b)</strong> — e raționamentul complet — și la <strong>(g)</strong> <code>x″−2x′+x=6te^t+3</code>, care e caz de rezonanță.</p>
+      </div>
+      <div class="ref">
+        <p class="rf">EXERCITII\CANEPA\REZOLVATE\Exercitii 9.pdf<span class="pill">cu soluții</span></p>
+        <p class="rd">„Ecuații diferențiale de ordinul I", 12 exerciții (a–l) cu soluții. Ăsta îți trebuie pentru <strong>varianta cuplată</strong>, unde ecuația de ordin I se rezolvă prima și intră ca termen liber în a doua.</p>
+      </div>
+      <div class="ref">
+        <p class="rf">EXERCITII\BADRALEXI\ec_si_sist_dif_CC.pdf<span class="pill bare">teorie</span></p>
+        <p class="rd">Fișa profesorului, <strong>scrisă exact pentru grupa CC</strong>, 5 pagini. Pagina 1 are formele generale și toate cazurile de rădăcini, într-un tabel. Dacă vrei un singur lucru de recitit înainte de examen, ăsta e.</p>
+      </div>
+      <div class="ref">
+        <p class="rf">MATERIALE PROFESOR\Exercitii ALGAED 2024_e2105577f144b14069749407a650f794.pdf<span class="pill">cu soluții</span></p>
+        <p class="rd">Capitolul 9, <strong>„Probleme rezolvate" de la pagina 69</strong>. Pentru ecuația de ordin I auxiliară, capitolul 7 de la <strong>pagina 60</strong>.</p>
+      </div>
+    </div>
+
+    <p class="label">Trei mișcări</p>
+    <ol class="moves">
+      <li><strong>Omogena.</strong> Ecuația caracteristică <code>λ² + aλ + b = 0</code> → scrii <code>x₀</code> după tipul rădăcinilor.</li>
+      <li><strong>Particulara.</strong> Ghicești forma lui <code>x_p</code> după cum arată dreapta, o înlocuiești și afli coeficientul.</li>
+      <li><code>x = x₀ + x_p</code>, apoi pui <code>x(0)</code> și <code>x′(0)</code>.</li>
+    </ol>
+
+    <div class="math">OMOGENA                          PARTICULARA (m = de câte ori e μ rădăcină)
+λ₁ ≠ λ₂ :  C₁e^(λ₁t) + C₂e^(λ₂t)     dreapta = k         →  x_p = a·tᵐ
+λ dublă :  (C₁ + C₂t)·e^(λt)         dreapta = e^(μt)    →  x_p = a·tᵐ·e^(μt)
+α ± iβ  :  e^(αt)(C₁cos βt + C₂sin βt)  dreapta = cos/sin ωt →  x_p = tᵐ(a cos + b sin)</div>
+
+    <p class="label" style="margin-top:22px">Vezi-o făcută — examen 23.01.2023</p>
+    <div class="steps" data-steps>
+      <p class="given"><strong>x″ + 4x′ + 4x = 4,&nbsp; x(0) = 0,&nbsp; x′(0) = 0.</strong></p>
+
+      <div class="step"><div class="stitle">Mișcarea 1 — omogena</div>
+        <div class="math">λ² + 4λ + 4 = 0  ⟹  (λ + 2)² = 0  ⟹  λ = −2, rădăcină DUBLĂ
+
+⟹  x₀ = (C₁ + C₂·t)·e^(−2t)</div>
+      </div>
+
+      <div class="step"><div class="stitle">Mișcarea 2 — particulara</div>
+        <p>Dreapta e constanta 4. Constanta corespunde lui <code>μ = 0</code>, iar 0 nu e rădăcină aici (rădăcina e −2), deci <code>m = 0</code> și încerci direct o constantă:</p>
+        <div class="math">x_p = a   ⟹   x_p′ = 0,  x_p″ = 0
+
+înlocuind :  0 + 0 + 4a = 4   ⟹   a = 1</div>
+      </div>
+
+      <div class="step"><div class="stitle">Mișcarea 3 — constantele</div>
+        <div class="math">x(t) = (C₁ + C₂t)·e^(−2t) + 1
+
+x(0) = C₁ + 1 = 0                    ⟹  C₁ = −1
+
+x′(t) = (C₂ − 2C₁ − 2C₂t)·e^(−2t)     ← derivezi produsul!
+x′(0) = C₂ − 2C₁ = C₂ + 2 = 0        ⟹  C₂ = −2
+
+x(t) = 1 − (1 + 2t)·e^(−2t)
+
+verificare: x(0) = 1 − 1 = 0 ✓</div>
+      </div>
+
+      <button class="btn" data-next>Arată pasul următor →</button>
+    </div>
+
+    <div class="ex" data-ex>
+      <p class="label">Acum tu</p>
+      <div class="math">x″ − 3x′ + 2x = 4 ,    x(0) = 1 ,    x′(0) = 0</div>
+      <div class="qrow"><label>Rădăcinile ecuației caracteristice</label><input data-a="1,2|1, 2|2,1" placeholder="ex: 3,4"><span class="mark"></span></div>
+      <div class="qrow"><label>Soluția particulară x_p</label><input data-a="2|a=2|x_p=2|xp=2" placeholder="un număr"><span class="mark"></span></div>
+      <div class="qrow"><label>C₁ (coeficientul lui e^t)</label><input data-a="-2|−2" placeholder="număr"><span class="mark"></span></div>
+      <div class="qrow"><label>C₂ (coeficientul lui e^(2t))</label><input data-a="1" placeholder="număr"><span class="mark"></span></div>
+      <button class="btn" data-check>Verifică</button>
+      <button class="btn ghost" data-sol>Arată rezolvarea</button>
+      <div class="fb">
+        <div class="math">λ² − 3λ + 2 = 0  ⟹  (λ−1)(λ−2) = 0  ⟹  λ = 1,  λ = 2  (distincte)
+x₀ = C₁e^t + C₂e^(2t)
+
+dreapta = 4, iar 0 nu e rădăcină  ⟹  x_p = a
+înlocuind:  0 − 0 + 2a = 4  ⟹  a = 2
+
+x(t) = C₁e^t + C₂e^(2t) + 2
+
+x(0)  = C₁ +  C₂ + 2 = 1   ⟹  C₁ + C₂  = −1
+x′(t) = C₁e^t + 2C₂e^(2t)
+x′(0) = C₁ + 2C₂ = 0       ⟹  C₁ = −2C₂
+
+−2C₂ + C₂ = −1  ⟹  C₂ = 1,  C₁ = −2
+
+x(t) = −2e^t + e^(2t) + 2        verificare: x(0) = −2+1+2 = 1 ✓</div>
+      </div>
+    </div>
+
+    <div class="aside">
+      <p class="label">Rezonanța — capcana care apare cel mai des</p>
+      <p>Dacă exponentul din dreapta este chiar o rădăcină a ecuației caracteristice, forma simplă nu funcționează: substituția îți dă <code>0 = ceva</code>. Atunci înmulțești cu <code>t</code>.</p>
+      <div class="math">x″ − x = eᵗ        λ² − 1 = 0  ⟹  λ = ±1
+                   μ = 1 ESTE rădăcină (m = 1)  ⟹  x_p = a·t·eᵗ
+
+x_p′  = a(eᵗ + t·eᵗ)
+x_p″  = a(2eᵗ + t·eᵗ)
+x_p″ − x_p = 2a·eᵗ = eᵗ   ⟹   a = ½    ⟹   x_p = (t/2)·eᵗ</div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Ce te poate costa</p>
+      <ul>
+        <li>La <code>λ</code> dublă, <code>x′</code> se obține derivând un <em>produs</em> — nu uita termenul care vine din <code>C₂t</code>.</li>
+        <li>La ecuațiile cuplate, rezolvi complet ecuația de ordin I întâi, apoi îi bagi rezultatul ca termen liber în a doua.</li>
+        <li><code>x′(0)</code> se calculează derivând soluția <em>completă</em>, cu tot cu <code>x_p</code>.</li>
+      </ul>
+    </div>
+
+    <button class="btn" data-go="p1">Gata P5, mergi la P1 →</button>
+  </div>
+</section>
+
+<!-- ============ P1 ============ -->
+<section class="mod" id="mod-p1">
+  <div class="card">
+    <h2>P1 · Complement ortogonal și proiecție</h2>
+    <p class="sub">Prima problemă de pe subiect, la fiecare sesiune.</p>
+
+    <div class="spot">
+      <p class="label">Cum o recunoști</p>
+      <p>Ți se dă un subspațiu <code>U = Sp{u₁, u₂, u₃}</code> și un vector <code>v</code>, și ți se cere <code>pr_U v</code>, sau <code>U⊥</code>, sau amândouă.</p>
+    </div>
+
+    <div class="refs">
+      <p class="label">Rezolvări gata făcute — deschide-le în paralel</p>
+      <p class="hint">Toate căile pornesc din <code>D:\brain\Projects\ALGAED\</code></p>
+      <div class="ref">
+        <p class="rf">EXERCITII\CANEPA\REZOLVATE\Exercitii 6-7.pdf<span class="pill">cu soluții</span></p>
+        <p class="rd">„Produs scalar. Ortogonalitate și proiecție". <strong>Exercițiul 5</strong> (pagina 3 în jos) e exact enunțul de la examen: <em>„determinați pentru fiecare subspațiu U complementul său ortogonal U⊥ și proiecția vectorului v pe U și pe U⊥"</em>. Primul subpunct pornește de la un U dat prin sistem omogen, cu <code>v=(1,2,5)</code>.</p>
+      </div>
+      <div class="ref">
+        <p class="rf">MATERIALE PROFESOR\Exercitii ALGAED 2024_e2105577f144b14069749407a650f794.pdf<span class="pill">cu soluții</span></p>
+        <p class="rd">Capitolul 5, <strong>„Probleme rezolvate" de la pagina 33</strong>. Acolo e și Gram–Schmidt desfășurat pas cu pas.</p>
+      </div>
+      <div class="ref">
+        <p class="rf">EXERCITII\BADRALEXI\Fisa exercitii - produs scalar.pdf<span class="pill bare">doar enunțuri</span></p>
+        <p class="rd">Exercițiile <strong>3, 5, 6, 7</strong> sunt fix tipul de la examen (proiecție pe subspațiu, complement ortogonal, bază și dimensiune). Fără soluții — folosește-le ca test, după ce ai citit rezolvările de mai sus.</p>
+      </div>
+    </div>
+
+    <p class="label">Trei mișcări</p>
+    <ol class="moves">
+      <li><strong>Curăță generatorii.</strong> Verifică dacă unul e combinație a celorlalți și aruncă-l. Aici se pierd cei mai mulți oameni.</li>
+      <li><strong>Gram–Schmidt</strong> pe cei rămași: fiecare vector nou minus proiecțiile lui pe cei deja ortogonalizați.</li>
+      <li><strong>Proiectezi</strong> și scazi: <code>pr_(U⊥) v = v − pr_U v</code>.</li>
+    </ol>
+
+    <p class="label" style="margin-top:22px">Vezi-o făcută — examen ianuarie 2024</p>
+    <div class="steps" data-steps>
+      <p class="given"><strong>U = Sp{u₁=(0,1,2,−2), u₂=(1,2,6,−2), u₃=(1,1,4,0)} ⊆ ℝ⁴,&nbsp; v = (1,0,1,0).</strong></p>
+
+      <div class="step"><div class="stitle">Mișcarea 1 — sunt independenți?</div>
+        <p>Aduni primul cu al treilea și compari cu al doilea:</p>
+        <div class="math">u₁ + u₃ = (0,1,2,−2) + (1,1,4,0) = (1, 2, 6, −2) = u₂   ✓
+
+⟹  u₂ e dependent, îl arunci.   dim U = 2,  bază {u₁, u₃}</div>
+      </div>
+
+      <div class="step"><div class="stitle">Mișcarea 2 — Gram–Schmidt</div>
+        <div class="math">w₁ = u₁ = (0,1,2,−2)          ‖w₁‖² = 0+1+4+4 = 9
+
+⟨u₃,w₁⟩ = 0·1 + 1·1 + 4·2 + 0·(−2) = 9
+
+w₂ = u₃ − (9/9)·w₁ = (1,1,4,0) − (0,1,2,−2) = (1, 0, 2, 2)
+                                            ‖w₂‖² = 1+0+4+4 = 9</div>
+      </div>
+
+      <div class="step"><div class="stitle">Mișcarea 3 — proiecția</div>
+        <div class="math">⟨v,w₁⟩ = 0 + 0 + 2 + 0 = 2
+⟨v,w₂⟩ = 1 + 0 + 2 + 0 = 3
+
+pr_U v = (2/9)·(0,1,2,−2) + (3/9)·(1,0,2,2)
+
+       = (0, 2/9, 4/9, −4/9) + (1/3, 0, 2/3, 2/3)
+
+       = (1/9)·(3, 2, 10, 2)
+
+pr_(U⊥) v = (1,0,1,0) − (1/9)(3,2,10,2) = (1/9)·(6, −2, −1, −2)</div>
+      </div>
+
+      <div class="step"><div class="stitle">Dacă cere U⊥ explicit</div>
+        <p>Pui produsul scalar cu fiecare generator egal cu zero:</p>
+        <div class="math">x = (x,y,z,t)
+
+⟨x,u₁⟩ = 0 :   y + 2z − 2t = 0
+⟨x,u₃⟩ = 0 :   x + y + 4z  = 0
+
+⟹  x = −2z − 2t ,   y = −2z + 2t     (z, t libere)
+
+dim U⊥ = 4 − 2 = 2 ,  bază { (−2,−2,1,0), (−2,2,0,1) }</div>
+      </div>
+
+      <button class="btn" data-next>Arată pasul următor →</button>
+    </div>
+
+    <div class="ex" data-ex>
+      <p class="label">Acum tu — numerele ies întregi, nu te speria de fracții</p>
+      <div class="math">U = Sp{ u₁=(1,1,1,1),  u₂=(3,1,1,−1),  u₃=(4,2,2,0) }      v = (4,0,0,0)</div>
+      <div class="qrow"><label>dim U</label><input data-a="2" placeholder="un număr"><span class="mark"></span></div>
+      <div class="qrow"><label>w₂ după Gram–Schmidt</label><input data-a="(2,0,0,-2)|2,0,0,-2|(1,0,0,-1)|1,0,0,-1" placeholder="ex: (1,2,0,3)"><span class="mark"></span></div>
+      <div class="qrow"><label>pr_U v</label><input data-a="(3,1,1,-1)|3,1,1,-1" placeholder="ex: (1,2,0,3)"><span class="mark"></span></div>
+      <div class="qrow"><label>pr_(U⊥) v</label><input data-a="(1,-1,-1,1)|1,-1,-1,1" placeholder="ex: (1,2,0,3)"><span class="mark"></span></div>
+      <button class="btn" data-check>Verifică</button>
+      <button class="btn ghost" data-sol>Arată rezolvarea</button>
+      <div class="fb">
+        <div class="math">1) u₁ + u₂ = (4,2,2,0) = u₃  ⟹  u₃ dependent, îl arunci.  dim U = 2
+
+2) w₁ = (1,1,1,1),  ‖w₁‖² = 4
+   ⟨u₂,w₁⟩ = 3+1+1−1 = 4
+   w₂ = (3,1,1,−1) − (4/4)(1,1,1,1) = (2, 0, 0, −2),   ‖w₂‖² = 8
+
+3) ⟨v,w₁⟩ = 4        ⟨v,w₂⟩ = 8
+
+   pr_U v = (4/4)(1,1,1,1) + (8/8)(2,0,0,−2)
+          = (1,1,1,1) + (2,0,0,−2) = (3, 1, 1, −1)
+
+   pr_(U⊥) v = (4,0,0,0) − (3,1,1,−1) = (1, −1, −1, 1)
+
+verificare: (1,−1,−1,1)·u₁ = 0 ✓ ,  (1,−1,−1,1)·u₂ = 3−1−1−1 = 0 ✓</div>
+      </div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Ce te poate costa</p>
+      <ul>
+        <li>Dacă sari peste mișcarea 1 și faci Gram–Schmidt pe trei vectori dependenți, îți iese <code>w₃ = 0</code> și crezi că ai greșit. Nu ai — doar erau dependenți.</li>
+        <li>La proiecție se împarte la <code>‖wᵢ‖²</code>, nu la <code>‖wᵢ‖</code>.</li>
+        <li>Nu normaliza dacă nu ți se cere „ortonormată" — radicalii doar îngreunează calculul.</li>
+        <li>Verificarea gratuită: <code>pr_(U⊥) v</code> trebuie să dea produs scalar zero cu fiecare generator.</li>
+      </ul>
+    </div>
+
+    <button class="btn" data-go="p3">Gata P1, mergi la P3 →</button>
+  </div>
+</section>
+
+<!-- ============ P3 ============ -->
+<section class="mod" id="mod-p3">
+  <div class="card">
+    <h2>P3 · Descompunerea SVD</h2>
+    <p class="sub">Se sprijină pe valori proprii, exact ca P4. E o rețetă de șase pași, fără nimic de înțeles.</p>
+
+    <div class="spot">
+      <p class="label">Cum o recunoști</p>
+      <p>Scrie explicit „descompunerea în valori singulare" sau „SVD". Deseori îți dă o <em>aplicație</em> <code>f</code>, nu o matrice — atunci prima treabă e să scrii matricea.</p>
+    </div>
+
+    <div class="refs">
+      <p class="label">Rezolvări gata făcute — deschide-le în paralel</p>
+      <p class="hint">Toate căile pornesc din <code>D:\brain\Projects\ALGAED\</code></p>
+      <div class="ref">
+        <p class="rf">EXERCITII\CANEPA\REZOLVATE\Exercitii 8.pdf<span class="pill">cu soluții</span></p>
+        <p class="rd">„Descompunerea valorilor singulare. Forme pătratice. Conice și cuadrice". <strong>Exercițiul 1, pagina 1</strong>: cinci matrice (a–e), fiecare cu <code>U</code>, <code>Σ</code> și <code>V</code> scrise complet. Începe cu (a) <code>A=(0 2; 0 0; 0 0)</code> — vezi cum arată Σ când matricea nu e pătratică. Exercițiul 2 arată la ce folosește SVD-ul geometric (cercul unitate devine elipsă).</p>
+      </div>
+      <div class="ref">
+        <p class="rf">MATERIALE PROFESOR\Exercitii ALGAED 2024_e2105577f144b14069749407a650f794.pdf<span class="pill">cu soluții</span></p>
+        <p class="rd">Capitolul 6, <strong>„Probleme rezolvate" de la pagina 47</strong>. Acoperă SVD, ortodiagonalizare și forme pătratice la un loc.</p>
+      </div>
+      <div class="ref">
+        <p class="rf">EXERCITII\BADRALEXI\Fisa exercitii - ortodiagonalizare, SVD, forme patratice.pdf<span class="pill bare">doar enunțuri</span></p>
+        <p class="rd">Doar 4 pagini. Exercițiile <strong>3 și 4</strong> sunt SVD curat: <code>A=(2 2; −1 1)</code> și <code>A=(1 1; 1 1; 1 −1)</code>. Bune de exersat pe hârtie.</p>
+      </div>
+    </div>
+
+    <p class="label">Trei mișcări</p>
+    <ol class="moves">
+      <li>Calculezi <code>AᵀA</code>, îi afli valorile proprii și le pui <strong>descrescător</strong>. Vectorii proprii ortonormați = coloanele lui <code>V</code>.</li>
+      <li><code>σᵢ = √λᵢ</code>. Le pui pe diagonala lui <code>Σ</code>, care are forma lui <code>A</code>.</li>
+      <li><code>uᵢ = (1/σᵢ)·A·vᵢ</code> pentru fiecare σ nenul; completezi <code>U</code> dacă e nevoie.</li>
+    </ol>
+
+    <p class="label" style="margin-top:22px">Vezi-o făcută — examen ianuarie 2024</p>
+    <div class="steps" data-steps>
+      <p class="given"><strong>f : ℝ₂[X] → ℝ₂[X], f(P) = P′ (derivata), în baza canonică {1, X, X²}.</strong></p>
+
+      <div class="step"><div class="stitle">Mișcarea 0 — scrii matricea</div>
+        <p>Derivezi fiecare element al bazei și pui coordonatele rezultatului pe <em>coloane</em>:</p>
+        <div class="math">f(1)  = 0    →  coloana (0,0,0)
+f(X)  = 1    →  coloana (1,0,0)
+f(X²) = 2X   →  coloana (0,2,0)
+
+    | 0  1  0 |
+A = | 0  0  2 |
+    | 0  0  0 |</div>
+      </div>
+
+      <div class="step"><div class="stitle">Mișcarea 1 — AᵀA și spectrul</div>
+        <div class="math">       | 0  0  0 |
+AᵀA =  | 0  1  0 |     e diagonală, deci valorile proprii se citesc direct
+       | 0  0  4 |
+
+λ₁ = 4  (cel mai mare)  →  v₁ = (0,0,1)
+λ₂ = 1                  →  v₂ = (0,1,0)
+λ₃ = 0                  →  v₃ = (1,0,0)
+
+    | 0  0  1 |
+V = | 0  1  0 |      ← coloanele, în ordine descrescătoare a lui λ
+    | 1  0  0 |</div>
+      </div>
+
+      <div class="step"><div class="stitle">Mișcarea 2 — valorile singulare</div>
+        <div class="math">σ₁ = √4 = 2       σ₂ = √1 = 1       σ₃ = √0 = 0
+
+Σ = diag(2, 1, 0)</div>
+      </div>
+
+      <div class="step"><div class="stitle">Mișcarea 3 — matricea U</div>
+        <div class="math">u₁ = (1/2)·A·(0,0,1)ᵀ = (1/2)·(0,2,0) = (0,1,0)
+u₂ = (1/1)·A·(0,1,0)ᵀ = (1,0,0)
+u₃ = (0,0,1)                      ← completat ortonormal
+
+    | 0  1  0 |
+U = | 1  0  0 |          A = U·Σ·Vᵀ
+    | 0  0  1 |</div>
+      </div>
+
+      <button class="btn" data-next>Arată pasul următor →</button>
+    </div>
+
+    <div class="ex" data-ex>
+      <p class="label">Acum tu</p>
+      <div class="math">f : ℝ₂[X] → ℝ₂[X] ,   f(P)(X) = P′(X) + P(0) ,   baza {1, X, X²}</div>
+      <div class="qrow"><label>Prima coloană a lui A (imaginea lui 1)</label><input data-a="(1,0,0)|1,0,0" placeholder="ex: (0,1,0)"><span class="mark"></span></div>
+      <div class="qrow"><label>Valorile proprii ale lui AᵀA (descrescător)</label><input data-a="4,2,0|4, 2, 0" placeholder="ex: 9,1,0"><span class="mark"></span></div>
+      <div class="qrow"><label>σ₁</label><input data-a="2" placeholder="număr"><span class="mark"></span></div>
+      <div class="qrow"><label>σ₂</label><input data-a="sqrt2|√2|radical2|1.41|1.414" placeholder="poți scrie sqrt2"><span class="mark"></span></div>
+      <button class="btn" data-check>Verifică</button>
+      <button class="btn ghost" data-sol>Arată rezolvarea</button>
+      <div class="fb">
+        <div class="math">f(1)  = 0 + 1  = 1     →  (1,0,0)
+f(X)  = 1 + 0  = 1     →  (1,0,0)
+f(X²) = 2X + 0 = 2X    →  (0,2,0)
+
+    | 1  1  0 |            | 1  1  0 |
+A = | 0  0  2 |     AᵀA =  | 1  1  0 |
+    | 0  0  0 |            | 0  0  4 |
+
+blocul | 1 1 |  are λ = 2 și 0 ;  plus λ = 4 din colț
+       | 1 1 |
+
+λ ordonate :  4,  2,  0        σ₁ = √4 = 2 ,  σ₂ = √2 ,  σ₃ = 0
+
+v₁ = (0,0,1) ,  v₂ = (1,1,0)/√2 ,  v₃ = (1,−1,0)/√2
+
+u₁ = (1/2)·A·(0,0,1) = (1/2)(0,2,0) = (0,1,0)
+u₂ = (1/√2)·A·(1,1,0)/√2 = (1/2)(2,0,0) = (1,0,0)</div>
+      </div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Ce te poate costa</p>
+      <ul>
+        <li><code>σ = √λ</code>, nu λ. Verifică asta de două ori.</li>
+        <li>Coloanele lui V se ordonează <strong>descrescător</strong> după λ, altfel Σ nu mai corespunde.</li>
+        <li>Σ are forma lui <code>A</code> (m×n), nu a lui <code>AᵀA</code>. Dacă A nu e pătratică, Σ are linii sau coloane de zerouri.</li>
+        <li>Valorile proprii ale lui <code>AᵀA</code> sunt mereu ≥ 0. Dacă îți iese una negativă, ai greșit înmulțirea.</li>
+      </ul>
+    </div>
+
+    <button class="btn" data-go="p2">Gata P3, mergi la P2 →</button>
+  </div>
+</section>
+
+<!-- ============ P2 ============ -->
+<section class="mod" id="mod-p2">
+  <div class="card">
+    <h2>P2 · Conica</h2>
+    <p class="sub">Are cei mai mulți pași — dar primii doi îți aduc puncte singuri, în treizeci de secunde.</p>
+
+    <div class="spot">
+      <p class="label">Cum o recunoști</p>
+      <p>O ecuație cu <code>x²</code>, <code>y²</code> și de obicei <code>xy</code>. Se cere „tipul" și „forma canonică".</p>
+    </div>
+
+    <div class="aside" style="margin-top:0;margin-bottom:18px;border-style:solid;border-color:var(--green)">
+      <p class="label" style="color:var(--green)">Dacă nu ai timp de nimic altceva, fă doar atât</p>
+      <div class="math">a₁₁x² + 2a₁₂xy + a₂₂y² + 2b₁x + 2b₂y + c = 0
+                ↑ ATENȚIE: a₁₂ = JUMĂTATE din coeficientul lui xy
+                           b₁, b₂ = jumătate din coeficienții lui x, y
+
+δ = a₁₁·a₂₂ − a₁₂²         δ > 0 elipsă · δ = 0 parabolă · δ < 0 hiperbolă
+
+     | a₁₁ a₁₂ b₁ |
+Δ =  | a₁₂ a₂₂ b₂ |        Δ ≠ 0 nedegenerată · Δ = 0 degenerată
+     | b₁  b₂  c  |</div>
+      <p>Ai scris tipul conicei. E punctaj luat, indiferent dacă ajungi sau nu la forma canonică.</p>
+    </div>
+
+    <div class="refs">
+      <p class="label">Rezolvări gata făcute — deschide-le în paralel</p>
+      <p class="hint">Toate căile pornesc din <code>D:\brain\Projects\ALGAED\</code></p>
+      <div class="ref">
+        <p class="rf">EXERCITII\CANEPA\REZOLVATE\Exercitii 8.pdf<span class="pill">cu soluții</span></p>
+        <p class="rd">Același fișier ca la P3 — partea a doua acoperă <strong>formele pătratice, conicele și cuadricele</strong>, cu soluții. Aici vezi cum se scrie reducerea la forma canonică pe foaie, cu tot cu rotația.</p>
+      </div>
+      <div class="ref">
+        <p class="rf">MATERIALE PROFESOR\Exercitii ALGAED 2024_e2105577f144b14069749407a650f794.pdf<span class="pill">cu soluții</span></p>
+        <p class="rd">Capitolul 6, <strong>„Probleme rezolvate" de la pagina 47</strong>.</p>
+      </div>
+      <div class="ref">
+        <p class="rf">SUBIECTE\Subiecte Examen 2023-2024_feab7234433642b85300045f77c89b15.pdf<span class="pill">cu soluții</span></p>
+        <p class="rd">Varianta CC are <strong>baremul oficial</strong> pentru exact conica din exemplul de mai jos. Dacă vrei să vezi cât de mult trebuie scris ca să iei punctajul întreg, ăsta e etalonul.</p>
+      </div>
+    </div>
+
+    <p class="label">Restul mișcărilor</p>
+    <ol class="moves">
+      <li>Diagonalizezi <code>A = (a₁₁ a₁₂; a₁₂ a₂₂)</code>: valori proprii λ₁, λ₂ și vectori proprii normalizați.</li>
+      <li>Formezi <code>Q</code> cu vectorii pe coloane, astfel încât <code>det Q = +1</code>. Substitui <code>(x,y)ᵀ = Q(x′,y′)ᵀ</code>.</li>
+      <li>Partea pătratică devine <code>λ₁x′² + λ₂y′²</code>. Recalculezi partea liniară, formezi pătrate perfecte, gata.</li>
+    </ol>
+
+    <p class="label" style="margin-top:22px">Vezi-o făcută — examen ianuarie 2024</p>
+    <div class="steps" data-steps>
+      <p class="given"><strong>x² + 2xy + y² + 2x − 2y = 0.</strong></p>
+
+      <div class="step"><div class="stitle">Mișcarea 1 — coeficienții și tipul</div>
+        <div class="math">coeficientul lui xy este 2  ⟹  a₁₂ = 1
+coeficientul lui x  este 2  ⟹  b₁  = 1
+coeficientul lui y  este −2 ⟹  b₂  = −1
+
+a₁₁ = 1 ,  a₁₂ = 1 ,  a₂₂ = 1 ,  b₁ = 1 ,  b₂ = −1 ,  c = 0
+
+δ = 1·1 − 1·1 = 0        ⟹  PARABOLĂ
+
+    | 1  1  1 |
+Δ = | 1  1 −1 | = −4 ≠ 0  ⟹  nedegenerată
+    | 1 −1  0 |</div>
+      </div>
+
+      <div class="step"><div class="stitle">Mișcarea 2 — rotația</div>
+        <div class="math">A = | 1  1 |     λ² − 2λ = 0  ⟹  λ₁ = 2 ,  λ₂ = 0
+    | 1  1 |
+
+λ=2 :  −x + y = 0  ⟹  q₁ = (1,1)/√2
+λ=0 :   x + y = 0  ⟹  q₂ = (−1,1)/√2
+
+      1  | 1  −1 |
+ Q = ——— |        |      det Q = ½(1+1) = 1  ✓ (e rotație, nu simetrie)
+      √2 | 1   1 |</div>
+      </div>
+
+      <div class="step"><div class="stitle">Mișcarea 3 — substituția</div>
+        <div class="math">x = (x′ − y′)/√2       y = (x′ + y′)/√2
+
+partea pătratică  →  λ₁x′² + λ₂y′² = 2x′²        (automat, nu recalcula)
+
+partea liniară :  2x − 2y = (2/√2)[(x′−y′) − (x′+y′)]
+                          = (2/√2)(−2y′) = −2√2·y′
+
+2x′² − 2√2·y′ = 0      ⟹      y′ = x′²/√2         (parabolă)</div>
+      </div>
+
+      <button class="btn" data-next>Arată pasul următor →</button>
+    </div>
+
+    <div class="ex" data-ex>
+      <p class="label">Acum tu</p>
+      <div class="math">5x² + 4xy + 5y² − 9 = 0</div>
+      <div class="qrow"><label>a₁₂</label><input data-a="2" placeholder="atenție la jumătate"><span class="mark"></span></div>
+      <div class="qrow"><label>δ</label><input data-a="21" placeholder="număr"><span class="mark"></span></div>
+      <div class="qrow"><label>Tipul conicei</label><input data-a="elipsa|elipsă|elipsa." placeholder="un cuvânt"><span class="mark"></span></div>
+      <div class="qrow"><label>Valorile proprii ale lui A</label><input data-a="3,7|3, 7|7,3" placeholder="ex: 1,4"><span class="mark"></span></div>
+      <button class="btn" data-check>Verifică</button>
+      <button class="btn ghost" data-sol>Arată rezolvarea</button>
+      <div class="fb">
+        <div class="math">coeficientul lui xy este 4  ⟹  a₁₂ = 2      (nu 4!)
+a₁₁ = 5 ,  a₂₂ = 5 ,  b₁ = b₂ = 0 ,  c = −9
+
+δ = 5·5 − 2² = 25 − 4 = 21 > 0   ⟹   ELIPSĂ
+
+    | 5  2   0 |
+Δ = | 2  5   0 | = −9·(25−4) = −189 ≠ 0   ⟹  nedegenerată
+    | 0  0  −9 |
+
+A = | 5  2 |    (5−λ)² − 4 = 0  ⟹  5−λ = ±2  ⟹  λ = 3 ,  λ = 7
+    | 2  5 |
+
+nu există parte liniară, deci forma canonică se scrie direct:
+
+3x′² + 7y′² − 9 = 0    ⟹    x′²/3 + y′²/(9/7) = 1</div>
+      </div>
+    </div>
+
+    <div class="traps">
+      <p class="label">Ce te poate costa</p>
+      <ul>
+        <li><code>a₁₂</code> este <strong>jumătate</strong> din coeficientul lui <code>xy</code>. Aceeași regulă pentru <code>b₁</code>, <code>b₂</code>. E singura greșeală care strică toată problema din primul rând.</li>
+        <li><code>det Q</code> trebuie să fie <strong>+1</strong>. Dacă iese −1, inversează cele două coloane.</li>
+        <li>Verificări fără calcul: apare doar <code>x²</code> → parabolă; <code>x²</code> și <code>y²</code> cu semne diferite → hiperbolă; același semn și coeficienți egali → cerc.</li>
+      </ul>
+    </div>
+
+    <button class="btn" data-go="rec">Gata P2, treci la recunoaștere →</button>
+  </div>
+</section>
+
+<!-- ============ RECOGNITION ============ -->
+<section class="mod" id="mod-rec">
+  <div class="card">
+    <h2>Drill de recunoaștere</h2>
+    <p class="sub">Pe lucrare, jumătate din bătălie e să știi în trei secunde din ce tip e problema. Zece enunțuri — apasă tipul.</p>
+    <p class="scorebar" id="score">0 din 10</p>
+    <div id="drills"></div>
+  </div>
+
+  <div class="card">
+    <h3>Ultimul lucru, înainte să dormi</h3>
+    <ol class="moves">
+      <li>Începe lucrarea cu <strong>P4 și P5</strong>. Sunt 40% din subiect și se rezolvă la fel de fiecare dată.</li>
+      <li>Apoi <strong>P1</strong>. Chiar dacă nu termini, baza ortogonală prin Gram–Schmidt se punctează separat.</li>
+      <li><strong>P3</strong>: scrie măcar <code>AᵀA</code> și valorile proprii — sunt pași punctați independent de rezultat.</li>
+      <li><strong>P2</strong> la final: calculează δ și Δ și scrie tipul, chiar dacă nu apuci forma canonică.</li>
+      <li>Scrie fiecare pas. Metoda se punctează separat de răspuns.</li>
+    </ol>
+    <p style="margin-top:16px">Și dormi cele trei ore. Chiar contează.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Antrenor construit din subiectele de examen 2021–2025. Exemplele rezolvate și cele de exercițiu au fost verificate prin calcul.</p>
+  <p>Dacă te blochezi la un pas, întreabă-mă — sunt aici.</p>
+</footer>
+
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* ---------- navigation ---------- */
+  var mods = {}, btns = {};
+  document.querySelectorAll(".mod").forEach(function(m){ mods[m.id.slice(4)] = m; });
+  document.querySelectorAll(".navbtn").forEach(function(b){ btns[b.dataset.go] = b; });
+
+  function go(id){
+    if(!mods[id]) return;
+    for(var k in mods){ mods[k].classList.toggle("on", k === id); }
+    for(var n in btns){ btns[n].setAttribute("aria-current", n === id ? "true" : "false"); }
+    window.scrollTo({top:0, behavior:"instant"});
+    save("last", id);
+  }
+  document.querySelectorAll("[data-go]").forEach(function(el){
+    el.addEventListener("click", function(){ go(el.dataset.go); });
+  });
+
+  /* ---------- storage (best-effort) ---------- */
+  function save(k,v){ try{ localStorage.setItem("algaed:"+k, v); }catch(e){} }
+  function load(k){ try{ return localStorage.getItem("algaed:"+k); }catch(e){ return null; } }
+
+  function markDone(id){
+    if(btns[id]) btns[id].classList.add("done");
+    save("done:"+id, "1");
+  }
+  Object.keys(btns).forEach(function(id){
+    if(load("done:"+id) === "1" && btns[id]) btns[id].classList.add("done");
+  });
+
+  /* ---------- progressive step reveal ---------- */
+  document.querySelectorAll("[data-steps]").forEach(function(box){
+    var steps = box.querySelectorAll(".step");
+    var btn   = box.querySelector("[data-next]");
+    var i = 0;
+    btn.addEventListener("click", function(){
+      if(i < steps.length){
+        steps[i].classList.add("on");
+        i++;
+      }
+      if(i >= steps.length){
+        btn.disabled = true;
+        btn.textContent = "Ai văzut toți pașii — acum fă-o tu, mai jos ↓";
+      } else {
+        btn.textContent = "Arată pasul următor →  (" + i + "/" + steps.length + ")";
+      }
+    });
+  });
+
+  /* ---------- answer checking ---------- */
+  function norm(s){
+    return String(s)
+      .toLowerCase()
+      .replace(/\s+/g, "")
+      .replace(/[·×]/g, "")
+      .replace(/−/g, "-")
+      .replace(/√/g, "sqrt")
+      .replace(/[ăâ]/g, "a").replace(/[îi]/g, "i")
+      .replace(/[șş]/g, "s").replace(/[țţ]/g, "t")
+      .replace(/,(?=\d)/g, ".")
+      .replace(/^\(|\)$/g, "");
+  }
+  function listNorm(s){
+    // compare as an unordered-insensitive but order-preserving token list
+    return norm(s).replace(/[()\[\]]/g, "").split(/[,;]/).filter(Boolean).join(",");
+  }
+  function matches(given, spec){
+    var g1 = norm(given), g2 = listNorm(given);
+    return spec.split("|").some(function(a){
+      return g1 === norm(a) || g2 === listNorm(a);
+    });
+  }
+
+  document.querySelectorAll("[data-ex]").forEach(function(ex){
+    var inputs = ex.querySelectorAll("input[data-a]");
+    var fb     = ex.querySelector(".fb");
+    var mod    = ex.closest(".mod").id.slice(4);
+
+    ex.querySelector("[data-check]").addEventListener("click", function(){
+      var good = 0;
+      inputs.forEach(function(inp){
+        var mark = inp.parentNode.querySelector(".mark");
+        var val  = inp.value.trim();
+        if(!val){ inp.className=""; mark.className="mark"; mark.textContent=""; return; }
+        if(matches(val, inp.dataset.a)){
+          inp.className = "ok"; mark.className = "mark ok"; mark.textContent = "✓"; good++;
+        } else {
+          inp.className = "no"; mark.className = "mark no"; mark.textContent = "✗";
+        }
+      });
+      if(good === inputs.length){
+        fb.classList.add("on");
+        markDone(mod);
+      }
+    });
+
+    ex.querySelector("[data-sol]").addEventListener("click", function(){
+      fb.classList.add("on");
+      markDone(mod);
+    });
+  });
+
+  /* ---------- recognition drill ---------- */
+  var TYPES = ["P1 proiecție","P2 conică","P3 SVD","P4 sistem EDO","P5 EDO ordin 2"];
+  var Q = [
+    ["Determinați soluția problemei Cauchy x″ + 9x = 5, x(0)=0, x′(0)=2.", 4,
+     "O singură ecuație, are x″ și îți dă x(0) ȘI x′(0)."],
+    ["Fie U = Sp{(1,0,2),(2,1,0)} și v=(3,3,3). Determinați pr_U v.", 0,
+     "Un subspațiu generat plus un vector — proiecție, deci Gram–Schmidt."],
+    ["Identificați tipul curbei 4x² − 4xy + y² + 2x = 0 și aduceți-o la forma canonică.", 1,
+     "x², y², xy și cuvântul „forma canonică” — conică."],
+    ["x′ = x + 2y, y′ = 3x, cu x(0)=1, y(0)=0. Reprezentați grafic soluția.", 3,
+     "Două ecuații, x′ și y′, două condiții inițiale — sistem."],
+    ["Fie f: ℝ³→ℝ³ dată de matricea A. Determinați A = UΣVᵀ.", 2,
+     "UΣVᵀ e chiar definiția SVD."],
+    ["Determinați complementul ortogonal al lui W = {(x,y,z,t) | x+y=0, z−t=0}.", 0,
+     "Complement ortogonal — tot familia proiecției."],
+    ["Rezolvați x″ − 5x′ + 6x = e^(2t), x(0)=0, x′(0)=1.", 4,
+     "Ordin 2 — și atenție, aici e rezonanță: 2 e rădăcină, deci x_p = a·t·e^(2t)."],
+    ["Aflați valorile singulare ale matricei A = (1 0; 0 3; 0 0).", 2,
+     "„Valori singulare” = σ = √λ din AᵀA. SVD."],
+    ["Aduceți la forma canonică 9x² + 24xy + 16y² − 10x = 0 și precizați tipul.", 1,
+     "δ = 9·16 − 12² = 0 — parabolă. Atenție, a₁₂ = 12, nu 24."],
+    ["Determinați x(t), y(t) știind că x′ = 4x + 2y, y′ = x + 5y, x(0)=−1, y(0)=2, și dacă soluția taie prima bisectoare.", 3,
+     "Două ecuații cuplate + întrebare despre bisectoare — sistem EDO."]
+  ];
+
+  var host = document.getElementById("drills");
+  var scoreEl = document.getElementById("score");
+  var score = 0, answered = 0;
+
+  Q.forEach(function(q){
+    var d = document.createElement("div");
+    d.className = "drill";
+    var p = document.createElement("p");
+    p.className = "q";
+    p.textContent = q[0];
+    d.appendChild(p);
+
+    var opts = document.createElement("div");
+    opts.className = "opts";
+    var why = document.createElement("p");
+    why.className = "why";
+    var locked = false;
+
+    TYPES.forEach(function(t, idx){
+      var b = document.createElement("button");
+      b.className = "opt";
+      b.type = "button";
+      b.textContent = t;
+      b.addEventListener("click", function(){
+        if(locked) return;
+        locked = true;
+        answered++;
+        if(idx === q[1]){
+          b.classList.add("ok");
+          score++;
+        } else {
+          b.classList.add("no");
+          opts.children[q[1]].classList.add("ok");
+        }
+        why.textContent = q[2];
+        why.classList.add("on");
+        scoreEl.textContent = score + " din " + answered + " (din 10)";
+        if(answered === Q.length) markDone("rec");
+      });
+      opts.appendChild(b);
+    });
+
+    d.appendChild(opts);
+    d.appendChild(why);
+    host.appendChild(d);
+  });
+
+  /* ---------- restore last module ---------- */
+  var last = load("last");
+  if(last && mods[last]) go(last);
+})();
+</script>
+</body>
+</html>
