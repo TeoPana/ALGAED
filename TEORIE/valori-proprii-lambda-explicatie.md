@@ -4,7 +4,7 @@ Notă de teorie, ilustrată cu exemple din `EXERCITII/CANEPA/REZOLVATE/exercitiu
 
 ## Ce e λ
 
-În sistemele de forma $X' = AX$ (unde $A$ e o matrice constantă și $X(t)=\begin{pmatrix}x(t)\\y(t)\end{pmatrix}$), cauți soluții de forma
+În sistemele de forma $X' = AX$ (unde $A$ e o matrice constantă și $X(t)=(x(t),\,y(t))^T$), cauți soluții de forma
 
 $$X(t) = e^{\lambda t} v$$
 
