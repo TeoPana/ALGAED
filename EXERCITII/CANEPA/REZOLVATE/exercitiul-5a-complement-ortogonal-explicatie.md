@@ -22,6 +22,16 @@ Atunci $x_1=-(-2x_3)-3x_3=-x_3$.
 
 Cu $x_3=t$ liber: $(x_1,x_2,x_3)=t\cdot(-1,\,-2,\,1)$.
 
+**De unde vine exact $t\cdot(-1,-2,1)$:** $x_3$ e singura necunoscută nedeterminată, deci îi dai un nume nou, $t$, ca s-o tratezi ca parametru: $x_3=t$. Înlocuiești $t$ înapoi în celelalte două relații ($x_1=-x_3,\ x_2=-2x_3$):
+
+$$x_1=-t,\qquad x_2=-2t,\qquad x_3=t \implies (x_1,x_2,x_3)=(-t,\,-2t,\,t)$$
+
+Scoți $t$ factor comun din fiecare componentă (ca la orice expresie algebrică cu același factor peste tot):
+
+$$(-t,\,-2t,\,t) = t\cdot(-1,\,-2,\,1)$$
+
+Vectorul $(-1,-2,1)$ e „tiparul" fix — orice soluție a sistemului e un multiplu al lui, iar $t$ arată „cât de mult" din tipar iei.
+
 $$U=\mathrm{Sp}\{(1,\,2,\,-1)\}\qquad(\dim U=1)$$
 
 (am scris vectorul înmulțit cu $-1$ față de $(-1,-2,1)$ — e aceeași dreaptă, direcția nu contează la semn.)
