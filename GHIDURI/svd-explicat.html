@@ -1,0 +1,226 @@
+<title>SVD explicat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+:root{
+  --paper:#F4F2EA; --surface:#FFFFFF; --panel:#EAEEEC;
+  --ink:#1B211F; --ink-2:#4E5A56; --ink-3:#7C8985;
+  --rule:#D7DCD6; --rule-soft:#E6EAE4;
+  --teal:#0E6E68; --teal-ink:#0A5450; --teal-soft:#E1F0EE;
+  --rust:#A84A2E; --rust-soft:#F7EAE4;
+  --shadow:0 1px 2px rgba(20,30,28,.06), 0 8px 24px -14px rgba(20,30,28,.22);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#121715; --surface:#181F1C; --panel:#1E2622;
+    --ink:#E7ECE8; --ink-2:#A2ADA7; --ink-3:#77837E;
+    --rule:#2B3531; --rule-soft:#212B27;
+    --teal:#5FC7BE; --teal-ink:#8FDAD2; --teal-soft:#17332F;
+    --rust:#E38B6C; --rust-soft:#2E1E17;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#121715; --surface:#181F1C; --panel:#1E2622;
+  --ink:#E7ECE8; --ink-2:#A2ADA7; --ink-3:#77837E;
+  --rule:#2B3531; --rule-soft:#212B27;
+  --teal:#5FC7BE; --teal-ink:#8FDAD2; --teal-soft:#17332F;
+  --rust:#E38B6C; --rust-soft:#2E1E17;
+  --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -14px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;
+  font-size:16.5px; line-height:1.62; margin:0; padding:0 20px 90px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:740px;margin:0 auto}
+h1,h2,h3{font-family:Fraunces,Georgia,serif; text-wrap:balance; margin:0}
+.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace; font-variant-numeric:tabular-nums}
+.m{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace; font-size:.92em}
+p{margin:0 0 14px}
+p:last-child{margin-bottom:0}
+strong{font-weight:600}
+
+header{padding:46px 0 26px}
+.eyebrow{
+  font-size:12px; font-weight:600; letter-spacing:.13em; text-transform:uppercase;
+  color:var(--teal-ink); margin:0 0 12px;
+}
+h1{font-size:clamp(30px,5.4vw,42px); font-weight:600; line-height:1.08; letter-spacing:-.01em; margin-bottom:14px}
+.standfirst{font-size:17.5px; color:var(--ink-2); max-width:56ch}
+
+/* hero: circle -> ellipse */
+.hero-svg{
+  margin:8px 0 4px; display:flex; align-items:center; justify-content:center;
+  gap:28px; padding:22px 10px; background:var(--surface); border:1px solid var(--rule);
+  border-radius:10px; box-shadow:var(--shadow);
+}
+.hero-svg svg{overflow:visible}
+.hero-label{font-family:"JetBrains Mono"; font-size:12px; color:var(--ink-3); text-align:center; margin-top:6px}
+.hero-arrow{font-size:22px; color:var(--ink-3)}
+
+section{margin:40px 0}
+h2{font-size:24px; font-weight:600; margin-bottom:6px}
+.sub{font-size:14.5px; color:var(--ink-3); font-style:italic; margin-bottom:18px}
+
+.recipe{
+  background:var(--surface); border:1px solid var(--rule); border-radius:10px;
+  padding:20px 22px; box-shadow:var(--shadow);
+}
+ol.moves{margin:0; padding:0; list-style:none; counter-reset:m; display:flex; flex-direction:column; gap:12px}
+ol.moves li{counter-increment:m; position:relative; padding-left:34px; font-size:15.5px}
+ol.moves li::before{
+  content:counter(m); position:absolute; left:0; top:0;
+  width:22px; height:22px; border-radius:50%; background:var(--teal); color:#fff;
+  font-family:"JetBrains Mono"; font-size:12px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+}
+
+.formula{
+  font-family:"JetBrains Mono"; font-size:13.5px; line-height:1.7; white-space:pre;
+  background:var(--panel); border-left:3px solid var(--teal); border-radius:0 8px 8px 0;
+  padding:14px 16px; margin:16px 0; overflow-x:auto;
+}
+
+.worked{border:1px solid var(--rule); border-radius:10px; overflow:hidden; box-shadow:var(--shadow)}
+.worked .given{
+  background:var(--teal-soft); padding:16px 20px; font-size:15px; border-bottom:1px solid var(--rule);
+}
+.worked .given .k{
+  display:block; font-family:"JetBrains Mono"; font-size:11px; text-transform:uppercase; letter-spacing:.08em;
+  color:var(--teal-ink); margin-bottom:6px;
+}
+.step{padding:18px 20px; border-bottom:1px solid var(--rule-soft); background:var(--surface)}
+.step:last-child{border-bottom:none}
+.step h3{font-size:15px; font-weight:600; margin-bottom:8px; color:var(--teal-ink)}
+.step p{font-size:15px}
+.result{
+  background:var(--panel); margin:18px 20px 20px; padding:14px 16px; border-radius:8px;
+  font-family:"JetBrains Mono"; font-size:13.5px; text-align:center; overflow-x:auto;
+}
+
+.traps{
+  border-left:3px solid var(--rust); background:var(--rust-soft); border-radius:0 8px 8px 0;
+  padding:16px 20px; margin-top:16px;
+}
+.traps .k{font-family:"JetBrains Mono"; font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--rust); display:block; margin-bottom:8px}
+.traps ul{margin:0; padding-left:18px}
+.traps li{margin-bottom:6px; font-size:15px}
+.traps li:last-child{margin-bottom:0}
+
+footer{margin-top:52px; padding-top:20px; border-top:1px solid var(--rule); font-size:14px; color:var(--ink-3)}
+footer code{font-family:"JetBrains Mono"; font-size:.92em}
+
+@media(max-width:560px){
+  body{font-size:15.5px; padding:0 14px 70px}
+  .hero-svg{flex-direction:column; gap:10px}
+}
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Geometrie · P3 la examen</span>
+  <h1>SVD e o rotație, o întindere,<br>și încă o rotație</h1>
+  <p class="standfirst">Orice matrice, oricât de urâtă, face mereu același lucru unui cerc: îl rotește, îl întinde pe două direcții perpendiculare, apoi îl mai rotește o dată. Asta e tot ce e <span class="m">A = U·Σ·Vᵀ</span>.</p>
+</header>
+
+<div class="hero-svg">
+  <svg width="120" height="120" viewBox="0 0 120 120">
+    <circle cx="60" cy="60" r="42" fill="none" stroke="currentColor" stroke-width="2" style="color:var(--ink-2)"/>
+    <line x1="60" y1="18" x2="60" y2="102" stroke="var(--rule)" stroke-width="1"/>
+    <line x1="18" y1="60" x2="102" y2="60" stroke="var(--rule)" stroke-width="1"/>
+  </svg>
+  <span class="hero-arrow">→</span>
+  <svg width="150" height="120" viewBox="0 0 150 120">
+    <g transform="translate(75,60) rotate(-24)">
+      <ellipse cx="0" cy="0" rx="58" ry="26" fill="none" stroke="var(--teal)" stroke-width="2.5"/>
+      <line x1="-58" y1="0" x2="58" y2="0" stroke="var(--teal-ink)" stroke-width="1.5"/>
+      <line x1="0" y1="-26" x2="0" y2="26" stroke="var(--teal-ink)" stroke-width="1.5"/>
+      <text x="40" y="-8" font-family="JetBrains Mono" font-size="11" fill="var(--teal-ink)">σ₁</text>
+      <text x="4" y="-18" font-family="JetBrains Mono" font-size="11" fill="var(--teal-ink)">σ₂</text>
+    </g>
+  </svg>
+</div>
+<p class="hero-label">cercul unitate  →  elipsă cu semiaxele σ₁, σ₂ (imaginea lui A)</p>
+
+<section>
+  <h2>Rețeta în trei mișcări</h2>
+  <p class="sub">Funcționează pentru orice matrice A, pătratică sau nu</p>
+  <div class="recipe">
+    <ol class="moves">
+      <li><strong>Calculezi <span class="m">AᵀA</span></strong> și îi afli valorile proprii. Le pui în ordine <strong>descrescătoare</strong> — asta dă ordinea coloanelor lui <span class="m">V</span>.</li>
+      <li><strong><span class="m">σᵢ = √λᵢ</span></strong> — niciodată λᵢ direct. Le pui pe diagonala lui <span class="m">Σ</span>, care are exact forma (m×n) lui <span class="m">A</span>, nu a lui <span class="m">AᵀA</span>.</li>
+      <li><strong><span class="m">uᵢ = (1/σᵢ)·A·vᵢ</span></strong> pentru fiecare σ nenul — asta îți dă coloanele lui <span class="m">U</span>.</li>
+    </ol>
+  </div>
+  <div class="formula">A = U · Σ · Vᵀ
+
+U  (m×m)  ortogonală — bază ortonormată pentru codomeniu
+Σ  (m×n)  diagonală, σ₁ ≥ σ₂ ≥ ... ≥ 0
+V  (n×n)  ortogonală — bază ortonormată pentru domeniu, din vectorii proprii ai AᵀA</div>
+</section>
+
+<section>
+  <h2>Rezolvată — exercițiul 1(d)</h2>
+  <p class="sub">O matrice 2×3, cu trei valori singulare distincte, una zero — cazul cel mai complet</p>
+
+  <div class="worked">
+    <div class="given">
+      <span class="k">Enunț</span>
+      A are liniile (3, 2, 2) și (2, 3, −2). Determinați descompunerea SVD.
+    </div>
+
+    <div class="step">
+      <h3>1 · AᵀA și polinomul caracteristic</h3>
+      <div class="formula">AᵀA = ⎛ 13  12   2 ⎞
+      ⎜ 12  13  −2 ⎟
+      ⎝  2  −2   8 ⎠
+
+det(AᵀA − λI) = −λ³ + 34λ² − 225λ = −λ(λ² − 34λ + 225)
+
+λ = 0   sau   λ = (34 ± √(1156−900))/2 = (34 ± 16)/2</div>
+      <p><strong>λ₁ = 25, λ₂ = 9, λ₃ = 0</strong> — verificare gratuită: suma = urma lui AᵀA = 13+13+8 = 34 ✓</p>
+    </div>
+
+    <div class="step">
+      <h3>2 · vectorii proprii → coloanele lui V</h3>
+      <p>Pentru fiecare λ rezolvi <span class="m">(AᵀA − λI)v = 0</span> și normalizezi. Pentru λ=0, e chiar Ker(A) — nucleul lui A, nu al lui AᵀA (coincid pentru matrice reale).</p>
+      <div class="formula">v₁ = (1/√2, 1/√2, 0)ᵀ         — pentru λ=25
+v₂ = (1/3√2, −1/3√2, 4/3√2)ᵀ  — pentru λ=9
+v₃ = (−2/3, 2/3, 1/3)ᵀ        — pentru λ=0, din Ker(A)</div>
+    </div>
+
+    <div class="step">
+      <h3>3 · σ, apoi U din u_i = A v_i / σ_i</h3>
+      <div class="formula">σ₁=√25=5,  σ₂=√9=3,  σ₃=√0=0
+
+u₁ = (1/5)·Av₁ = (1/√2, 1/√2)ᵀ
+u₂ = (1/3)·Av₂ = (−1/√2, 1/√2)ᵀ</div>
+      <p>Doar 2 coloane pentru U — A are 2 linii, deci U e deja 2×2 completă, fără să mai fie nevoie de a treia coloană.</p>
+    </div>
+
+    <div class="result">A = U Σ Vᵀ,  Σ = diag(5, 3, 0)  (formă 2×3, cu o coloană de zero)</div>
+  </div>
+
+  <div class="traps">
+    <span class="k">Ce te poate costa</span>
+    <ul>
+      <li><span class="m">σ = √λ</span>, niciodată λ direct — cea mai frecventă greșeală de pe subiect.</li>
+      <li><span class="m">Σ</span> are forma lui <span class="m">A</span> (m×n), nu a lui <span class="m">AᵀA</span> (n×n) — dacă <span class="m">A</span> nu e pătratică, <span class="m">Σ</span> are un rând sau o coloană întreagă de zero.</li>
+      <li>Coloanele lui <span class="m">V</span> se ordonează <strong>descrescător</strong> după λ — schimbă ordinea și <span class="m">Σ</span> nu mai corespunde cu <span class="m">U</span>.</li>
+      <li>λ=0 înseamnă <span class="m">A</span> nu are rang complet — vectorul propriu corespunzător vine din <span class="m">Ker(A)</span>, nu din formula <span class="m">uᵢ=Avᵢ/σᵢ</span> (care ar împărți la zero).</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Sursă completă cu toți pașii intermediari: <code>EXERCITII/CANEPA/REZOLVATE/exercitiul-1d-svd-explicatie.md</code>. Vezi și tipul P3 din <code>GHIDURI/cram-algaed.html</code>.</p>
+</footer>
+
+</div>

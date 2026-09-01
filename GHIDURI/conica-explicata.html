@@ -1,0 +1,231 @@
+<title>Conica explicată</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+:root{
+  --paper:#F3F1E9; --surface:#FFFFFF; --panel:#ECEEF1;
+  --ink:#1C2027; --ink-2:#4E5461; --ink-3:#7A8290;
+  --rule:#D9DCE2; --rule-soft:#E7E9ED;
+  --blue:#2E4C7C; --blue-ink:#233B62; --blue-soft:#E6ECF5;
+  --amber:#B0701E; --amber-soft:#F7EEDD;
+  --shadow:0 1px 2px rgba(20,24,30,.06), 0 8px 24px -14px rgba(20,24,30,.22);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#12151B; --surface:#171B23; --panel:#1E232C;
+    --ink:#E7E9EE; --ink-2:#A2A9B6; --ink-3:#767F8D;
+    --rule:#2A3038; --rule-soft:#20252D;
+    --blue:#7FA3E0; --blue-ink:#A6C1EC; --blue-soft:#182640;
+    --amber:#D9A253; --amber-soft:#2B2114;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#12151B; --surface:#171B23; --panel:#1E232C;
+  --ink:#E7E9EE; --ink-2:#A2A9B6; --ink-3:#767F8D;
+  --rule:#2A3038; --rule-soft:#20252D;
+  --blue:#7FA3E0; --blue-ink:#A6C1EC; --blue-soft:#182640;
+  --amber:#D9A253; --amber-soft:#2B2114;
+  --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -14px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;
+  font-size:16.5px; line-height:1.62; margin:0; padding:0 20px 90px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:740px;margin:0 auto}
+h1,h2,h3{font-family:Spectral,Georgia,serif; text-wrap:balance; margin:0}
+.mono{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace; font-variant-numeric:tabular-nums}
+.m{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace; font-size:.92em}
+p{margin:0 0 14px}
+p:last-child{margin-bottom:0}
+strong{font-weight:600}
+
+header{padding:46px 0 26px}
+.eyebrow{font-size:12px; font-weight:600; letter-spacing:.13em; text-transform:uppercase; color:var(--blue-ink); margin:0 0 12px}
+h1{font-size:clamp(30px,5.4vw,42px); font-weight:600; line-height:1.1; letter-spacing:-.008em; margin-bottom:14px}
+.standfirst{font-size:17.5px; color:var(--ink-2); max-width:58ch}
+
+/* blueprint diagram */
+.blueprint{
+  margin:8px 0 4px; padding:22px; background:#152A4A; border-radius:10px; box-shadow:var(--shadow);
+  display:flex; align-items:center; justify-content:center;
+}
+.blueprint svg{overflow:visible}
+.bp-caption{font-family:"JetBrains Mono"; font-size:12px; color:var(--ink-3); text-align:center; margin-top:8px}
+
+section{margin:40px 0}
+h2{font-size:24px; font-weight:600; margin-bottom:6px}
+.sub{font-size:14.5px; color:var(--ink-3); font-style:italic; margin-bottom:18px}
+
+.shortcut{
+  border:1.5px solid var(--blue); background:var(--blue-soft); border-radius:10px;
+  padding:18px 20px; margin-bottom:20px;
+}
+.shortcut .k{font-family:"JetBrains Mono"; font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--blue-ink); display:block; margin-bottom:8px}
+.shortcut .formula{background:transparent; border:none; padding:0; margin:8px 0}
+.shortcut p{font-size:14.5px; color:var(--ink-2)}
+
+.recipe{background:var(--surface); border:1px solid var(--rule); border-radius:10px; padding:20px 22px; box-shadow:var(--shadow)}
+ol.moves{margin:0; padding:0; list-style:none; counter-reset:m; display:flex; flex-direction:column; gap:12px}
+ol.moves li{counter-increment:m; position:relative; padding-left:34px; font-size:15.5px}
+ol.moves li::before{
+  content:counter(m); position:absolute; left:0; top:0;
+  width:22px; height:22px; border-radius:50%; background:var(--blue); color:#fff;
+  font-family:"JetBrains Mono"; font-size:12px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+}
+
+.formula{
+  font-family:"JetBrains Mono"; font-size:13.5px; line-height:1.7; white-space:pre;
+  background:var(--panel); border-left:3px solid var(--blue); border-radius:0 8px 8px 0;
+  padding:14px 16px; margin:16px 0; overflow-x:auto;
+}
+
+.worked{border:1px solid var(--rule); border-radius:10px; overflow:hidden; box-shadow:var(--shadow)}
+.worked .given{background:var(--blue-soft); padding:16px 20px; font-size:15px; border-bottom:1px solid var(--rule)}
+.worked .given .k{display:block; font-family:"JetBrains Mono"; font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--blue-ink); margin-bottom:6px}
+.step{padding:18px 20px; border-bottom:1px solid var(--rule-soft); background:var(--surface)}
+.step:last-child{border-bottom:none}
+.step h3{font-size:15px; font-weight:600; margin-bottom:8px; color:var(--blue-ink)}
+.step p{font-size:15px}
+.result{background:var(--panel); margin:18px 20px 20px; padding:14px 16px; border-radius:8px; font-family:"JetBrains Mono"; font-size:13.5px; text-align:center; overflow-x:auto}
+
+.traps{border-left:3px solid var(--amber); background:var(--amber-soft); border-radius:0 8px 8px 0; padding:16px 20px; margin-top:16px}
+.traps .k{font-family:"JetBrains Mono"; font-size:11px; text-transform:uppercase; letter-spacing:.08em; color:var(--amber); display:block; margin-bottom:8px}
+.traps ul{margin:0; padding-left:18px}
+.traps li{margin-bottom:6px; font-size:15px}
+.traps li:last-child{margin-bottom:0}
+
+footer{margin-top:52px; padding-top:20px; border-top:1px solid var(--rule); font-size:14px; color:var(--ink-3)}
+footer code{font-family:"JetBrains Mono"; font-size:.92em}
+
+@media(max-width:560px){
+  body{font-size:15.5px; padding:0 14px 70px}
+}
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Geometrie analitică · P2 la examen</span>
+  <h1>O conică urâtă e doar<br>o elipsă rotită și mutată</h1>
+  <p class="standfirst">Orice <span class="m">ax²+2bxy+cy²+2dx+2ey+f=0</span> e, sub forma finală, doar un cerc sau o elipsă/hiperbolă/parabolă simplă, privite dintr-un sistem de axe rotit și translatat. Rețeta e mereu: rotești ca să scapi de xy, apoi translatezi ca să scapi de partea liniară.</p>
+</header>
+
+<div class="blueprint">
+  <svg width="280" height="170" viewBox="0 0 280 170">
+    <g stroke="#5B87C2" stroke-width="1" opacity="0.35">
+      <line x1="0" y1="0" x2="0" y2="170"/><line x1="28" y1="0" x2="28" y2="170"/><line x1="56" y1="0" x2="56" y2="170"/><line x1="84" y1="0" x2="84" y2="170"/><line x1="112" y1="0" x2="112" y2="170"/><line x1="140" y1="0" x2="140" y2="170"/><line x1="168" y1="0" x2="168" y2="170"/><line x1="196" y1="0" x2="196" y2="170"/><line x1="224" y1="0" x2="224" y2="170"/><line x1="252" y1="0" x2="252" y2="170"/><line x1="280" y1="0" x2="280" y2="170"/>
+      <line x1="0" y1="0" x2="280" y2="0"/><line x1="0" y1="34" x2="280" y2="34"/><line x1="0" y1="68" x2="280" y2="68"/><line x1="0" y1="102" x2="280" y2="102"/><line x1="0" y1="136" x2="280" y2="136"/><line x1="0" y1="170" x2="280" y2="170"/>
+    </g>
+    <g transform="translate(60,85)" stroke="#8FB0DE" stroke-width="1.2" fill="none">
+      <line x1="-40" y1="0" x2="40" y2="0"/><line x1="0" y1="-40" x2="0" y2="40"/>
+    </g>
+    <text x="14" y="52" font-family="JetBrains Mono" font-size="11" fill="#8FB0DE">x, y</text>
+    <g transform="translate(60,85) rotate(-33)" stroke="#C9DCF4" stroke-width="1.3" fill="none">
+      <line x1="-46" y1="0" x2="46" y2="0"/><line x1="0" y1="-46" x2="0" y2="46"/>
+    </g>
+    <text x="96" y="46" font-family="JetBrains Mono" font-size="11" fill="#C9DCF4">x', y'</text>
+    <g transform="translate(190,60) rotate(-33)">
+      <ellipse cx="0" cy="0" rx="60" ry="18" fill="none" stroke="#F2C177" stroke-width="2.2"/>
+      <line x1="-60" y1="0" x2="60" y2="0" stroke="#F2C177" stroke-width="1"/>
+      <line x1="0" y1="-18" x2="0" y2="18" stroke="#F2C177" stroke-width="1"/>
+    </g>
+    <text x="205" y="30" font-family="JetBrains Mono" font-size="11" fill="#F2C177">x'', y''</text>
+  </svg>
+</div>
+<p class="bp-caption">axele originale (x,y) → rotite (x',y') → translatate în centrul elipsei (x'',y'')</p>
+
+<section>
+  <h2>Verificarea de 30 de secunde, înainte de orice calcul</h2>
+  <div class="shortcut">
+    <span class="k">δ îți dă tipul, gratuit</span>
+    <div class="formula">ax² + 2bxy + cy² + 2dx + 2ey + f = 0
+                  ↑ atenție: b = jumătate din coeficientul lui xy
+                             d, e = jumătate din coeficienții lui x, y
+
+δ = ac − b²        δ&gt;0 elipsă  ·  δ=0 parabolă  ·  δ&lt;0 hiperbolă</div>
+    <p>Scrii tipul din prima secundă — chiar dacă rămâi blocat la forma canonică, ai deja punctajul pentru identificarea tipului.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Rețeta completă, în trei mișcări</h2>
+  <p class="sub">Pentru cazul cu termeni liniari — dacă nu sunt, te oprești după mișcarea 2</p>
+  <div class="recipe">
+    <ol class="moves">
+      <li><strong>Matricea formei pătratice</strong> <span class="m">A = (a b; b c)</span>, valorile și vectorii proprii λ₁,λ₂ — asta e rotația.</li>
+      <li><strong>Substitui</strong> <span class="m">(x,y)ᵀ = P(x',y')ᵀ</span> cu <span class="m">P</span> formată din vectorii proprii normalizați (<span class="m">det P = +1</span>). Partea pătratică devine automat <span class="m">λ₁x'² + λ₂y'²</span>; partea liniară trebuie efectiv înlocuită.</li>
+      <li><strong>Completezi pătratul</strong> pe fiecare variabilă care mai are termen liniar — asta e translația care mută originea în centrul conicei.</li>
+    </ol>
+  </div>
+</section>
+
+<section>
+  <h2>Rezolvată — exercițiul 6(a)</h2>
+  <p class="sub">Cazul complet: are și xy (rotație), și termeni liniari (și translație)</p>
+
+  <div class="worked">
+    <div class="given">
+      <span class="k">Enunț</span>
+      5x² + 12xy + 10y² − 6x + 4y − 1 = 0. Identificați tipul și aduceți la forma canonică.
+    </div>
+
+    <div class="step">
+      <h3>1 · matricea, spectrul, tipul</h3>
+      <div class="formula">a₁₂ = 12/2 = 6      A = ⎛ 5  6 ⎞
+                          ⎝ 6  10 ⎠
+
+δ = 5·10 − 6² = 14 &gt; 0  →  ELIPSĂ (deja știi asta acum)
+
+(5−λ)(10−λ)−36 = λ²−15λ+14 = (λ−1)(λ−14)
+λ₁ = 1,  λ₂ = 14</div>
+      <p>Vectori proprii normalizați: <span class="m">v₁=(3,−2)ᵀ/√13</span> pentru λ=1; <span class="m">v₂=(2,3)ᵀ/√13</span> pentru λ=14. <span class="m">det P = 1</span> ✓ (rotație, nu simetrie).</p>
+    </div>
+
+    <div class="step">
+      <h3>2 · substituția — partea liniară nu vine gratis</h3>
+      <div class="formula">x = (3x'+2y')/√13,   y = (−2x'+3y')/√13
+
+partea pătratică  →  x'² + 14y'²           (automat, din λ₁, λ₂)
+
+−6x+4y = [(−18x'−12y')+(−8x'+12y')]/√13 = −26x'/√13 = −2√13·x'
+                                            ↑ termenul în y' dispare complet
+
+x'² + 14y'² − 2√13·x' − 1 = 0</div>
+    </div>
+
+    <div class="step">
+      <h3>3 · completarea pătratului (translația)</h3>
+      <div class="formula">x'² − 2√13·x' = (x'−√13)² − 13
+
+(x'−√13)² + 14y'² − 14 = 0
+
+x''=x'−√13, y''=y'  →  x''² + 14y''² = 14</div>
+    </div>
+
+    <div class="result">x''²/14 + y''²/1 = 1  —  elipsă cu semiaxele √14 și 1</div>
+  </div>
+
+  <div class="traps">
+    <span class="k">Ce te poate costa</span>
+    <ul>
+      <li><span class="m">b</span> (coeficientul din matrice) e <strong>jumătate</strong> din coeficientul lui xy din enunț — la fel pentru d,e față de coeficienții lui x,y. Cea mai frecventă greșeală, strică tot calculul din primul rând.</li>
+      <li><span class="m">det P</span> trebuie să fie <strong>+1</strong>, nu −1 — dacă iese −1, schimbi ordinea celor două coloane ale lui <span class="m">P</span>.</li>
+      <li>Dacă după substituție un termen liniar <strong>dispare complet</strong> (ca y' aici), nu e o coincidență — arată că ai orientat corect axele pe direcția de simetrie a conicei.</li>
+      <li>Dacă nu apare deloc parte liniară (d=e=0 direct din enunț), te oprești după mișcarea 2 — nu mai ai ce translata.</li>
+    </ul>
+  </div>
+</section>
+
+<footer>
+  <p>Sursă completă cu toți pașii intermediari: <code>EXERCITII/CANEPA/REZOLVATE/exercitiul-6a-conica-explicatie.md</code>. Vezi și tipul P2 din <code>GHIDURI/cram-algaed.html</code>.</p>
+</footer>
+
+</div>
