@@ -26,6 +26,24 @@ $$U=\mathrm{Sp}\{(1,\,2,\,-1)\}\qquad(\dim U=1)$$
 
 (am scris vectorul înmulțit cu $-1$ față de $(-1,-2,1)$ — e aceeași dreaptă, direcția nu contează la semn.)
 
+### De unde vine dimensiunea (de ce $\dim U=1$, nu $2$ sau $3$)
+
+Două moduri de-a vedea aceeași dimensiune — unul din **teoremă**, altul direct din **soluție**.
+
+**1. Din teorema rangului (teorema rang-nulitate):**
+
+$$\dim(\mathrm{Ker}(A)) = n - \mathrm{rang}(A)$$
+
+unde $n$ = numărul de **necunoscute** ($x_1,x_2,x_3$, deci $n=3$), iar $\mathrm{rang}(A)$ = numărul de **ecuații independente** (nu numărul de ecuații scrise în enunț). Am arătat mai sus că a treia ecuație se anulează identic când o exprimi din primele două — deci din cele 3 ecuații, doar **2 sunt independente** → $\mathrm{rang}(A)=2$.
+
+$$\dim U = n-\mathrm{rang}(A) = 3-2 = 1$$
+
+**2. Direct din soluție (mai intuitiv):** ai ajuns la $(x_1,x_2,x_3) = t\cdot(-1,-2,1)$ cu $t\in\mathbb{R}$ liber — orice soluție e un multiplu al **aceluiași** vector fix. Nu ai două direcții independente, ai o singură direcție, parametrizată de un singur număr real $t$.
+
+Dimensiunea unui subspațiu = **numărul de parametri liberi independenți** de care ai nevoie ca să descrii orice element al lui. Aici ai un singur parametru ($t$) → $\dim U=1$.
+
+**Regula generală de reținut:** numărul de necunoscute libere care rămân după ce rezolvi sistemul (aici doar $x_3=t$, pe când $x_1,x_2$ sunt determinate în funcție de $t$) = dimensiunea subspațiului soluțiilor. Dacă ar fi rămas 2 necunoscute libere, ai fi avut $\dim U=2$ (un plan, generat de 2 vectori), nu o dreaptă.
+
 ## Mișcarea 2 — complementul ortogonal, din rândurile lui A (nu din calcul direct)
 
 **Teorema care scurtează totul:** dacă $U=\mathrm{Ker}(A)$, atunci $U^\perp = \mathrm{Im}(A^T)$ — adică $U^\perp$ e chiar **spațiul generat de rândurile lui $A$**. Are sens intuitiv: $x\in\mathrm{Ker}(A)$ înseamnă că $x$ e perpendicular pe fiecare rând al lui $A$ (din $Ax=0$, fiecare linie e un produs scalar rând·$x=0$) — deci rândurile lui $A$ sunt automat în $U^\perp$, și cum $\dim U + \dim U^\perp = 3$, ele îl generează complet.
