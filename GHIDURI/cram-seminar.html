@@ -1,0 +1,231 @@
+<title>Cram Seminar ALGAED</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+:root{
+  --paper:#F0F3EE; --surface:#FFFFFF; --panel:#E6ECE3;
+  --ink:#1E2620; --ink-2:#4E594B; --ink-3:#7C8778;
+  --rule:#D3DCCE; --rule-soft:#E2E9DD;
+  --green:#3D6B4C; --green-ink:#2C4E38; --green-soft:#E4EFE6;
+  --amber:#A8761A; --amber-soft:#F5EDD8;
+  --red:#A3402E; --red-soft:#F6E6E1;
+  --shadow:0 1px 2px rgba(30,38,32,.07), 0 8px 22px -14px rgba(30,38,32,.25);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#11150F; --surface:#171C14; --panel:#1E251A;
+    --ink:#E7EDE2; --ink-2:#A8B4A0; --ink-3:#7C8878;
+    --rule:#2B331F; --rule-soft:#212A18;
+    --green:#82C398; --green-ink:#A6DAB5; --green-soft:#1A2A1F;
+    --amber:#DDB25E; --amber-soft:#2A2213;
+    --red:#E08C77; --red-soft:#2C1B16;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#11150F; --surface:#171C14; --panel:#1E251A;
+  --ink:#E7EDE2; --ink-2:#A8B4A0; --ink-3:#7C8878;
+  --rule:#2B331F; --rule-soft:#212A18;
+  --green:#82C398; --green-ink:#A6DAB5; --green-soft:#1A2A1F;
+  --amber:#DDB25E; --amber-soft:#2A2213;
+  --red:#E08C77; --red-soft:#2C1B16;
+  --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -14px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;
+  font-size:16.5px; line-height:1.62; margin:0; padding:0 20px 90px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto}
+h1,h2,h3{font-family:Lora,Georgia,serif; text-wrap:balance; margin:0}
+.m{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace; font-size:.92em}
+p{margin:0 0 14px}
+p:last-child{margin-bottom:0}
+strong{font-weight:600}
+
+header{padding:44px 0 24px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--green-ink);margin:0 0 12px}
+h1{font-size:clamp(29px,5.2vw,40px);font-weight:600;line-height:1.1;letter-spacing:-.008em;margin-bottom:14px}
+.standfirst{font-size:17px;color:var(--ink-2);max-width:60ch}
+
+nav.toc{
+  display:flex; flex-wrap:wrap; gap:8px; margin:22px 0 6px;
+  padding:16px; background:var(--surface); border:1px solid var(--rule); border-radius:10px; box-shadow:var(--shadow);
+}
+nav.toc a{
+  font-family:"JetBrains Mono"; font-size:12px; color:var(--green-ink); text-decoration:none;
+  padding:5px 9px; border:1px solid var(--rule); border-radius:6px; background:var(--panel);
+}
+nav.toc a:hover{border-color:var(--green)}
+
+section{margin:40px 0}
+.modnum{font-family:"JetBrains Mono"; font-size:12px; font-weight:700; letter-spacing:.06em; color:var(--green); text-transform:uppercase}
+h2{font-size:22px;font-weight:600;margin:6px 0 4px}
+.sub{font-size:14px;color:var(--ink-3);font-style:italic;margin-bottom:14px}
+
+.recipe{background:var(--surface); border:1px solid var(--rule); border-radius:10px; padding:16px 18px; box-shadow:var(--shadow)}
+ol.moves{margin:0; padding:0; list-style:none; counter-reset:m; display:flex; flex-direction:column; gap:9px}
+ol.moves li{counter-increment:m; position:relative; padding-left:30px; font-size:14.5px}
+ol.moves li::before{
+  content:counter(m); position:absolute; left:0; top:0;
+  width:20px; height:20px; border-radius:50%; background:var(--green); color:#fff;
+  font-family:"JetBrains Mono"; font-size:11px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+}
+
+.ex{margin-top:12px; padding:12px 15px; background:var(--panel); border-radius:8px; border-left:3px solid var(--green)}
+.ex .k{display:block; font-family:"JetBrains Mono"; font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--green-ink); margin-bottom:5px}
+.ex p{font-size:14px}
+
+.formula{
+  font-family:"JetBrains Mono"; font-size:12.5px; line-height:1.6; white-space:pre-wrap;
+  background:var(--panel); border-left:3px solid var(--green); border-radius:0 8px 8px 0;
+  padding:11px 14px; margin:10px 0; overflow-x:auto;
+}
+
+.trap{border-left:3px solid var(--red); background:var(--red-soft); border-radius:0 8px 8px 0; padding:10px 14px; margin-top:10px; font-size:14px}
+.trap .k{display:block; font-family:"JetBrains Mono"; font-size:10px; text-transform:uppercase; letter-spacing:.08em; color:var(--red); margin-bottom:4px}
+
+.ref{margin-top:10px; font-size:13.5px; color:var(--ink-3)}
+.ref code{font-family:"JetBrains Mono"; font-size:.92em}
+
+.divider{margin:56px 0 40px; padding-top:24px; border-top:2px solid var(--rule); text-align:center}
+.divider span{font-family:"JetBrains Mono"; font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--amber); background:var(--paper); padding:0 12px}
+
+footer{margin-top:52px; padding-top:20px; border-top:1px solid var(--rule); font-size:14px; color:var(--ink-3)}
+footer code{font-family:"JetBrains Mono"; font-size:.9em}
+
+@media(max-width:560px){ body{font-size:15.5px; padding:0 14px 70px} }
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Cram · materia de seminar</span>
+  <h1>Toate cele 9 seminarii, pe scurt</h1>
+  <p class="standfirst">Ordinea exactă a seminariilor (Alg_sem_1 → Alg_sem_9). Fiecare modul are rețeta + un exemplu verificat; unde subiectul e deja tratat pe larg în altă parte, link direct în loc să repet.</p>
+</header>
+
+<nav class="toc">
+  <a href="#s1">1 · Geometrie plană</a>
+  <a href="#s2">2 · Vectori 3D</a>
+  <a href="#s3">3 · Gauss</a>
+  <a href="#s4">4 · Spații vect.</a>
+  <a href="#s5">5 · Grassmann</a>
+  <a href="#s6">6 · Apl. liniare</a>
+  <a href="#s7">7 · Val. proprii</a>
+  <a href="#s8">8 · Diag. inversă</a>
+  <a href="#s9">9 · Recapitulare</a>
+</nav>
+
+<section id="s1">
+  <span class="modnum">Seminar 1</span>
+  <h2>Geometrie plană — conice și ecuații de drepte</h2>
+  <div class="recipe">
+    <p><strong>Drepte în plan:</strong> prin 2 puncte, panta <span class="m">m=(y₂−y₁)/(x₂−x₁)</span>, ecuația <span class="m">y−y₁=m(x−x₁)</span>. Prin punct + vector director <span class="m">(a,b)</span>: <span class="m">(x−x₀)/a=(y−y₀)/b</span>. Prin punct + normală <span class="m">(a,b)</span>: <span class="m">a(x−x₀)+b(y−y₀)=0</span>.</p>
+    <div class="formula">Cerc:     (x−a)² + (y−b)² = r²           centru (a,b), rază r
+Elipsă:   x²/a² + y²/b² = 1              semiaxe a, b
+Hiperbolă: x²/a² − y²/b² = 1
+Parabolă:  y² = 2px  (sau x² = 2py)</div>
+    <div class="ex"><span class="k">Exemplu verificat</span><p>Dreapta prin (1,2) și (3,6): panta = (6−2)/(3−1) = 2 → y−2=2(x−1) → y=2x. Verific: (1,2)→2·1=2 ✓; (3,6)→2·3=6 ✓.</p></div>
+  </div>
+</section>
+
+<section id="s2">
+  <span class="modnum">Seminar 2</span>
+  <h2>Vectori în spațiu — produs scalar, produs vectorial</h2>
+  <div class="recipe">
+    <div class="formula">⟨a,b⟩ = a₁b₁+a₂b₂+a₃b₃         cos θ = ⟨a,b⟩ / (‖a‖·‖b‖)
+a×b = (a₂b₃−a₃b₂, a₃b₁−a₁b₃, a₁b₂−a₂b₁)     ‖a×b‖ = aria paralelogramului</div>
+    <p class="ref">Aplicat complet (plan mediator, proiecție, arie triunghi) în <code>TEORIE/geometrie-analitica-plan-dreapta.md</code> și <code>TEORIE/proiectie-simetric-dreapta-plan.md</code>.</p>
+  </div>
+</section>
+
+<section id="s3">
+  <span class="modnum">Seminar 3</span>
+  <h2>Algoritmul Gauss / Gauss-Jordan — sisteme, inversă, subspațiu</h2>
+  <div class="recipe">
+    <ol class="moves">
+      <li><strong>Pentru sisteme:</strong> aduci matricea extinsă la formă eșalon (Gauss) sau la formă redusă (Gauss-Jordan) prin operații pe linii: schimbare de linii, înmulțire cu scalar nenul, adunarea unui multiplu de linie la altă linie.</li>
+      <li><strong>Pentru inversă:</strong> augmentezi <span class="m">[A | I]</span>, aplici Gauss-Jordan până obții <span class="m">[I | A⁻¹]</span> pe partea stângă.</li>
+      <li><strong>Pentru verificat dacă e subspațiu:</strong> vezi rețeta completă din <code>TEORIE/spatii-vectoriale-subspatii-baza.md</code> (3 condiții din axiome).</li>
+    </ol>
+    <div class="ex"><span class="k">Exemplu verificat — inversă 2×2</span><p>A cu liniile (2,1),(1,1): det=2·1−1·1=1. Formula directă (echivalentă cu Gauss-Jordan pe 2×2): A⁻¹ = (1/det)·[liniile (d,−b),(−c,a)] = liniile (1,−1),(−1,2). Verificare: A·A⁻¹ dă liniile (2−1,−2+2)=(1,0) și (1−1,−1+2)=(0,1) — adică I ✓.</p></div>
+    <div class="trap"><span class="k">Capcană</span>Gauss-Jordan pe matrice nesingulară dă mereu identitatea pe partea stângă — dacă la un moment dat obții o linie de zero pe partea stângă, matricea NU e inversabilă, oprești calculul.</div>
+  </div>
+</section>
+
+<section id="s4">
+  <span class="modnum">Seminar 4</span>
+  <h2>Spații vectoriale — bază, dimensiune, independență</h2>
+  <div class="recipe">
+    <p>Rețetă completă (verificare din axiome, extragere bază dintr-un sistem dependent, coordonate, completare la bază) în <code>TEORIE/spatii-vectoriale-subspatii-baza.md</code> — inclusiv exemplul cu polinoame <span class="m">R≤3[X]</span>.</p>
+  </div>
+</section>
+
+<section id="s5">
+  <span class="modnum">Seminar 5</span>
+  <h2>Subspații generate — sumă, intersecție, formula lui Grassmann</h2>
+  <div class="recipe">
+    <div class="formula">U+V = {u+v | u∈U, v∈V}        (cel mai mic subspațiu ce conține U∪V)
+U∩V = {x | x∈U și x∈V}
+
+Formula lui Grassmann:  dim(U+V) = dim U + dim V − dim(U∩V)</div>
+    <div class="ex">
+      <span class="k">Exemplu verificat</span>
+      <p>În R³: U = planul xy = Sp((1,0,0),(0,1,0)), dim U=2. V = planul yz = Sp((0,1,0),(0,0,1)), dim V=2.</p>
+      <p>U∩V: un vector din ambele plane are forma (x,y,0) ȘI (0,y',z') simultan → x=0, z=0 → U∩V = Sp((0,1,0)), dim=1.</p>
+      <p>U+V = R³ (cele două plane împreună generează tot spațiul), dim(U+V)=3.</p>
+      <p>Verificare Grassmann: 2+2−1 = 3 ✓.</p>
+    </div>
+    <div class="trap"><span class="k">Capcană</span>Grassmann dă doar DIMENSIUNEA lui U+V, nu o bază explicită — pentru bază, iei reuniunea bazelor lui U și V și extragi o bază din ea (rețeta de la seminar 4).</div>
+  </div>
+</section>
+
+<section id="s6">
+  <span class="modnum">Seminar 6</span>
+  <h2>Aplicații liniare — Ker, Im, matrice asociată</h2>
+  <div class="recipe">
+    <p>Rețetă completă (verificarea liniarității, matricea din baza canonică, Ker/Im, injectivitate/surjectivitate) în <code>TEORIE/aplicatii-liniare-recunoastere-ker-im.md</code>; varianta cu domeniul spațiu de matrice, în <code>TEORIE/aplicatii-liniare-pe-matrice.md</code>.</p>
+  </div>
+</section>
+
+<section id="s7">
+  <span class="modnum">Seminar 7</span>
+  <h2>Valori/vectori proprii, diagonalizare, Cayley-Hamilton</h2>
+  <div class="recipe">
+    <p>Ce înseamnă λ și cum schimbă forma soluției, în <code>TEORIE/valori-proprii-lambda-explicatie.md</code>. Calculul lui A⁻¹ prin Cayley-Hamilton (fără Gauss), în <code>TEORIE/cayley-hamilton-diagonalizare-inversa.md</code>.</p>
+    <div class="formula">Teorema Cayley-Hamilton:  P_A(A) = 0   (orice matrice verifică propriul polinom caracteristic)</div>
+  </div>
+</section>
+
+<section id="s8">
+  <span class="modnum">Seminar 8</span>
+  <h2>Diagonalizare "inversă" — dat Aⁿ, găsești A</h2>
+  <div class="recipe">
+    <p>Rețetă completă (vectorii proprii rămân aceiași, doar valorile proprii se "de-ridică la putere") în <code>TEORIE/cayley-hamilton-diagonalizare-inversa.md</code>, rețeta 2.</p>
+    <div class="trap"><span class="k">Capcană</span>Dacă n e par, extragerea rădăcinii de ordin n are ambiguitate de semn — verifică dacă enunțul dă o condiție suplimentară (ex. valori proprii pozitive) care fixează soluția unică.</div>
+  </div>
+</section>
+
+<div class="divider"><span>Recapitulare</span></div>
+
+<section id="s9">
+  <span class="modnum">Seminar 9</span>
+  <h2>Recapitulare parțial — tot ce apare împreună</h2>
+  <div class="recipe">
+    <p>Seminarul 9 e explicit recapitulare pentru parțial — combină plane paralele/perpendiculare, intersecție subspații, independență liniară de funcții, și o aplicație liniară completă cu Ker/Im/injectivitate/surjectivitate, toate într-un singur subiect tip.</p>
+    <p><strong>Asta e exact structura ghidului dedicat de parțial — vezi <code>GHIDURI/cram-partial.html</code></strong> pentru cele 4 tipuri de subiecte în ordinea frecvenței lor reale la examen, cu exemple complet verificate pentru fiecare.</p>
+  </div>
+</section>
+
+<footer>
+  <p>Toate exemplele din acest ghid sunt verificate prin înlocuire directă. Sursele complete de teorie: folderul <code>TEORIE/</code>. Pentru exerciții suplimentare de antrenament pe fiecare temă, fișele din <code>EXERCITII/BADRALEXI/</code> (enunțuri) și <code>EXERCITII/CANEPA/REZOLVATE/</code> (cu soluții) urmează aceeași numerotare ca seminariile.</p>
+</footer>
+
+</div>

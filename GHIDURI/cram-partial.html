@@ -1,0 +1,221 @@
+<title>Cram Parțial ALGAED</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zilla+Slab:wght@500;600;700&family=Public+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap">
+
+<style>
+:root{
+  --paper:#F5F1E6; --surface:#FFFFFF; --panel:#EFE7D4;
+  --ink:#26201A; --ink-2:#5C5142; --ink-3:#8A8070;
+  --rule:#DDD2B8; --rule-soft:#EAE2CD;
+  --amber:#A8641A; --amber-ink:#7E4B12; --amber-soft:#F5E7CE;
+  --green:#3D6B4C; --green-soft:#E5EFE6;
+  --red:#A3402E; --red-soft:#F6E6E1;
+  --shadow:0 1px 2px rgba(38,32,26,.07), 0 8px 22px -14px rgba(38,32,26,.25);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --paper:#171310; --surface:#1D1814; --panel:#241E17;
+    --ink:#EEE7DA; --ink-2:#B3A793; --ink-3:#847A69;
+    --rule:#332B21; --rule-soft:#28221B;
+    --amber:#E8A855; --amber-ink:#F0C083; --amber-soft:#2E2314;
+    --green:#7FB68F; --green-soft:#1B2A20;
+    --red:#E08C77; --red-soft:#2C1B16;
+    --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -14px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#171310; --surface:#1D1814; --panel:#241E17;
+  --ink:#EEE7DA; --ink-2:#B3A793; --ink-3:#847A69;
+  --rule:#332B21; --rule-soft:#28221B;
+  --amber:#E8A855; --amber-ink:#F0C083; --amber-soft:#2E2314;
+  --green:#7FB68F; --green-soft:#1B2A20;
+  --red:#E08C77; --red-soft:#2C1B16;
+  --shadow:0 1px 2px rgba(0,0,0,.35), 0 10px 26px -14px rgba(0,0,0,.6);
+}
+
+*{box-sizing:border-box}
+body{
+  background:var(--paper); color:var(--ink);
+  font-family:"Public Sans","Helvetica Neue",Arial,sans-serif;
+  font-size:16.5px; line-height:1.62; margin:0; padding:0 20px 90px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto}
+h1,h2,h3{font-family:"Zilla Slab",Georgia,serif; text-wrap:balance; margin:0}
+.m{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace; font-size:.92em}
+p{margin:0 0 14px}
+p:last-child{margin-bottom:0}
+strong{font-weight:600}
+
+header{padding:44px 0 24px}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;color:var(--amber-ink);margin:0 0 12px}
+h1{font-size:clamp(29px,5.2vw,40px);font-weight:600;line-height:1.1;letter-spacing:-.008em;margin-bottom:14px}
+.standfirst{font-size:17px;color:var(--ink-2);max-width:60ch}
+
+nav.toc{
+  display:flex; flex-wrap:wrap; gap:8px; margin:22px 0 6px;
+  padding:16px; background:var(--surface); border:1px solid var(--rule); border-radius:10px; box-shadow:var(--shadow);
+}
+nav.toc a{
+  font-family:"JetBrains Mono"; font-size:12.5px; color:var(--amber-ink); text-decoration:none;
+  padding:5px 10px; border:1px solid var(--rule); border-radius:6px; background:var(--panel);
+}
+nav.toc a:hover{border-color:var(--amber)}
+
+section{margin:44px 0}
+.modnum{
+  font-family:"JetBrains Mono"; font-size:12px; font-weight:700; letter-spacing:.06em;
+  color:var(--amber); text-transform:uppercase;
+}
+h2{font-size:23px;font-weight:600;margin:6px 0 4px}
+.sub{font-size:14.5px;color:var(--ink-3);font-style:italic;margin-bottom:16px}
+
+.recipe{background:var(--surface); border:1px solid var(--rule); border-radius:10px; padding:18px 20px; box-shadow:var(--shadow)}
+ol.moves{margin:0; padding:0; list-style:none; counter-reset:m; display:flex; flex-direction:column; gap:10px}
+ol.moves li{counter-increment:m; position:relative; padding-left:32px; font-size:15px}
+ol.moves li::before{
+  content:counter(m); position:absolute; left:0; top:0;
+  width:21px; height:21px; border-radius:50%; background:var(--amber); color:#fff;
+  font-family:"JetBrains Mono"; font-size:11.5px; font-weight:700;
+  display:flex; align-items:center; justify-content:center;
+}
+
+.ex{margin-top:14px; padding:14px 16px; background:var(--panel); border-radius:8px; border-left:3px solid var(--amber)}
+.ex .k{display:block; font-family:"JetBrains Mono"; font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--amber-ink); margin-bottom:6px}
+.ex p{font-size:14.5px}
+
+.formula{
+  font-family:"JetBrains Mono"; font-size:13px; line-height:1.65; white-space:pre-wrap;
+  background:var(--panel); border-left:3px solid var(--amber); border-radius:0 8px 8px 0;
+  padding:12px 15px; margin:12px 0; overflow-x:auto;
+}
+
+.trap{border-left:3px solid var(--red); background:var(--red-soft); border-radius:0 8px 8px 0; padding:12px 16px; margin-top:12px; font-size:14.5px}
+.trap .k{display:block; font-family:"JetBrains Mono"; font-size:10.5px; text-transform:uppercase; letter-spacing:.08em; color:var(--red); margin-bottom:6px}
+
+.pattern{
+  margin-top:40px; padding:20px 22px; background:var(--green-soft); border:1px solid var(--rule); border-radius:10px;
+}
+.pattern h3{font-size:16px; color:var(--green); margin-bottom:10px}
+.pattern ul{margin:0; padding-left:18px; font-size:14.5px}
+.pattern li{margin-bottom:6px}
+
+footer{margin-top:52px; padding-top:20px; border-top:1px solid var(--rule); font-size:14px; color:var(--ink-3)}
+footer code{font-family:"JetBrains Mono"; font-size:.9em}
+
+@media(max-width:560px){ body{font-size:15.5px; padding:0 14px 70px} }
+</style>
+
+<div class="wrap">
+
+<header>
+  <span class="eyebrow">Cram · materia de parțial</span>
+  <h1>Ce chiar pică la parțial</h1>
+  <p class="standfirst">Verificat pe subiectele din 2021 și 2022, plus tiparul confirmat de cerința (L3) de la finalul din 2026 (comutatorul <span class="m">AX−XA</span> era deja parțial în 2021). Patru tipuri, în ordinea frecvenței.</p>
+</header>
+
+<nav class="toc">
+  <a href="#geo">1 · Geometrie</a>
+  <a href="#spatii">2 · Spații vectoriale</a>
+  <a href="#aplicatii">3 · Aplicații liniare</a>
+  <a href="#comutative">4 · Matrice comutative</a>
+</nav>
+
+<section id="geo">
+  <span class="modnum">Tipul 1</span>
+  <h2>Geometrie analitică — drepte, plane, proiecții</h2>
+  <p class="sub">Tipar 2022: două drepte parametrice, găsești parametrul de intersecție, scrii ecuația planului (produs vectorial pentru normală)</p>
+
+  <div class="recipe">
+    <ol class="moves">
+      <li><strong>Plan mediator</strong> al unui segment <span class="m">[AB]</span>: normala = vectorul AB, trece prin mijlocul <span class="m">M=(A+B)/2</span>.</li>
+      <li><strong>Proiecție punct pe dreaptă:</strong> planul perpendicular pe dreaptă prin punct → intersectezi cu dreapta.</li>
+      <li><strong>Proiecție punct pe plan:</strong> dreapta perpendiculară pe plan prin punct → intersectezi cu planul.</li>
+      <li><strong>Simetric</strong> (față de dreaptă sau plan): proiecția e mijlocul dintre punctul original și simetric — <span class="m">simetric = 2×proiecție − original</span>.</li>
+      <li><strong>Arie triunghi</strong>: <span class="m">Aria = ½‖AB×AC‖</span>.</li>
+    </ol>
+    <div class="formula">⟨a,b⟩ = a₁b₁+a₂b₂+a₃b₃
+a×b = (a₂b₃−a₃b₂, a₃b₁−a₁b₃, a₁b₂−a₂b₁)   ← normală de plan / arie</div>
+    <div class="ex">
+      <span class="k">Exemplu verificat</span>
+      <p><span class="m">A(0,2,4)</span>, <span class="m">B(2,0,−2)</span>: plan mediator <span class="m">x−y−3z+3=0</span>. Detaliu complet în <code>TEORIE/geometrie-analitica-plan-dreapta.md</code> și <code>TEORIE/proiectie-simetric-dreapta-plan.md</code>.</p>
+    </div>
+    <div class="trap"><span class="k">Capcană</span>Nu confunda "normala planului" cu "direcția dreptei" — la proiecție pe dreaptă, planul auxiliar are ca normală direcția dreptei; la proiecție pe plan, dreapta auxiliară are ca direcție normala planului. Sunt roluri inversate.</div>
+  </div>
+</section>
+
+<section id="spatii">
+  <span class="modnum">Tipul 2</span>
+  <h2>Spații vectoriale — verificare, bază, dimensiune</h2>
+  <p class="sub">Tipar 2021: liniar (in)dependență + dimensiune subspațiu din condiții</p>
+
+  <div class="recipe">
+    <ol class="moves">
+      <li><strong>E subspațiu?</strong> — trei condiții: <span class="m">0∈U</span>; închis la adunare; închis la înmulțire cu scalar. Un singur contraexemplu la oricare din cele 3 e suficient ca să respingi.</li>
+      <li><strong>Extragi bază</strong> dintr-un set de generatori posibil dependent: rangul matricei (Gauss) = dimensiunea; un minor nenul de ordin = rang dă baza.</li>
+      <li><strong>Coordonate</strong> într-o bază: rezolvi sistemul liniar care exprimă vectorul ca o combinație a bazei.</li>
+      <li><strong>Completezi la bază</strong>: dacă ai <span class="m">k &lt; dim V</span> vectori independenți, adaugi <span class="m">dim V − k</span> vectori simpli (canonici) și verifici independența totală.</li>
+    </ol>
+    <div class="ex">
+      <span class="k">Exemplu verificat</span>
+      <p><span class="m">w₁=(1,2,1)</span>, <span class="m">w₂=(2,1,−1)</span>, <span class="m">w₃=(4,5,1)=2w₁+w₂</span> (dependent) → bază <span class="m">(w₁,w₂)</span>, <span class="m">dim U=2</span>. Detaliu complet în <code>TEORIE/spatii-vectoriale-subspatii-baza.md</code>.</p>
+    </div>
+    <div class="trap"><span class="k">Capcană</span>La "NU e subspațiu" — nu trebuie să verifici toate 3 condițiile dacă prima deja pică; dar dacă prima și a doua trec, tot mai trebuie verificată a treia (înmulțirea cu scalar negativ e cea mai frecventă cădere).</div>
+  </div>
+</section>
+
+<section id="aplicatii">
+  <span class="modnum">Tipul 3</span>
+  <h2>Aplicații liniare — recunoaștere, Ker/Im, inclusiv pe matrice</h2>
+  <p class="sub">Tipar 2021 (Q3) și finalul 2026 (L3): <span class="m">f: M₂(R) → M₂(R)</span>, <span class="m">f(X)=AX−XA</span></p>
+
+  <div class="recipe">
+    <ol class="moves">
+      <li><strong>Verifici liniaritatea</strong>: <span class="m">f(0)≠0</span> sau termeni de grad ≥2 → sigur NU e liniară. Altfel, verifică <span class="m">f(x+y)=f(x)+f(y)</span>.</li>
+      <li><strong>Baza canonică a domeniului</strong> — dacă domeniul e <span class="m">Mₙ(R)</span>, baza e <span class="m">E₁₁, E₁₂, …, Eₙₙ</span> (nu vectori din <span class="m">Rⁿ</span>).</li>
+      <li><strong>Calculezi f pe fiecare element al bazei</strong> — coloanele matricei <span class="m">M(f)</span>.</li>
+      <li><strong>Ker/Im</strong> — la fel ca la orice aplicație liniară, din <span class="m">M(f)</span>.</li>
+      <li><strong>Injectivitate/surjectivitate</strong>, gratis din dimensiuni: injectivă ⟺ <span class="m">Ker(f)=(0)</span>; surjectivă ⟺ <span class="m">dim Im(f) = dim(codomeniu)</span>.</li>
+    </ol>
+    <div class="ex">
+      <span class="k">Exemplu verificat</span>
+      <p>Comutatorul <span class="m">f(X)=AX−XA</span> cu A având liniile <span class="m">(1,2),(2,1)</span>: doar 2 din cele 4 imagini <span class="m">f(Eᵢⱼ)</span> sunt independente → <span class="m">dim Im(f)=2</span>. Detaliu complet în <code>TEORIE/aplicatii-liniare-pe-matrice.md</code> și <code>TEORIE/aplicatii-liniare-recunoastere-ker-im.md</code>.</p>
+    </div>
+    <div class="trap"><span class="k">Capcană</span>Proprietate gratuită la comutator: <span class="m">tr(AX−XA)=0</span> întotdeauna (fiindcă <span class="m">tr(AX)=tr(XA)</span>) — deci Im(f) e conținută în matricele cu urmă zero, un fapt care-ți poate confirma rapid dimensiunea găsită.</div>
+  </div>
+</section>
+
+<section id="comutative">
+  <span class="modnum">Tipul 4</span>
+  <h2>Matrice diagonalizabile cu aceiași vectori proprii</h2>
+  <p class="sub">Comutativitate — mai rar decât tipurile 1-3, dar a apărut și la finalul 2026 (L4)</p>
+
+  <div class="recipe">
+    <ol class="moves">
+      <li><strong>Rezultatul central:</strong> A,B diagonalizabile cu aceiași vectori proprii ⟹ <span class="m">AB=BA</span> (matricele diagonale comută mereu).</li>
+      <li><strong>Găsești parametrul</strong>: iei vectorii proprii ai matricei complet determinate, impui ca matricea cu parametru să-i aibă și ea ca vectori proprii — condiția de coliniaritate <span class="m">Bₘv=μv</span> dă o ecuație în parametru.</li>
+      <li><strong>Scurtătură matrice triunghiulară:</strong> primul vector canonic <span class="m">(1,0,…)</span> e mereu vector propriu al oricărei matrice triunghiular superioare, gratis.</li>
+    </ol>
+    <div class="ex">
+      <span class="k">Exemplu verificat</span>
+      <p>A cu liniile <span class="m">(1,1),(0,2)</span>, Bₘ cu liniile <span class="m">(m,1),(0,3)</span>: pentru ca <span class="m">(1,1)</span> să rămână vector propriu la Bₘ, <span class="m">m+1=3 ⟹ m=2</span>. Detaliu complet în <code>TEORIE/matrice-comutative-vectori-proprii-comuni.md</code>.</p>
+    </div>
+  </div>
+</section>
+
+<div class="pattern">
+  <h3>Ordinea de atac recomandată la examen</h3>
+  <ul>
+    <li><strong>Întâi geometria</strong> (tipul 1) — mecanică, punctaj sigur, rar ambiguă.</li>
+    <li><strong>Apoi spațiile vectoriale</strong> (tipul 2) — dacă te blochezi la o parte, verificarea subspațiului sau extragerea bazei se punctează separat.</li>
+    <li><strong>Aplicațiile liniare</strong> (tipul 3) — chiar dacă domeniul e neobișnuit (matrice, polinoame), rețeta e identică cu R<sup>n</sup>.</li>
+    <li><strong>Matrice comutative</strong> (tipul 4) ultimul — cel mai rar, dar rapid dacă recunoști scurtătura triunghiulară.</li>
+  </ul>
+</div>
+
+<footer>
+  <p>Sursele complete, cu toți pașii verificați: <code>TEORIE/geometrie-analitica-plan-dreapta.md</code>, <code>TEORIE/proiectie-simetric-dreapta-plan.md</code>, <code>TEORIE/spatii-vectoriale-subspatii-baza.md</code>, <code>TEORIE/aplicatii-liniare-pe-matrice.md</code>, <code>TEORIE/aplicatii-liniare-recunoastere-ker-im.md</code>, <code>TEORIE/matrice-comutative-vectori-proprii-comuni.md</code>. Pentru materia de seminar (mai amplă), vezi <code>GHIDURI/cram-seminar.html</code>.</p>
+</footer>
+
+</div>
