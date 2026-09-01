@@ -2,9 +2,13 @@
 
 Sursă: `Exercitii 6-7.pdf`, pagina 4 (enunț) / pagina 4 (soluție condensată, pentru verificare). Exact tipul de subiect P1 din `GHIDURI/cram-algaed.html`.
 
-**Enunț:** $U=\left\{(x_1,x_2,x_3)\in\mathbb{R}^3 \mid \begin{cases}x_1+3x_2+7x_3=0\\2x_1+2x_2+6x_3=0\\2x_1+x_2+4x_3=0\end{cases}\right\}$, $\mathbf{v}=(1,\,2,\,5)^T$, produsul scalar canonic pe $\mathbb{R}^3$.
+**Enunț:** $U=\{(x_1,x_2,x_3)\in\mathbb{R}^3\}$ supus sistemului omogen
 
-$U$ e dat ca **nucleu** al matricei $A=\begin{pmatrix}1&3&7\\2&2&6\\2&1&4\end{pmatrix}$ (fiecare ecuație = un rând din $A\mathbf{x}=0$), nu ca subspațiu generat de vectori — deci rețeta pornește diferit față de un $U=\mathrm{Sp}\{u_1,u_2,u_3\}$ obișnuit.
+$$\begin{cases}x_1+3x_2+7x_3=0\\2x_1+2x_2+6x_3=0\\2x_1+x_2+4x_3=0\end{cases}$$
+
+cu $\mathbf{v}=(1,\,2,\,5)^T$, produsul scalar canonic pe $\mathbb{R}^3$.
+
+$U$ e dat ca **nucleu** al matricei $A$, având liniile $(1,3,7)$, $(2,2,6)$, $(2,1,4)$ (fiecare ecuație = un rând din $A\mathbf{x}=0$), nu ca subspațiu generat de vectori — deci rețeta pornește diferit față de un $U=\mathrm{Sp}\{u_1,u_2,u_3\}$ obișnuit.
 
 ## Mișcarea 1 — rezolvi sistemul, găsești baza lui U
 
