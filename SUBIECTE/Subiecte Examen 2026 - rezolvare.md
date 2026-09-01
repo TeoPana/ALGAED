@@ -12,9 +12,7 @@ $f:\mathbb{R}_{\le2}[X]\to\mathbb{R}^3$, $f(P)=(P(0)-P'(0),\ P(1)-P(0),\ -P(0)+2
 
 $$f(P) = (a-b,\ b+c,\ -a+3b+2c)$$
 
-Matricea lui $f$ în raport cu bazele canonice (coloane = imaginile lui $1,X,X^2$):
-
-$$M=\begin{pmatrix}1&-1&0\\0&1&1\\-1&3&2\end{pmatrix}$$
+Matricea lui $f$ în raport cu bazele canonice (coloane = imaginile lui $1,X,X^2$), cu liniile $(1,-1,0)$, $(0,1,1)$, $(-1,3,2)$ — notată $M$.
 
 **Ker(f):** $Ma=0 \Rightarrow a=b,\ c=-b$, a treia ecuație e redundantă. Cu $b=t$: $(a,b,c)=t(1,1,-1)$.
 
@@ -74,17 +72,20 @@ $$w = v_1+v_2-v_4 \in W,\qquad \text{coordonate: }(1,\,1,\,-1)$$
 
 $A$ are liniile $(1,2)$ și $(2,1)$.
 
-**(a)** Calculezi $f$ pe fiecare element al bazei canonice $\{E_{11},E_{12},E_{21},E_{22}\}$:
+**(a)** Calculezi $f$ pe fiecare element al bazei canonice $\{E_{11},E_{12},E_{21},E_{22}\}$ — fiecare rezultat e o matrice $2\times2$:
 
-$$f(E_{11})=\begin{pmatrix}0&-2\\2&0\end{pmatrix},\quad f(E_{12})=\begin{pmatrix}-2&0\\0&2\end{pmatrix},\quad f(E_{21})=\begin{pmatrix}2&0\\0&-2\end{pmatrix},\quad f(E_{22})=\begin{pmatrix}0&2\\-2&0\end{pmatrix}$$
+- $f(E_{11})$: liniile $(0,-2)$ și $(2,0)$
+- $f(E_{12})$: liniile $(-2,0)$ și $(0,2)$
+- $f(E_{21})$: liniile $(2,0)$ și $(0,-2)$
+- $f(E_{22})$: liniile $(0,2)$ și $(-2,0)$
 
-Matricea lui $f$ (coloane = imaginile de mai sus, ca vectori în $\mathbb{R}^4$):
-
-$$M_f=\begin{pmatrix}0&-2&2&0\\-2&0&0&2\\2&0&0&-2\\0&2&-2&0\end{pmatrix}$$
+Matricea lui $f$ (coloane = imaginile de mai sus, ca vectori în $\mathbb{R}^4$) are liniile $(0,-2,2,0)$, $(-2,0,0,2)$, $(2,0,0,-2)$, $(0,2,-2,0)$ — notată $M_f$.
 
 **(b)** Observi $f(E_{21})=-f(E_{11})$ și $f(E_{22})=-f(E_{12})$ — doar 2 coloane independente.
 
-$$\mathrm{Im}(f)=\mathrm{Sp}\left\{\begin{pmatrix}0&-2\\2&0\end{pmatrix},\ \begin{pmatrix}-2&0\\0&2\end{pmatrix}\right\},\qquad \dim\mathrm{Im}(f)=2$$
+$$\mathrm{Im}(f)=\mathrm{Sp}\{f(E_{11}),\ f(E_{12})\},\qquad \dim\mathrm{Im}(f)=2$$
+
+(adică matricele cu liniile $(0,-2),(2,0)$ și, respectiv, $(-2,0),(0,2)$.)
 
 ---
 
@@ -134,7 +135,9 @@ $$\boxed{y=\frac{13}{18}x+\frac32}$$
 
 **(a)** $v_1=\tfrac15(4,3)$, $v_2=\tfrac15(-3,4)$ — ortonormați (verifici $v_1\cdot v_2=0$, $\|v_i\|=1$), deci $A$ simetrică: $A=PDP^T$ cu $P=\tfrac15$ având liniile $(4,-3)$ și $(3,4)$, $D=\mathrm{diag}(1,-1)$.
 
-$$A = \frac{1}{25}\begin{pmatrix}4&3\\3&-4\end{pmatrix}\begin{pmatrix}4&3\\-3&4\end{pmatrix} = \boxed{\frac{1}{25}\begin{pmatrix}7&24\\24&-7\end{pmatrix}}$$
+$A = \tfrac{1}{25}\cdot(\text{matrice cu liniile }(4,3),(3,-4))\cdot(\text{matrice cu liniile }(4,3),(-3,4))$, produs care dă:
+
+$$\boxed{A = \dfrac{1}{25}\ \text{matrice cu liniile } (7,24)\text{ și }(24,-7)}$$
 
 (verificare: $\mathrm{tr}(A)=0=\lambda_1+\lambda_2$ ✓; $\det A=-1=\lambda_1\lambda_2$ ✓)
 
