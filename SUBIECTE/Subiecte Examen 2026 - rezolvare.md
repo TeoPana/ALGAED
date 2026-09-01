@@ -72,6 +72,33 @@ $$w = v_1+v_2-v_4 \in W,\qquad \text{coordonate: }(1, 1, -1)$$
 
 $A$ are liniile $(1,2)$ și $(2,1)$.
 
+### Ce e $E_{ij}$ și de unde vine
+
+$E_{ij}$ e **matricea care are $1$ exact pe poziția (linia $i$, coloana $j$) și $0$ peste tot în rest**. Pentru $\mathcal{M}_2(\mathbb{R})$ (matrice $2\times2$) sunt exact 4 astfel de matrice — atâtea poziții cât are o matrice $2\times2$:
+
+$$E_{11}:\ \text{liniile }(1,0)\text{ și }(0,0) \qquad E_{12}:\ \text{liniile }(0,1)\text{ și }(0,0)$$
+$$E_{21}:\ \text{liniile }(0,0)\text{ și }(1,0) \qquad E_{22}:\ \text{liniile }(0,0)\text{ și }(0,1)$$
+
+Aceste 4 matrice formează **baza canonică** a spațiului $\mathcal{M}_2(\mathbb{R})$, la fel cum $(1,0)$ și $(0,1)$ sunt baza canonică a lui $\mathbb{R}^2$ — orice matrice $2\times2$ se scrie unic ca o combinație a lor. De exemplu, o matrice cu liniile $(a,b)$ și $(c,d)$ e exact $a\cdot E_{11}+b\cdot E_{12}+c\cdot E_{21}+d\cdot E_{22}$ (verifici direct: $a$ înmulțește matricea cu $1$ doar pe poziția $(1,1)$, deci contribuie $a$ acolo, și tot așa pentru ceilalți).
+
+**De ce contează pentru $f$:** ca să afli matricea unei aplicații liniare, trebuie să știi ce face $f$ pe **fiecare vector din bază** — aici baza e formată din cele 4 matrice $E_{ij}$, nu din vectori din $\mathbb{R}^n$, dar rețeta rămâne identică cu orice altă aplicație liniară.
+
+### Calculul explicit al lui $f(E_{11})$ (celelalte trei urmează exact același tipar)
+
+$f(X)=AX-XA$, deci $f(E_{11})=A\cdot E_{11}-E_{11}\cdot A$. Calculezi cele două produse separat:
+
+$$A\cdot E_{11}:\ \text{liniile }(1,2)\text{ și }(2,1)\ \text{înmulțite cu liniile }(1,0)\text{ și }(0,0)\ \text{ale lui }E_{11}$$
+
+Linia 1 a rezultatului: $(1\cdot1+2\cdot0,\ 1\cdot0+2\cdot0)=(1,0)$. Linia 2: $(2\cdot1+1\cdot0,\ 2\cdot0+1\cdot0)=(2,0)$. Deci $A\cdot E_{11}$ are liniile $(1,0)$ și $(2,0)$.
+
+$$E_{11}\cdot A:\ \text{liniile }(1,0)\text{ și }(0,0)\ \text{ale lui }E_{11}\ \text{înmulțite cu liniile }(1,2)\text{ și }(2,1)\ \text{ale lui }A$$
+
+Linia 1: $(1\cdot1+0\cdot2,\ 1\cdot2+0\cdot1)=(1,2)$. Linia 2: $(0,0)$ (orice înmulțit cu linia nulă dă $0$). Deci $E_{11}\cdot A$ are liniile $(1,2)$ și $(0,0)$.
+
+$$f(E_{11}) = A\cdot E_{11}-E_{11}\cdot A = \text{liniile }(1-1,\ 0-2)=(0,-2)\ \text{și}\ (2-0,\ 0-0)=(2,0)$$
+
+Exact rezultatul folosit mai jos. Pentru $f(E_{12}),f(E_{21}),f(E_{22})$ faci identic — schimbi doar care $E_{ij}$ înmulțești, restul mecanicii (înmulțire matrice + scădere) e la fel.
+
 **(a)** Calculezi $f$ pe fiecare element al bazei canonice $(E_{11},E_{12},E_{21},E_{22})$ — fiecare rezultat e o matrice $2\times2$:
 
 - $f(E_{11})$: liniile $(0,-2)$ și $(2,0)$
