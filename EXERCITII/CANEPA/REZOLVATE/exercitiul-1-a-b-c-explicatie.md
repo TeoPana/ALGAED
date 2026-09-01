@@ -65,9 +65,20 @@ $$x(t)=e^{4t}\big[1-(t+1)\big]=-te^{4t},\qquad y(t)=e^{4t}(1-t)$$
 
 $$\boxed{x(t)=-te^{4t},\qquad y(t)=(1-t)e^{4t}}$$
 
-**Verificare** (obligatorie când ai valoare proprie dublă — se greșește ușor la $w$):
-$x'=-e^{4t}(1+4t)$ și $5x-y=e^{4t}(-5t-1+t)=-e^{4t}(4t+1)$ ✓
-$y'=e^{4t}(3-4t)$ și $x+3y=e^{4t}(-t+3-3t)=e^{4t}(3-4t)$ ✓
+**Verificare** (obligatorie când ai valoare proprie dublă — se greșește ușor la $w$): derivezi soluția găsită direct și o compari cu partea dreaptă a sistemului, calculată tot cu soluția găsită. Dacă coincid, e corectă.
+
+Derivarea lui $x(t)=-t\,e^{4t}$ e un produs, deci regula produsului $(uv)'=u'v+uv'$ cu $u=-t$ ($u'=-1$) și $v=e^{4t}$ ($v'=4e^{4t}$):
+
+$$x'(t) = (-1)e^{4t} + (-t)(4e^{4t}) = -e^{4t}-4te^{4t} = -e^{4t}(1+4t)$$
+
+La fel pentru $y(t)=(1-t)e^{4t}$, cu $u=1-t$ ($u'=-1$):
+
+$$y'(t) = (-1)e^{4t} + (1-t)(4e^{4t}) = e^{4t}\big[-1+4(1-t)\big] = e^{4t}(3-4t)$$
+
+Acum compari cu partea dreaptă a sistemului original, calculată cu $x(t)$ și $y(t)$ găsite:
+
+$$5x-y = 5(-te^{4t}) - (1-t)e^{4t} = e^{4t}(-5t-1+t) = -e^{4t}(4t+1) = x' \quad ✓$$
+$$x+3y = -te^{4t} + 3(1-t)e^{4t} = e^{4t}(-t+3-3t) = e^{4t}(3-4t) = y' \quad ✓$$
 
 ---
 
