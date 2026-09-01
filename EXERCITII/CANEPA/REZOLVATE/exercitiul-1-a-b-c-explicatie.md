@@ -43,9 +43,9 @@ $$A-4I=\begin{pmatrix}1&-1\\1&-1\end{pmatrix}\ \text{are rang }1 \implies \text{
 
 Deci **NU** e diagonalizabilă — mergi pe rețeta cu bloc Jordan (exact ca la exercițiul 32 din fișa cu ecuații și sisteme).
 
-Vector propriu: $(A-4I)v=0 \Rightarrow v_1-v_2=0 \Rightarrow v=\begin{pmatrix}1\\1\end{pmatrix}$
+Vector propriu: $(A-4I)v=0 \Rightarrow v_1-v_2=0 \Rightarrow v=(1,\,1)^T$
 
-Vector generalizat $w$, din $(A-4I)w=v$: $w_1-w_2=1$; alegi $w_2=0 \Rightarrow w=\begin{pmatrix}1\\0\end{pmatrix}$
+Vector generalizat $w$, din $(A-4I)w=v$: $w_1-w_2=1$; alegi $w_2=0 \Rightarrow w=(1,\,0)^T$
 
 **Mișcarea 2 — $P$, $J$ și $e^{At}$**
 
