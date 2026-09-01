@@ -37,3 +37,33 @@ Asta e chiar definiția **valorii proprii**: $\lambda$ e un număr pentru care e
 | complex, $\alpha\pm i\beta$ cu $\alpha\ne0$ | oscilează și crește/decade (spirală) |
 
 Practic, în orice exercițiu de tipul P4/P5 din `GHIDURI/cram-algaed.html`, primul lucru pe care-l calculezi ($\lambda$) îți spune deja, înainte să scrii vreo soluție, *forma calitativă* a răspunsului — restul e doar aritmetica de potrivit constantele la condițiile inițiale.
+
+## Ce e J — forma Jordan (NU Iacobianul)
+
+În `exercitiul-1-a-b-c-explicatie.md` (b) și `exercitiul-33-explicatie.md` apare o matrice $J$. E ușor de confundat după literă, dar **nu e Iacobianul** — sunt două lucruri complet diferite, din contexte diferite:
+
+### J = matricea Jordan (ce am folosit noi)
+
+Apare doar când o valoare proprie $\lambda$ e **repetată** (multiplicitate algebrică > 1) și are **mai puțini vectori proprii independenți** decât multiplicitatea ei (deficiență geometrică) — exact cazul din ex. 1(b), unde $\lambda=4$ era dublă dar avea un singur vector propriu.
+
+Într-un asemenea caz, $A$ nu mai e diagonalizabilă, dar tot poți scrie $A = PJP^{-1}$, unde $J$ e **cea mai apropiată formă posibilă de diagonală** — un bloc Jordan:
+
+$$J = \begin{pmatrix}\lambda & 1\\ 0 & \lambda\end{pmatrix}$$
+
+($\lambda$ pe diagonală, $1$ deasupra ei — restul zero.) Coloanele lui $P$ sunt vectorul propriu $v$ și vectorul generalizat $w$, obținut din $(A-\lambda I)w = v$ (exact pasul din ex. 1(b) și 32).
+
+De-asta apare $t\cdot e^{\lambda t}$ în soluție — vine direct din:
+
+$$e^{Jt} = e^{\lambda t}\begin{pmatrix}1 & t\\ 0 & 1\end{pmatrix}$$
+
+**Regulă de recunoaștere:** dacă la un exercițiu de sistem de EDO ($X'=AX$) polinomul caracteristic îți dă o rădăcină dublă, primul lucru pe care-l verifici e rangul lui $A-\lambda I$. Rang $1$ (pe o matrice $2\times2$) → deficiență → ai nevoie de $J$.
+
+### Iacobianul (altă poveste — pentru sisteme neliniare)
+
+Iacobianul e matricea derivatelor parțiale ale unui sistem **neliniar** $X' = f(X)$, calculată într-un punct de echilibru $X^*$ (unde $f(X^*)=0$), ca să-l aproximezi liniar acolo:
+
+$$J_f(X) = \begin{pmatrix}\dfrac{\partial f_1}{\partial x_1} & \dfrac{\partial f_1}{\partial x_2}\\[6pt] \dfrac{\partial f_2}{\partial x_1} & \dfrac{\partial f_2}{\partial x_2}\end{pmatrix}$$
+
+Nu apare în niciunul din exercițiile 1 sau 33 — acelea sunt sisteme **liniare** ($X'=AX$), unde matricea sistemului e chiar $A$, gata dată, nu trebuie derivată. Iacobianul devine relevant doar dacă la un moment dat primești un sistem neliniar și ți se cere să-l liniarizezi în jurul unui punct de echilibru, ca să-i clasifici stabilitatea — un tip de subiect diferit, nu l-am întâlnit încă în exercițiile rezolvate din repo.
+
+**Pe scurt:** aceeași literă $J$, dar $J$ = Jordan apare la sisteme liniare cu valoare proprie repetată deficientă; $J_f$ = Iacobian apare la liniarizarea sistemelor neliniare. Nu se substituie una pe alta.
