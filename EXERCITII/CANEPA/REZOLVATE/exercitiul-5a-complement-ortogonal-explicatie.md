@@ -2,13 +2,13 @@
 
 Sursă: `Exercitii 6-7.pdf`, pagina 4 (enunț) / pagina 4 (soluție condensată, pentru verificare). Exact tipul de subiect P1 din `GHIDURI/cram-algaed.html`.
 
-**Enunț:** $U=\{(x_1,x_2,x_3)\in\mathbb{R}^3\}$ supus sistemului omogen
+**Enunț:** $U=(x_1,x_2,x_3)\in\mathbb{R}^3$ supus sistemului omogen
 
-$$\begin{cases}x_1+3x_2+7x_3=0\\2x_1+2x_2+6x_3=0\\2x_1+x_2+4x_3=0\end{cases}$$
+$$x_1+3x_2+7x_3=0,\qquad 2x_1+2x_2+6x_3=0,\qquad 2x_1+x_2+4x_3=0$$
 
-cu $\mathbf{v}=(1,\,2,\,5)^T$, produsul scalar canonic pe $\mathbb{R}^3$.
+cu $\mathbf{v}=(1, 2, 5)^T$, produsul scalar canonic pe $\mathbb{R}^3$.
 
-$U$ e dat ca **nucleu** al matricei $A$, având liniile $(1,3,7)$, $(2,2,6)$, $(2,1,4)$ (fiecare ecuație = un rând din $A\mathbf{x}=0$), nu ca subspațiu generat de vectori — deci rețeta pornește diferit față de un $U=\mathrm{Sp}\{u_1,u_2,u_3\}$ obișnuit.
+$U$ e dat ca **nucleu** al matricei $A$, având liniile $(1,3,7)$, $(2,2,6)$, $(2,1,4)$ (fiecare ecuație = un rând din $A\mathbf{x}=0$), nu ca subspațiu generat de vectori — deci rețeta pornește diferit față de un $U=\mathrm{Sp}(u_1,u_2,u_3)$ obișnuit.
 
 ## Mișcarea 1 — rezolvi sistemul, găsești baza lui U
 
@@ -20,19 +20,19 @@ Atunci $x_1=-(-2x_3)-3x_3=-x_3$.
 
 **Verifici cu ecuația 3** (ca să confirmi că e redundantă, nu contradictorie): $2(-x_3)+(-2x_3)+4x_3=0$ ✓ — se anulează identic, deci a treia ecuație nu adaugă nicio restricție nouă (rangul lui $A$ e $2$, nu $3$).
 
-Cu $x_3=t$ liber: $(x_1,x_2,x_3)=t\cdot(-1,\,-2,\,1)$.
+Cu $x_3=t$ liber: $(x_1,x_2,x_3)=t\cdot(-1, -2, 1)$.
 
 **De unde vine exact $t\cdot(-1,-2,1)$:** $x_3$ e singura necunoscută nedeterminată, deci îi dai un nume nou, $t$, ca s-o tratezi ca parametru: $x_3=t$. Înlocuiești $t$ înapoi în celelalte două relații ($x_1=-x_3,\ x_2=-2x_3$):
 
-$$x_1=-t,\qquad x_2=-2t,\qquad x_3=t \implies (x_1,x_2,x_3)=(-t,\,-2t,\,t)$$
+$$x_1=-t,\qquad x_2=-2t,\qquad x_3=t \implies (x_1,x_2,x_3)=(-t, -2t, t)$$
 
 Scoți $t$ factor comun din fiecare componentă (ca la orice expresie algebrică cu același factor peste tot):
 
-$$(-t,\,-2t,\,t) = t\cdot(-1,\,-2,\,1)$$
+$$(-t, -2t, t) = t\cdot(-1, -2, 1)$$
 
 Vectorul $(-1,-2,1)$ e „tiparul" fix — orice soluție a sistemului e un multiplu al lui, iar $t$ arată „cât de mult" din tipar iei.
 
-$$U=\mathrm{Sp}\{(1,\,2,\,-1)\}\qquad(\dim U=1)$$
+$$U=\mathrm{Sp}(1, 2, -1)\qquad(\dim U=1)$$
 
 (am scris vectorul înmulțit cu $-1$ față de $(-1,-2,1)$ — e aceeași dreaptă, direcția nu contează la semn.)
 
@@ -60,7 +60,7 @@ Dimensiunea unui subspațiu = **numărul de parametri liberi independenți** de 
 
 Rândurile lui $A$: $(1,3,7),\ (2,2,6),\ (2,1,4)$. Cum $\mathrm{rang}(A)=2$ (am văzut la mișcarea 1 că a treia ecuație e dependentă), doar 2 din cele 3 rânduri sunt independente — verifici că $(2,1,4)=-\tfrac12(1,3,7)+\tfrac54(2,2,6)$ (dependent) — deci:
 
-$$U^\perp = \mathrm{Sp}\{(1,\,3,\,7),\ (2,\,2,\,6)\}\qquad(\dim U^\perp=2)$$
+$$U^\perp = \mathrm{Sp}\big((1, 3, 7),\ (2, 2, 6)\big)\qquad(\dim U^\perp=2)$$
 
 **De reținut ca scurtătură pentru examen:** dacă subiectul îți dă $U$ direct ca sistem de ecuații (deci ca nucleu), NU mai treci prin Gram-Schmidt ca să găsești $U^\perp$ — rândurile matricei sistemului sunt deja o bază (sau un sistem de generatori, dacă unele rânduri sunt dependente) pentru $U^\perp$.
 
@@ -68,13 +68,13 @@ $$U^\perp = \mathrm{Sp}\{(1,\,3,\,7),\ (2,\,2,\,6)\}\qquad(\dim U^\perp=2)$$
 
 $U$ e generat de un singur vector $u=(1,2,-1)$, deci proiecția pe $U$ e proiecția pe un singur vector:
 
-$$\mathrm{pr}_U\mathbf{v} = \frac{\langle \mathbf{v},u\rangle}{\langle u,u\rangle}\,u$$
+$$\mathrm{pr}_U\mathbf{v} = \frac{\langle \mathbf{v},u\rangle}{\langle u,u\rangle}\cdot u$$
 
 $$\langle \mathbf{v},u\rangle = 1\cdot1+2\cdot2+5\cdot(-1) = 1+4-5=0$$
 
 Numărătorul e $0$ — deci **fără să mai calculezi nimic altceva**:
 
-$$\mathrm{pr}_U\mathbf{v} = 0 \qquad\Longrightarrow\qquad \mathbf{v}\in U^\perp \quad\text{și}\quad \mathrm{pr}_{U^\perp}\mathbf{v}=\mathbf{v}-\mathrm{pr}_U\mathbf{v}=\mathbf{v}=(1,\,2,\,5)$$
+$$\mathrm{pr}_U\mathbf{v} = 0 \qquad\Longrightarrow\qquad \mathbf{v}\in U^\perp \quad\text{și}\quad \mathrm{pr}_{U^\perp}\mathbf{v}=\mathbf{v}-\mathrm{pr}_U\mathbf{v}=\mathbf{v}=(1, 2, 5)$$
 
 **Verificare directă:** $\mathbf{v}$ trebuie să fie perpendicular pe generatorul lui $U$ dacă e complet în $U^\perp$ — exact ce am obținut din $\langle \mathbf{v},u\rangle=0$. Coincide cu soluția din PDF: „$\mathrm{pr}_U\mathbf{v}=0$, deci $\mathbf{v}\in U^\perp$ și $\mathrm{pr}_{U^\perp}\mathbf{v}=\mathbf{v}$."
 

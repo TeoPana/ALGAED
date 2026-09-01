@@ -29,7 +29,7 @@ $$x''(t) = C_1e^{t}+4C_2e^{2t}+4C_3e^{-2t}$$
 
 **Mișcarea 3 — sistemul din condițiile inițiale**
 
-$$\begin{cases}x(0)=C_1+C_2+C_3=3\\ x'(0)=C_1+2C_2-2C_3=1\\ x''(0)=C_1+4C_2+4C_3=9\end{cases}$$
+$$x(0)=C_1+C_2+C_3=3,\qquad x'(0)=C_1+2C_2-2C_3=1,\qquad x''(0)=C_1+4C_2+4C_3=9$$
 
 Din prima ecuație: $C_1=3-C_2-C_3$. O înlocuiești în celelalte două:
 
@@ -65,11 +65,11 @@ $$x''-2x'+x=3 \qquad(ii)$$
 
 $$x_{p1}(t) = t^2(At+B)e^{t} = (At^3+Bt^2)e^{t}$$
 
-**Trucul de calcul (evită derivarea brută):** scrii $x_{p1}=u\cdot e^{t}$ cu $u=At^3+Bt^2$. Pentru că $\lambda=1$ e rădăcină dublă a ecuației caracteristice, operatorul $x''-2x'+x$ aplicat pe $u\,e^{t}$ se simplifică direct la $e^{t}u''$ (derivatele lui $u$ de ordin 0 și 1 se anulează exact, ca la orice rezonanță de ordinul al doilea):
+**Trucul de calcul (evită derivarea brută):** scrii $x_{p1}=u\cdot e^{t}$ cu $u=At^3+Bt^2$. Pentru că $\lambda=1$ e rădăcină dublă a ecuației caracteristice, operatorul $x''-2x'+x$ aplicat pe $u\cdot e^{t}$ se simplifică direct la $e^{t}u''$ (derivatele lui $u$ de ordin 0 și 1 se anulează exact, ca la orice rezonanță de ordinul al doilea):
 
 $$x_{p1}''-2x_{p1}'+x_{p1} = e^{t}u''$$
 
-Deci ecuația devine $e^{t}u''=6t\,e^{t}\implies u''=6t$. Cu $u=At^3+Bt^2$: $u''=6At+2B$.
+Deci ecuația devine $e^{t}u''=6t\cdot e^{t}\implies u''=6t$. Cu $u=At^3+Bt^2$: $u''=6At+2B$.
 
 $$6At+2B=6t \implies A=1,\ B=0 \implies x_{p1}(t)=t^3e^{t}$$
 

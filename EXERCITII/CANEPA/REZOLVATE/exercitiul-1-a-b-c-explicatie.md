@@ -8,22 +8,22 @@ Sursă: `Exercitii 10.pdf`, pagina 1 (enunțuri) / pagina 2 (soluția lui (a), p
 
 **Mișcarea 1 — matricea și spectrul**
 
-$$A=\begin{pmatrix}-5 & 2\\ 1 & -6\end{pmatrix},\qquad p_A(\lambda)=(\lambda+5)(\lambda+6)-2=\lambda^2+11\lambda+28=(\lambda+4)(\lambda+7)$$
+$A$ are liniile $(-5,2)$ și $(1,-6)$. $p_A(\lambda)=(\lambda+5)(\lambda+6)-2=\lambda^2+11\lambda+28=(\lambda+4)(\lambda+7)$
 
 $$\lambda_1=-4,\qquad \lambda_2=-7$$
 
 Vectori proprii:
 
-$$(A+4I)v=0 \Rightarrow -v_1+2v_2=0 \Rightarrow v_1=\begin{pmatrix}2\\1\end{pmatrix}$$
-$$(A+7I)v=0 \Rightarrow 2v_1+2v_2=0 \Rightarrow v_2=\begin{pmatrix}-1\\1\end{pmatrix}$$
+$$(A+4I)v=0 \Rightarrow -v_1+2v_2=0 \Rightarrow v_1=(2,1)^T$$
+$$(A+7I)v=0 \Rightarrow 2v_1+2v_2=0 \Rightarrow v_2=(-1,1)^T$$
 
 **Mișcarea 2 — soluția generală**
 
-$$X(t)=C_1e^{-4t}\begin{pmatrix}2\\1\end{pmatrix}+C_2e^{-7t}\begin{pmatrix}-1\\1\end{pmatrix} \implies \begin{cases}x(t)=2C_1e^{-4t}-C_2e^{-7t}\\ y(t)=C_1e^{-4t}+C_2e^{-7t}\end{cases}$$
+$$X(t)=C_1e^{-4t}v_1+C_2e^{-7t}v_2 \implies x(t)=2C_1e^{-4t}-C_2e^{-7t},\qquad y(t)=C_1e^{-4t}+C_2e^{-7t}$$
 
 **Mișcarea 3 — condițiile inițiale**
 
-$$\begin{cases}x(0)=2C_1-C_2=3\\ y(0)=C_1+C_2=0\end{cases} \implies C_2=-C_1 \implies 3C_1=3 \implies C_1=1,\ C_2=-1$$
+$$x(0)=2C_1-C_2=3,\qquad y(0)=C_1+C_2=0 \implies C_2=-C_1 \implies 3C_1=3 \implies C_1=1,\ C_2=-1$$
 
 $$\boxed{x(t)=2e^{-4t}+e^{-7t},\qquad y(t)=e^{-4t}-e^{-7t}}$$
 
@@ -35,31 +35,31 @@ $$\boxed{x(t)=2e^{-4t}+e^{-7t},\qquad y(t)=e^{-4t}-e^{-7t}}$$
 
 **Mișcarea 1 — matricea și spectrul**
 
-$$A=\begin{pmatrix}5 & -1\\ 1 & 3\end{pmatrix},\qquad p_A(\lambda)=(5-\lambda)(3-\lambda)+1=\lambda^2-8\lambda+16=(\lambda-4)^2$$
+$A$ are liniile $(5,-1)$ și $(1,3)$. $p_A(\lambda)=(5-\lambda)(3-\lambda)+1=\lambda^2-8\lambda+16=(\lambda-4)^2$
 
 $\lambda=4$ e rădăcină **dublă**. Verifici dacă e diagonalizabilă:
 
-$$A-4I=\begin{pmatrix}1&-1\\1&-1\end{pmatrix}\ \text{are rang }1 \implies \text{multipl. geom.}=1 < \text{multipl. alg.}=2$$
+$A-4I$ are liniile $(1,-1)$ și $(1,-1)$, rang $1 \implies$ multipl. geom. $=1<$ multipl. alg. $=2$.
 
 Deci **NU** e diagonalizabilă — mergi pe rețeta cu bloc Jordan (exact ca la exercițiul 32 din fișa cu ecuații și sisteme).
 
-Vector propriu: $(A-4I)v=0 \Rightarrow v_1-v_2=0 \Rightarrow v=(1,\,1)^T$
+Vector propriu: $(A-4I)v=0 \Rightarrow v_1-v_2=0 \Rightarrow v=(1, 1)^T$
 
-Vector generalizat $w$, din $(A-4I)w=v$: $w_1-w_2=1$; alegi $w_2=0 \Rightarrow w=(1,\,0)^T$
+Vector generalizat $w$, din $(A-4I)w=v$: $w_1-w_2=1$; alegi $w_2=0 \Rightarrow w=(1, 0)^T$
 
 **Mișcarea 2 — $P$, $J$ și $e^{At}$**
 
-$$P=(v\mid w)=\begin{pmatrix}1&1\\1&0\end{pmatrix},\qquad J=\begin{pmatrix}4&1\\0&4\end{pmatrix},\qquad e^{Jt}=e^{4t}\begin{pmatrix}1&t\\0&1\end{pmatrix}$$
+$P=(v\mid w)$ are liniile $(1,1)$ și $(1,0)$; $J$ are liniile $(4,1)$ și $(0,4)$; $e^{Jt}=e^{4t}\cdot M$ unde $M$ are liniile $(1,t)$ și $(0,1)$.
 
-$$Pe^{Jt}=e^{4t}\begin{pmatrix}1&1\\1&0\end{pmatrix}\begin{pmatrix}1&t\\0&1\end{pmatrix}=e^{4t}\begin{pmatrix}1&t+1\\1&t\end{pmatrix}$$
+Produsul $Pe^{Jt}$ dă o matrice cu liniile $e^{4t}(1,\ t+1)$ și $e^{4t}(1,\ t)$.
 
-(la fel ca la ex. 32: **nu calculezi efectiv $P^{-1}$**, pui direct $P^{-1}\binom{c_1}{c_2}=\binom{k_1}{k_2}$)
+(la fel ca la ex. 32: **nu calculezi efectiv $P^{-1}$**, pui direct $P^{-1}(c_1,c_2)^T=(k_1,k_2)^T$)
 
 **Mișcarea 3 — soluția generală și condițiile inițiale**
 
-$$X(t)=Pe^{Jt}\begin{pmatrix}k_1\\k_2\end{pmatrix} \implies \begin{cases}x(t)=k_1e^{4t}+k_2(t+1)e^{4t}\\ y(t)=k_1e^{4t}+k_2te^{4t}\end{cases}$$
+$$X(t)=Pe^{Jt}(k_1,k_2)^T \implies x(t)=k_1e^{4t}+k_2(t+1)e^{4t},\qquad y(t)=k_1e^{4t}+k_2te^{4t}$$
 
-$$\begin{cases}x(0)=k_1+k_2=0\\ y(0)=k_1=1\end{cases} \implies k_1=1,\ k_2=-1$$
+$$x(0)=k_1+k_2=0,\qquad y(0)=k_1=1 \implies k_1=1,\ k_2=-1$$
 
 $$x(t)=e^{4t}\big[1-(t+1)\big]=-te^{4t},\qquad y(t)=e^{4t}(1-t)$$
 
@@ -67,7 +67,7 @@ $$\boxed{x(t)=-te^{4t},\qquad y(t)=(1-t)e^{4t}}$$
 
 **Verificare** (obligatorie când ai valoare proprie dublă — se greșește ușor la $w$): derivezi soluția găsită direct și o compari cu partea dreaptă a sistemului, calculată tot cu soluția găsită. Dacă coincid, e corectă.
 
-Derivarea lui $x(t)=-t\,e^{4t}$ e un produs, deci regula produsului $(uv)'=u'v+uv'$ cu $u=-t$ ($u'=-1$) și $v=e^{4t}$ ($v'=4e^{4t}$):
+Derivarea lui $x(t)=-t\cdot e^{4t}$ e un produs, deci regula produsului $(uv)'=u'v+uv'$ cu $u=-t$ ($u'=-1$) și $v=e^{4t}$ ($v'=4e^{4t}$):
 
 $$x'(t) = (-1)e^{4t} + (-t)(4e^{4t}) = -e^{4t}-4te^{4t} = -e^{4t}(1+4t)$$
 
@@ -86,22 +86,22 @@ $$x+3y = -te^{4t} + 3(1-t)e^{4t} = e^{4t}(-t+3-3t) = e^{4t}(3-4t) = y' \quad ✓
 
 **Mișcarea 1 — matricea și spectrul**
 
-$$A=\begin{pmatrix}1&-1\\-4&1\end{pmatrix},\qquad p_A(\lambda)=(1-\lambda)^2-4=0 \implies 1-\lambda=\pm2$$
+$A$ are liniile $(1,-1)$ și $(-4,1)$. $p_A(\lambda)=(1-\lambda)^2-4=0 \implies 1-\lambda=\pm2$
 
 $$\lambda_1=-1,\qquad \lambda_2=3 \quad\text{(reale, distincte)}$$
 
 Vectori proprii:
 
-$$(A+I)v=0 \Rightarrow 2v_1-v_2=0 \Rightarrow v_1=\begin{pmatrix}1\\2\end{pmatrix}$$
-$$(A-3I)v=0 \Rightarrow -2v_1-v_2=0 \Rightarrow v_2=\begin{pmatrix}1\\-2\end{pmatrix}$$
+$$(A+I)v=0 \Rightarrow 2v_1-v_2=0 \Rightarrow v_1=(1,2)^T$$
+$$(A-3I)v=0 \Rightarrow -2v_1-v_2=0 \Rightarrow v_2=(1,-2)^T$$
 
 **Mișcarea 2 — soluția generală**
 
-$$X(t)=C_1e^{-t}\begin{pmatrix}1\\2\end{pmatrix}+C_2e^{3t}\begin{pmatrix}1\\-2\end{pmatrix} \implies \begin{cases}x(t)=C_1e^{-t}+C_2e^{3t}\\ y(t)=2C_1e^{-t}-2C_2e^{3t}\end{cases}$$
+$$X(t)=C_1e^{-t}v_1+C_2e^{3t}v_2 \implies x(t)=C_1e^{-t}+C_2e^{3t},\qquad y(t)=2C_1e^{-t}-2C_2e^{3t}$$
 
 **Mișcarea 3 — condițiile inițiale**
 
-$$\begin{cases}x(0)=C_1+C_2=1\\ y(0)=2C_1-2C_2=-2 \iff C_1-C_2=-1\end{cases} \implies C_1=0,\ C_2=1$$
+$$x(0)=C_1+C_2=1,\qquad y(0)=2C_1-2C_2=-2 \iff C_1-C_2=-1 \implies C_1=0,\ C_2=1$$
 
 $$\boxed{x(t)=e^{3t},\qquad y(t)=-2e^{3t}}$$
 

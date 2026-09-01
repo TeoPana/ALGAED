@@ -8,7 +8,7 @@ Sursă: `Exercitii 8.pdf`, pagina 5-6. Am ales-o pentru că e **singura din setu
 
 Coeficientul lui $xy$ e $12$, deci $a_{12}$ = **jumătate** din el = $6$ (capcana clasică — nu uita împărțirea la 2):
 
-$$A = \begin{pmatrix}5&6\\6&10\end{pmatrix}$$
+$A$ are liniile $(5,6)$ și $(6,10)$.
 
 Polinom caracteristic: $(5-\lambda)(10-\lambda)-36=\lambda^2-15\lambda+14=(\lambda-1)(\lambda-14)$
 
@@ -22,7 +22,7 @@ $\lambda=1$: $(A-I)v=0 \implies 2v_1+3v_2=0 \implies v=(3,-2)$, normă $\sqrt{13
 
 $\lambda=14$: $(A-14I)v=0 \implies -3v_1+2v_2=0 \implies v=(2,3)$, normă $\sqrt{13}$ → $v_2=(2,3)^T/\sqrt{13}$
 
-$$P = \frac{1}{\sqrt{13}}\begin{pmatrix}3&2\\-2&3\end{pmatrix},\qquad \det P = \frac{9+4}{13}=1\ \checkmark\ \text{(rotație, nu simetrie)}$$
+$P=\tfrac{1}{\sqrt{13}}\cdot(\text{matrice cu liniile }(3,2)\text{ și }(-2,3))$, și $\det P = \frac{9+4}{13}=1\ \checkmark$ (rotație, nu simetrie).
 
 ## Mișcarea 2 — substituția (rotația propriu-zisă)
 
@@ -32,19 +32,19 @@ Partea pătratică devine automat $\lambda_1x'^2+\lambda_2y'^2 = x'^2+14y'^2$ (n
 
 Partea liniară — **aici e diferența față de exemplele mai simple**, trebuie efectiv înlocuită:
 
-$$-6x+4y = -6\cdot\frac{3x'+2y'}{\sqrt{13}}+4\cdot\frac{-2x'+3y'}{\sqrt{13}} = \frac{(-18x'-12y')+(-8x'+12y')}{\sqrt{13}} = \frac{-26x'}{\sqrt{13}} = -2\sqrt{13}\,x'$$
+$$-6x+4y = -6\cdot\frac{3x'+2y'}{\sqrt{13}}+4\cdot\frac{-2x'+3y'}{\sqrt{13}} = \frac{(-18x'-12y')+(-8x'+12y')}{\sqrt{13}} = \frac{-26x'}{\sqrt{13}} = -2\sqrt{13} x'$$
 
 (termenul în $y'$ dispare complet — nu e întâmplător: e semnul că axa de simetrie a elipsei e paralelă cu $Ox'$ după rotație.)
 
 Ecuația devine:
 
-$$x'^2+14y'^2-2\sqrt{13}\,x'-1=0$$
+$$x'^2+14y'^2-2\sqrt{13} x'-1=0$$
 
 ## Mișcarea 3 — translația (completarea pătratului, pasul care lipsește din cazurile simple)
 
 Grupezi termenii cu $x'$ și completezi pătratul:
 
-$$x'^2-2\sqrt{13}\,x' = (x'-\sqrt{13})^2-13$$
+$$x'^2-2\sqrt{13} x' = (x'-\sqrt{13})^2-13$$
 
 $$\big[(x'-\sqrt{13})^2-13\big]+14y'^2-1=0 \implies (x'-\sqrt{13})^2+14y'^2-14=0$$
 

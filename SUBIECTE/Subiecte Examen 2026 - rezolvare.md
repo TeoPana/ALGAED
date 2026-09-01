@@ -16,11 +16,11 @@ Matricea lui $f$ în raport cu bazele canonice (coloane = imaginile lui $1,X,X^2
 
 **Ker(f):** $Ma=0 \Rightarrow a=b,\ c=-b$, a treia ecuație e redundantă. Cu $b=t$: $(a,b,c)=t(1,1,-1)$.
 
-$$\mathrm{Ker}(f)=\mathrm{Sp}\{1+X-X^2\},\qquad \dim\mathrm{Ker}(f)=1$$
+$$\mathrm{Ker}(f)=\mathrm{Sp}(1+X-X^2),\qquad \dim\mathrm{Ker}(f)=1$$
 
 Din teorema rangului: $\dim\mathrm{Im}(f)=3-1=2$. Verifici că $f(X^2)=(0,1,2)=f(1)+f(X)$ (dependent), deci:
 
-$$\mathrm{Im}(f)=\mathrm{Sp}\{(1,0,-1),\,(-1,1,3)\},\qquad \dim\mathrm{Im}(f)=2$$
+$$\mathrm{Im}(f)=\mathrm{Sp}((1,0,-1), (-1,1,3)),\qquad \dim\mathrm{Im}(f)=2$$
 
 **(b)** $v=(0,1,2)$ — observă că e exact $f(X^2)$, deja arătat mai sus ca fiind combinația $(1,0,-1)+(-1,1,3)$. Deci $v\in\mathrm{Im}(f)$ **direct, fără calcul**:
 
@@ -42,11 +42,11 @@ $$1(x-1)-1(y-1)-3(z-1)=0 \implies \boxed{x-y-3z+3=0}$$
 
 $$t=\frac{\overrightarrow{AC}\cdot d}{d\cdot d}=\frac{1+3+3}{1+1+9}=\frac{7}{11}$$
 
-$$P_{\mathrm{proiecție}} = A+t\,d = \left(\frac{7}{11},\,\frac{15}{11},\,\frac{23}{11}\right)$$
+$$P_{\mathrm{proiecție}} = A+t d = \left(\frac{7}{11}, \frac{15}{11}, \frac{23}{11}\right)$$
 
 **Aria $\triangle ABC$:** $\overrightarrow{AB}\times\overrightarrow{AC} = (2,-2,-6)\times(1,-3,-1) = (-16,-4,-4)$
 
-$$\mathrm{Aria}=\frac12\|\overrightarrow{AB}\times\overrightarrow{AC}\| = \frac12\sqrt{256+16+16}=\frac12\sqrt{288}=\boxed{6\sqrt2}$$
+$$\mathrm{Aria}=\frac12‖\overrightarrow{AB}\times\overrightarrow{AC}‖ = \frac12\sqrt{256+16+16}=\frac12\sqrt{288}=\boxed{6\sqrt2}$$
 
 ---
 
@@ -60,11 +60,11 @@ Rezolvi $v_5=av_1+bv_2+cv_4$: din componenta 3, $a=1$; din componenta 1, $b=1$; 
 
 $v_1,v_2,v_4$ rămân independente (rang 3, verificat prin eliminare Gauss).
 
-$$\text{bază: }\{v_1,v_2,v_4\},\qquad \dim_{\mathbb{R}}W=3$$
+$$\text{bază: }(v_1,v_2,v_4),\qquad \dim_{\mathbb{R}}W=3$$
 
-**(b)** $w=(2,0,3,4)=a\,v_1+b\,v_2+c\,v_4$: din comp. 3, $a=1$; din comp. 1, $b=1$; din comp. 2, $2-1+c=0\Rightarrow c=-1$; verifici comp. 4: $4+1-1=4$ ✓.
+**(b)** $w=(2,0,3,4)=a v_1+b v_2+c v_4$: din comp. 3, $a=1$; din comp. 1, $b=1$; din comp. 2, $2-1+c=0\Rightarrow c=-1$; verifici comp. 4: $4+1-1=4$ ✓.
 
-$$w = v_1+v_2-v_4 \in W,\qquad \text{coordonate: }(1,\,1,\,-1)$$
+$$w = v_1+v_2-v_4 \in W,\qquad \text{coordonate: }(1, 1, -1)$$
 
 ---
 
@@ -72,7 +72,7 @@ $$w = v_1+v_2-v_4 \in W,\qquad \text{coordonate: }(1,\,1,\,-1)$$
 
 $A$ are liniile $(1,2)$ și $(2,1)$.
 
-**(a)** Calculezi $f$ pe fiecare element al bazei canonice $\{E_{11},E_{12},E_{21},E_{22}\}$ — fiecare rezultat e o matrice $2\times2$:
+**(a)** Calculezi $f$ pe fiecare element al bazei canonice $(E_{11},E_{12},E_{21},E_{22})$ — fiecare rezultat e o matrice $2\times2$:
 
 - $f(E_{11})$: liniile $(0,-2)$ și $(2,0)$
 - $f(E_{12})$: liniile $(-2,0)$ și $(0,2)$
@@ -83,7 +83,7 @@ Matricea lui $f$ (coloane = imaginile de mai sus, ca vectori în $\mathbb{R}^4$)
 
 **(b)** Observi $f(E_{21})=-f(E_{11})$ și $f(E_{22})=-f(E_{12})$ — doar 2 coloane independente.
 
-$$\mathrm{Im}(f)=\mathrm{Sp}\{f(E_{11}),\ f(E_{12})\},\qquad \dim\mathrm{Im}(f)=2$$
+$$\mathrm{Im}(f)=\mathrm{Sp}(f(E_{11}),\ f(E_{12})),\qquad \dim\mathrm{Im}(f)=2$$
 
 (adică matricele cu liniile $(0,-2),(2,0)$ și, respectiv, $(-2,0),(0,2)$.)
 
@@ -97,7 +97,7 @@ $$AB = PDP^{-1}PD'P^{-1}=PDD'P^{-1}=PD'DP^{-1}=PD'P^{-1}PDP^{-1}=BA$$
 
 **(b)** $A$ are liniile $(1,1)$ și $(0,2)$: valori proprii $1,2$ (matrice triunghiulară). Vectori proprii: $\lambda=1\to(1,0)$; $\lambda=2\to(1,1)$.
 
-$B_m$ are liniile $(m,1)$ și $(0,3)$: $(1,0)$ e automat vector propriu al lui $B_m$ pentru orice $m$ (valoare proprie $m$). Pentru ca $(1,1)$ să fie și el vector propriu: $B_m(1,1)^T=(m+1,\,3)^T$ trebuie să fie multiplu de $(1,1)^T$, deci $m+1=3$.
+$B_m$ are liniile $(m,1)$ și $(0,3)$: $(1,0)$ e automat vector propriu al lui $B_m$ pentru orice $m$ (valoare proprie $m$). Pentru ca $(1,1)$ să fie și el vector propriu: $B_m(1,1)^T=(m+1, 3)^T$ trebuie să fie multiplu de $(1,1)^T$, deci $m+1=3$.
 
 $$\boxed{m=2}$$
 
@@ -107,7 +107,7 @@ $$\boxed{m=2}$$
 
 ## (E1) Complement ortogonal (4D) și dreaptă de regresie
 
-**(a)** $U=\mathrm{Sp}\{(1,1,1,1),\,(-5,-2,3,4)\}$. Rezolvi $x\cdot u_1=0,\ x\cdot u_2=0$:
+**(a)** $U=\mathrm{Sp}((1,1,1,1), (-5,-2,3,4))$. Rezolvi $x\cdot u_1=0,\ x\cdot u_2=0$:
 
 $$x_1+x_2+x_3+x_4=0,\qquad -5x_1-2x_2+3x_3+4x_4=0$$
 
@@ -115,11 +115,11 @@ Cu $x_3=s,\ x_4=t$ liberi: $x_1=\dfrac{5s+6t}{3},\ x_2=-\dfrac{8s+9t}{3}$. Alegi
 
 $$w_1=(5,-8,3,0),\qquad w_2=(2,-3,0,1)$$
 
-Gram-Schmidt: $e_1=w_1/\|w_1\|=(5,-8,3,0)/(7\sqrt2)$. Ortogonalizezi $w_2$ față de $w_1$ ($w_1\cdot w_2=34$, $\|w_1\|^2=98$):
+Gram-Schmidt: $e_1=w_1/‖w_1‖=(5,-8,3,0)/(7\sqrt2)$. Ortogonalizezi $w_2$ față de $w_1$ ($w_1\cdot w_2=34$, $‖w_1‖^2=98$):
 
-$$w_2'=w_2-\frac{34}{98}w_1=\frac{1}{49}(13,-11,-51,49),\qquad \|w_2'\cdot49\|=42\sqrt3$$
+$$w_2'=w_2-\frac{34}{98}w_1=\frac{1}{49}(13,-11,-51,49),\qquad ‖w_2'\cdot49‖=42\sqrt3$$
 
-$$U^\perp\text{: bază ortonormată } \left\{\frac{(5,-8,3,0)}{7\sqrt2},\ \frac{(13,-11,-51,49)}{42\sqrt3}\right\}$$
+$$U^\perp\text{: bază ortonormată } \left(\frac{(5,-8,3,0)}{7\sqrt2},\ \frac{(13,-11,-51,49)}{42\sqrt3}\right)$$
 
 **(b)** Puncte $(-5,-2),(-2,0),(3,3),(4,5)$. $\Sigma x=0,\ \Sigma y=6,\ \Sigma xy=39,\ \Sigma x^2=54$ ($n=4$).
 
@@ -133,7 +133,7 @@ $$\boxed{y=\frac{13}{18}x+\frac32}$$
 
 ## (E2) Matrice din vectori/valori proprii, optimizare formă pătratică
 
-**(a)** $v_1=\tfrac15(4,3)$, $v_2=\tfrac15(-3,4)$ — ortonormați (verifici $v_1\cdot v_2=0$, $\|v_i\|=1$), deci $A$ simetrică: $A=PDP^T$ cu $P=\tfrac15$ având liniile $(4,-3)$ și $(3,4)$, $D=\mathrm{diag}(1,-1)$.
+**(a)** $v_1=\tfrac15(4,3)$, $v_2=\tfrac15(-3,4)$ — ortonormați (verifici $v_1\cdot v_2=0$, $‖v_i‖=1$), deci $A$ simetrică: $A=PDP^T$ cu $P=\tfrac15$ având liniile $(4,-3)$ și $(3,4)$, $D=\mathrm{diag}(1,-1)$.
 
 $A = \tfrac{1}{25}\cdot(\text{matrice cu liniile }(4,3),(3,-4))\cdot(\text{matrice cu liniile }(4,3),(-3,4))$, produs care dă:
 
@@ -151,13 +151,13 @@ $$\min q(v) = -1 \ (\text{la } v_2), \qquad \max q(v) = 1\ (\text{la } v_1)$$
 
 ## (E3) Gram-Schmidt + ecuație diferențială cu coeficienți din partea (a)
 
-**(a)** $v_1=(1,2)$, $v_2=(3,1)$. Gram-Schmidt: $v_1\cdot v_2=5$, $\|v_1\|^2=5$, deci
+**(a)** $v_1=(1,2)$, $v_2=(3,1)$. Gram-Schmidt: $v_1\cdot v_2=5$, $‖v_1‖^2=5$, deci
 
 $$f_1=v_1=(1,2),\qquad f_2=v_2-\frac{5}{5}v_1=(3,1)-(1,2)=(2,-1)$$
 
-Coordonatele lui $w=(4,3)$ în baza ortogonală $\{f_1,f_2\}$ (nenormalizată — de-asta se numesc $\alpha$, nu proiecții pe versori):
+Coordonatele lui $w=(4,3)$ în baza ortogonală $(f_1,f_2)$ (nenormalizată — de-asta se numesc $\alpha$, nu proiecții pe versori):
 
-$$\alpha_1=\frac{w\cdot f_1}{\|f_1\|^2}=\frac{4+6}{5}=2,\qquad \alpha_2=\frac{w\cdot f_2}{\|f_2\|^2}=\frac{8-3}{5}=1$$
+$$\alpha_1=\frac{w\cdot f_1}{‖f_1‖^2}=\frac{4+6}{5}=2,\qquad \alpha_2=\frac{w\cdot f_2}{‖f_2‖^2}=\frac{8-3}{5}=1$$
 
 (verificare: $2(1,2)+1(2,-1)=(4,3)=w$ ✓)
 
@@ -195,11 +195,11 @@ $x''+3x'+2x=e^{-t+1}=e\cdot e^{-t}$, $x(0)=0,\ x'(0)=e$.
 
 Omogenă: $\lambda^2+3\lambda+2=(\lambda+1)(\lambda+2)=0\Rightarrow\lambda=-1,-2$. $x_h=C_1e^{-t}+C_2e^{-2t}$.
 
-$\mu=-1$ **este** rădăcină (simplă) $\Rightarrow$ rezonanță, $m=1$: $x_p=a\,t\,e^{-t}$.
+$\mu=-1$ **este** rădăcină (simplă) $\Rightarrow$ rezonanță, $m=1$: $x_p=a t e^{-t}$.
 
 $$x_p''+3x_p'+2x_p = ae^{-t}(t-2)+3ae^{-t}(1-t)+2ate^{-t}=ae^{-t}\big[(t-2)+3(1-t)+2t\big]=ae^{-t}$$
 
-$$ae^{-t}=e\cdot e^{-t}\implies a=e \implies x_p=e\,t\,e^{-t}=t\,e^{1-t}$$
+$$ae^{-t}=e\cdot e^{-t}\implies a=e \implies x_p=e t e^{-t}=t e^{1-t}$$
 
 $$x(t)=C_1e^{-t}+C_2e^{-2t}+te^{1-t}$$
 
@@ -207,7 +207,7 @@ $$x(0)=C_1+C_2=0,\qquad x'(0)=-C_1-2C_2+e=e\implies -C_1-2C_2=0$$
 
 Din cele două: $C_1=-C_2$ și $C_1=-2C_2\Rightarrow -C_2=-2C_2\Rightarrow C_2=0\Rightarrow C_1=0$.
 
-$$\boxed{x(t)=t\,e^{1-t}}$$
+$$\boxed{x(t)=t e^{1-t}}$$
 
 **Verificare directă:** $x(0)=0$ ✓; $x'(t)=e^{1-t}(1-t)$, $x'(0)=e$ ✓; $x''+3x'+2x=e^{1-t}[(t-2)+3(1-t)+2t]=e^{1-t}=e^{-t+1}$ ✓ — partea omogenă dispare complet, soluția e doar termenul particular.
 
@@ -216,6 +216,6 @@ $$\boxed{x(t)=t\,e^{1-t}}$$
 ## De reținut din subiectul ăsta
 
 - **(S)** și **(E1)(a)** arată același truc: dacă vectorul dat pentru proiecție e vizibil o combinație a generatorilor (sau evident perpendicular pe ei), proiecția iese fără niciun calcul — verifică asta primul.
-- **(E3)** — atenție la diferența „bază ortogonală" vs. „ortonormată": dacă enunțul cere coordonate față de baza ortogonală (nenormalizată) din Gram-Schmidt, formula e $\alpha_i=\dfrac{w\cdot f_i}{\|f_i\|^2}$, nu $w\cdot e_i$ direct.
+- **(E3)** — atenție la diferența „bază ortogonală" vs. „ortonormată": dacă enunțul cere coordonate față de baza ortogonală (nenormalizată) din Gram-Schmidt, formula e $\alpha_i=\dfrac{w\cdot f_i}{‖f_i‖^2}$, nu $w\cdot e_i$ direct.
 - **(E4)** — a doua cerință (soluții $y=kx$) e practic recunoașterea directă a direcțiilor proprii, fără să mai rezolvi sistemul complet.
 - **(E5)** — cazul de rezonanță unde partea omogenă se anulează complet din condițiile inițiale nu e o eroare — verifică mereu cu înlocuire directă înainte să suspectezi o greșeală de calcul.

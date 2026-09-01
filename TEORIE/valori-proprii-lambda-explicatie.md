@@ -4,7 +4,7 @@ Notă de teorie, ilustrată cu exemple din `EXERCITII/CANEPA/REZOLVATE/exercitiu
 
 ## Ce e λ
 
-În sistemele de forma $X' = AX$ (unde $A$ e o matrice constantă și $X(t)=(x(t),\,y(t))^T$), cauți soluții de forma
+În sistemele de forma $X' = AX$ (unde $A$ e o matrice constantă și $X(t)=(x(t), y(t))^T$), cauți soluții de forma
 
 $$X(t) = e^{\lambda t} v$$
 
@@ -22,7 +22,7 @@ Asta e chiar definiția **valorii proprii**: $\lambda$ e un număr pentru care e
 
 - **Ex. 1(c)** — $\lambda_1=-1,\ \lambda_2=3$: o direcție se contractă ($-1$), cealaltă se dilată ($3$). E un punct-șa (saddle) în planul de fază.
 
-- **Ex. 1(b)** — $\lambda=4$ **dublă**, dar cu un singur vector propriu (rang-deficiență la $A-4I$). Aici $\lambda$ nu-ți dă decât o singură direcție proprie, deci soluția nu poate fi doar $e^{4t}v$ — trebuie completată cu un vector generalizat $w$ și apare termenul $t\,e^{4t}$. Practic $\lambda$ îți spune viteza de creștere exponențială, dar geometria (câte direcții proprii independente ai) îți spune dacă ai nevoie de bloc Jordan.
+- **Ex. 1(b)** — $\lambda=4$ **dublă**, dar cu un singur vector propriu (rang-deficiență la $A-4I$). Aici $\lambda$ nu-ți dă decât o singură direcție proprie, deci soluția nu poate fi doar $e^{4t}v$ — trebuie completată cu un vector generalizat $w$ și apare termenul $t\cdot e^{4t}$. Practic $\lambda$ îți spune viteza de creștere exponențială, dar geometria (câte direcții proprii independente ai) îți spune dacă ai nevoie de bloc Jordan.
 
 - **Ex. 33** — $\lambda=\pm 2i$, **complexe**, fără parte reală. Aici $e^{\lambda t}$ nu mai e o exponențială reală — e $e^{i\beta t}=\cos\beta t + i\sin\beta t$, adică rotație pură, fără creștere/scădere. De-asta soluția finală e o combinație de $\sin 2t$ și $\cos 2t$: traiectoria se învârte în cerc/elipsă în jurul originii, nu tinde spre $0$ și nu explodează.
 
@@ -46,23 +46,15 @@ Practic, în orice exercițiu de tipul P4/P5 din `GHIDURI/cram-algaed.html`, pri
 
 Apare doar când o valoare proprie $\lambda$ e **repetată** (multiplicitate algebrică > 1) și are **mai puțini vectori proprii independenți** decât multiplicitatea ei (deficiență geometrică) — exact cazul din ex. 1(b), unde $\lambda=4$ era dublă dar avea un singur vector propriu.
 
-Într-un asemenea caz, $A$ nu mai e diagonalizabilă, dar tot poți scrie $A = PJP^{-1}$, unde $J$ e **cea mai apropiată formă posibilă de diagonală** — un bloc Jordan:
+Într-un asemenea caz, $A$ nu mai e diagonalizabilă, dar tot poți scrie $A = PJP^{-1}$, unde $J$ e **cea mai apropiată formă posibilă de diagonală** — un bloc Jordan, cu liniile $(\lambda, 1)$ și $(0, \lambda)$ ($\lambda$ pe diagonală, $1$ deasupra ei — restul zero). Coloanele lui $P$ sunt vectorul propriu $v$ și vectorul generalizat $w$, obținut din $(A-\lambda I)w = v$ (exact pasul din ex. 1(b) și 32).
 
-$$J = \begin{pmatrix}\lambda & 1\\ 0 & \lambda\end{pmatrix}$$
-
-($\lambda$ pe diagonală, $1$ deasupra ei — restul zero.) Coloanele lui $P$ sunt vectorul propriu $v$ și vectorul generalizat $w$, obținut din $(A-\lambda I)w = v$ (exact pasul din ex. 1(b) și 32).
-
-De-asta apare $t\cdot e^{\lambda t}$ în soluție — vine direct din:
-
-$$e^{Jt} = e^{\lambda t}\begin{pmatrix}1 & t\\ 0 & 1\end{pmatrix}$$
+De-asta apare $t\cdot e^{\lambda t}$ în soluție — vine direct din $e^{Jt} = e^{\lambda t}\cdot M$, unde $M$ are liniile $(1, t)$ și $(0, 1)$.
 
 **Regulă de recunoaștere:** dacă la un exercițiu de sistem de EDO ($X'=AX$) polinomul caracteristic îți dă o rădăcină dublă, primul lucru pe care-l verifici e rangul lui $A-\lambda I$. Rang $1$ (pe o matrice $2\times2$) → deficiență → ai nevoie de $J$.
 
 ### Iacobianul (altă poveste — pentru sisteme neliniare)
 
-Iacobianul e matricea derivatelor parțiale ale unui sistem **neliniar** $X' = f(X)$, calculată într-un punct de echilibru $X^*$ (unde $f(X^*)=0$), ca să-l aproximezi liniar acolo:
-
-$$J_f(X) = \begin{pmatrix}\dfrac{\partial f_1}{\partial x_1} & \dfrac{\partial f_1}{\partial x_2}\\[6pt] \dfrac{\partial f_2}{\partial x_1} & \dfrac{\partial f_2}{\partial x_2}\end{pmatrix}$$
+Iacobianul e matricea derivatelor parțiale ale unui sistem **neliniar** $X' = f(X)$, calculată într-un punct de echilibru $X^*$ (unde $f(X^*)=0$), ca să-l aproximezi liniar acolo — matricea $J_f(X)$ are pe linia $i$, coloana $j$ derivata parțială $\partial f_i/\partial x_j$ (adică liniile $\left(\dfrac{\partial f_1}{\partial x_1}, \dfrac{\partial f_1}{\partial x_2}\right)$ și $\left(\dfrac{\partial f_2}{\partial x_1}, \dfrac{\partial f_2}{\partial x_2}\right)$).
 
 Nu apare în niciunul din exercițiile 1 sau 33 — acelea sunt sisteme **liniare** ($X'=AX$), unde matricea sistemului e chiar $A$, gata dată, nu trebuie derivată. Iacobianul devine relevant doar dacă la un moment dat primești un sistem neliniar și ți se cere să-l liniarizezi în jurul unui punct de echilibru, ca să-i clasifici stabilitatea — un tip de subiect diferit, nu l-am întâlnit încă în exercițiile rezolvate din repo.
 
